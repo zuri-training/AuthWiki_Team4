@@ -26,7 +26,7 @@
  ### Submitting Tasks
   - __You will be submitting tasks by making pull requests to the 'secondary' branch of the parent repository__
   - __To make a pull request, go to you forked repository page on *[github](http://github.com)* and navigate to the pull-request tab. From here, you can create a new pull request to the 'secondary' branch of the original repository( Note: you need need to change ```base: main``` to ```base: secondary```), add description and submit.__
-  > __*NOTE: Always update your forked repo when taking on a task and before making a pull request to avoid conflicts and overrides. Check [here](https://github.com/zuri-training/AuthWiki_Team4/edit/main/README.md#pulling-changes-from-the-original-repository-to-update-your-forked-repository) to learn how to update to forked repository/local repository*__
+  > __*NOTE: Always update your forked repo when taking on a task and before making a pull request(submission) to avoid conflicts and overrides. Check [here](https://github.com/zuri-training/AuthWiki_Team4/edit/main/README.md#pulling-changes-from-the-original-repository-to-update-your-forked-repository) to learn how to update to forked repository/local repository*__
   - __Your request(task submission) will then be reviewed and merged if okay.__
  
  
