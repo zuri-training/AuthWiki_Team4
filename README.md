@@ -44,4 +44,4 @@
   - __Merge the secondary branch of the upstream to your main branch using ```git merge upstream/secondary```.__
   - __Commit your changes and push to reflect the changes your remote repository.__ 
 
-##### *Similar functionalities is provided by 'Git Desktop' and 'VSCode'*
+##### *Similar functionalities are provided by 'Git Desktop' and 'VSCode'*
