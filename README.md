@@ -9,7 +9,7 @@
 
 # Initial Setup Procedures
 ### Forking the Repository and Cloning it to your Local Machine
-  - __Click on the Fork icon on the top-right of the repo's page and fork the repository. You fork should be created now with the directory ```<your_username>/AuthWiki_Team4```. Next, you need to clone it to our local machine/computer.__
+  - __Click on the Fork icon on the top-right of the repo's page and fork the repository. You fork should be created now with the directory ```<your_username>/AuthWiki_Team4```. Next, you need to clone it to your local machine/computer.__
   - __Click on the 'code' button and copy the url of the repo. On your local machine, open the command line or terminal and navigate to the directory you want you clone the repo into. In the command line window, enter ```git clone <enter the url you copied here>```, it should look like ```git clone https://github.com/<your_username>/AuthWiki_Team4.git```. Press 'Enter', your repo should be clone in your chosen directory now. Let's proceed to the next step.__ 
 
 
@@ -45,3 +45,4 @@
   - __Commit your changes and push to reflect the changes your remote repository.__ 
 
 ##### *Similar functionalities are provided by 'Git Desktop' and 'VSCode'*
+##### *Reach out to the team-lead @Elsam20 if there is any issue*
