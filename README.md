@@ -30,7 +30,7 @@ __Click on the 'code' button and copy the url of the repository. On your local m
 ### Forking the Repository and Cloning it to your Local Machine
   - __Click on the Fork icon on the top-right of the repository's page and fork the repository. Your fork should now be created with the directory ```<your_username>/AuthWiki_Team4```. Next, you need to clone it to your local machine/computer.__
   - __Click on the 'code' button and copy the url of the repo. On your local machine, open the command line or terminal and navigate to the directory you want to clone the repository into. In the command line window, enter ```git clone <enter the url you copied here>```, it should look like ```git clone https://github.com/<your_username>/AuthWiki_Team4.git```. Press 'Enter', your repo should be cloned into your chosen directory now. Let's proceed to the next step.__
-  - __Now that your have cloned the forked repository you need to set your 'upstream' and pull from the brach you'll be working on. Refer to *[this](https://github.com/zuri-training/AuthWiki_Team4/edit/Frontend/README.md#alternatively-you-can-do-this-on-your-local-machine-)* part of the README to see how you can do this.__  
+  - __Now that your have cloned the forked repository you need to set your 'upstream' and pull from the brach you'll be working on. Refer to *[this](#upstream)* part of the README to see how you can do this.__  
 
 
 
@@ -46,17 +46,17 @@ __Click on the 'code' button and copy the url of the repository. On your local m
 ### Submitting Tasks
   - __You will be submitting tasks by making pull requests to the 'secondary' branch of the parent repository__
   - __To make a pull request, go to your forked repository page on *[github](http://github.com)* and navigate to the pull-request tab. From here, you can create a new pull request to the 'secondary' branch of the original repository( Note: For frontend developers, you need need to change ```base: main``` to ```base: Frontend```), add description and submit.__
-  > __*NOTE: Always update your forked repo when taking on a task and before making a pull request(submission) to avoid conflicts and overrides. Check [here](https://github.com/zuri-training/AuthWiki_Team4/edit/main/README.md#pulling-changes-from-the-original-repository-to-update-your-forked-repository) to learn how to update to forked repository/local repository*__
+  > __*NOTE: Always update your forked repo when taking on a task and before making a pull request(submission) to avoid conflicts and overrides. Check [here](#upstream) to learn how to update your forked repository/local repository*__
   - __Your request(task submission) will then be reviewed and merged if okay.__
  
  
  
-## Pulling Changes from the original repository to update your forked repository
+## <a name='upstream'></a> Pulling Changes from the original repository to update your forked repository
   - __Navigate to the project directory and run command line or terminal. Next, we need to set our upstream repository (here, it will be the original repository ```AuthWiki_Team4```). There, run ```git remote add upstream https://github.com/zuri-training/AuthWiki_Team4```.__
   - __Fetch the changes that have been made to original repository using ```git fetch upstream```.__
   - __Switch to your forked repository's main(default) branch(if your not already on main) using ```git checkout main``` or ```git checkout master``` if your default branch is named 'master'.__
   - __Merge the 'Frontend' branch of the upstream to your main branch using ```git merge upstream/Frontend```.__
-  - __Stage and commit your changes and push to reflect the changes in your remote repository using ```git push origin```.__ 
+  - __Stage and commit your changes and push to reflect the changes in your remote repository using ```git push origin```.__
 
 ##### *Similar functionalities are provided by 'Github Desktop' and 'VSCode'*
 ##### *Reach out to the team-lead @Elsam20 if there is any issue*
