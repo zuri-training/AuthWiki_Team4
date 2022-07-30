@@ -13,6 +13,7 @@ use Illuminate\{
     Http\Request,
     Foundation\Auth\AuthenticatesUsers,
     Support\Facades\Redirect,
+    Support\Facades\DB,
     Support\Str,
     Support\Facades\Auth
 };
@@ -81,6 +82,7 @@ class LoginController extends Controller
                 'user_name' => Str::words($provider->getNickname(), 1, '#').Str::random(8),
                 'photo' => $provider->getAvatar(),
                 'password' => Str::random(8),
+                'email_verified_at' => DB::raw('NOW()')
             ]
         );
         Github::updateOrCreate(

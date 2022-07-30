@@ -1,0 +1,87 @@
+.login-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.first-P {
+    text-align: center;
+    margin-top: 12%;
+}
+.user {
+    text-align: center;
+}
+.nput {
+    height: 0.6cm;
+    margin-bottom: 13px;
+}
+.button {
+    /* background-color: ; */
+    border: none;
+    color: white;
+    padding: 10px 135px;
+    border: 1px;
+    /* border-color: ; */
+    border-radius: 4px;
+    margin-top: 50px;
+    cursor: pointer;
+}
+.continue-with {
+    text-align: center;
+    margin-top: 25px;
+}
+.continue-with {
+    text-align: center;
+}
+
+
+.continue-with:before,
+.continue-with:after {
+  background-color: #000;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 7%;
+}
+
+.continue-with:before {
+  right: 1em;
+  margin-left: -50%;
+}
+
+.continue-with:after {
+  left: 1em;
+  margin-right: -50%;
+}
+.fa {
+    padding: 8px;
+    font-size: 30px;
+    width: 90px;
+    text-align: center;
+    text-decoration: none;
+    text-align: center;
+    margin-left: 41.5%;
+    /* margin-right: ; */
+}
+
+.fa-google {
+    background: grey;
+    color: white;
+
+  }
+  .fa-github {
+    background: grey;
+    color: white;
+    margin-left: 3%;
+    /* margin-right: ; */
+  }
+.lastP {
+    text-align: center;
+}
+.bi {
+    margin-left: -22px;
+    cursor: pointer;
+}
+
