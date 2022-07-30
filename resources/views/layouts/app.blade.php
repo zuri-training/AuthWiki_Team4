@@ -15,6 +15,16 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+     <script src="{{ asset('js/login.js') }}" defer></script>
+
+{{-- styles --}}
+     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+          <link href="{{ asset('css/signup.css') }}" rel="stylesheet">
+     
+  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'> 
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> 
 </head>
 <body>
     <div id="app">
