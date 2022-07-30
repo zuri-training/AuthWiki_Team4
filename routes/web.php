@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\{
+    Auth,
+    Route
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -13,18 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('newlog', function (){ 
-    return view('mylogin');
-});
-
-// Route::get('log', function (){ return view('mylogin');
-// });
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/google-auth/callback', [\App\Http\Controllers\Auth\LoginController::class, 'googleLogin']);
+Route::get('/google-auth/redirect', [\App\Http\Controllers\Auth\LoginController::class, 'redirectGoogle']);
+Route::get('/github-auth/callback', [\App\Http\Controllers\Auth\LoginController::class, 'gitHubLogin']);
+Route::get('/github-auth/redirect', [\App\Http\Controllers\Auth\LoginController::class, 'redirectGithub']);
