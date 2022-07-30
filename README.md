@@ -38,6 +38,10 @@ __Click on the 'code' button and copy the url of the repository. On your local m
 ### Checking For and Completing Tasks
   - __Go the 'Issues' tab on the parent repository, here you will see all issues created. These issues have tags/categories to describe them, you can hover over them on pc to see what they represent. Every task(issue) should have a/an assignee(s), if you are assigned to a task you can click on the task(issue) to view the details.__
   - __On your machine/computer, You can do the tasks and then stage the files or changes for commit using > ```git add <file_name>``` to stage a specific file or either ```git add .``` or ```git add -A``` to stage all files/changes for commit. To check the staged files enter ```git status``` and run__
+  - __You will be saving you work in the 'resources' directory.__
+    - __'*.html' files will be saved in the 'resources/views' sub-directory.__
+    - __'*.css' files will be saved in the 'resources/css' sub-directory.__
+    - __'*.js' files will be saved in the 'resources/js' sub-directory.__
   - __Stage and commit all changes using ```git commit -m <your_commit_message>```.__
   - __Push the changes to your forked repository using ```git push origin```.__
  
