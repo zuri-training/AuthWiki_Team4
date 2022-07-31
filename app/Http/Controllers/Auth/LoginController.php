@@ -84,7 +84,7 @@ class LoginController extends Controller
             ],
             [
                 'name' => $provider->getName(),
-                'user_name' => Str::words($provider->getNickname(), 1).'#'.Str::random(8),
+                'user_name' => Str::words($provider->getNickname(), 1, '').'#'.Str::random(8),
                 'photo' => $provider->getAvatar(),
                 'password' => Str::random(8),
                 'email_verified_at' => now()
@@ -110,7 +110,7 @@ class LoginController extends Controller
             ],
             [
                 'name' => $provider->getName(),
-                'user_name' => Str::words($provider->getNickname(), 1).'#'.Str::random(8),
+                'user_name' => Str::words($provider->getNickname(), 1, '').'#'.Str::random(8),
                 'photo' => $provider->getAvatar(),
                 'password' => Str::random(8),
                 'email_verified_at' => now()
