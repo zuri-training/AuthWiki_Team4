@@ -11,10 +11,9 @@ class Github extends Model
 {
     use HasFactory;
 
-    protected $table = 'githubs';
     public $timestamps = false;
     protected $fillable = [
-        'users_id',
+        'user_id',
         'github_id',
         'github_token',
         'github_refresh_token'

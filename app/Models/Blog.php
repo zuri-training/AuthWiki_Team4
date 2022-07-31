@@ -7,18 +7,19 @@ use Illuminate\Database\Eloquent\{
     Model
 };
 
-class Google extends Model
+class Blog extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
     protected $fillable = [
         'user_id',
-        'google_id',
-        'google_token',
-        'google_refresh_token'
+        'title',
+        'body'
     ];
 
+    public function blogComments() {
+        return $this->hasMany(BlogComment::class);
+    }
     public function users() {
         return $this->belongsTo(User::class);
     }

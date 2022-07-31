@@ -18,7 +18,7 @@
         <form method="POST" action="{{ route('login')}}">
             @csrf
             <label class="user">Username or Email</label><br>
-            <input type="email" class="nput" name="login_id" placeholder="Enter username or email address" size="38" /><br>
+            <input type="text" class="nput" name="login" placeholder="Enter username or email address" size="38" /><br>
             <label class="user">Password</label><br>
             <input type="password" id="password" class="nput" name="password" placeholder="Enter password" size="38"/>
             <i class="bi bi-eye-slash" id="togglePassword"></i><br>

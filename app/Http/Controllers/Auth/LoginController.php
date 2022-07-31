@@ -52,7 +52,7 @@ class LoginController extends Controller
     }
     public function username()
     {
-        return 'login_id';
+        return 'login';
     }
     protected function credentials(Request $request)
     {
@@ -65,6 +65,12 @@ class LoginController extends Controller
 
         return $credentials;
     }
+    protected function attemptLogin(Request $request)
+    {
+        return $this->guard()->attempt(
+            $this->credentials($request), true
+        );
+    }
     protected function authenticated(Request $request, $user)
     {
         return Redirect::intended($this->redirectTo);
@@ -75,25 +81,25 @@ class LoginController extends Controller
         $provider = Socialite::driver('github')->user();
         $user = User::firstOrCreate(
             [
-                'email' => $provider->getEmail()
+                'email' => Str::lower($provider->getEmail())
             ],
             [
                 'name' => $provider->getName(),
-                'user_name' => Str::words($provider->getNickname(), 1, '#').Str::random(8),
+                'user_name' => Str::words($provider->getNickname(), 1).'#'.Str::random(8),
                 'photo' => $provider->getAvatar(),
                 'password' => Str::random(8),
-                'email_verified_at' => DB::raw('NOW()')
+                'email_verified_at' => now()
             ]
         );
         Github::updateOrCreate(
             ['github_id' => $provider->getId()],
             [
-                'users_id' => $user->uid,
+                'user_id' => $user->uid,
                 'github_token' => $provider->token,
                 'github_refresh_token' => $provider->refreshToken
             ]
         );
-        Auth::loginUsingId($user->uid);
+        Auth::loginUsingId($user->id, true);
         return redirect(RouteServiceProvider::HOME);
     }
     public function googleLogin()
@@ -101,13 +107,14 @@ class LoginController extends Controller
         $provider = Socialite::driver('google')->user();
         $user = User::firstOrCreate(
             [
-                'email' => $provider->getEmail()
+                'email' => Str::lower($provider->getEmail())
             ],
             [
                 'name' => $provider->getName(),
-                'user_name' => Str::words($provider->getNickname(), 1, '#').Str::random(8),
+                'user_name' => Str::words($provider->getNickname(), 1).'#'.Str::random(8),
                 'photo' => $provider->getAvatar(),
                 'password' => Str::random(8),
+                'email_verified_at' => now()
             ]
         );
         Google::updateOrCreate(
@@ -115,12 +122,12 @@ class LoginController extends Controller
                 'google_id' => $provider->getId()
             ],
             [
-                'users_id' => $user->uid,
+                'user_id' => $user->uid,
                 'google_token' => $provider->token,
                 'google_refresh_token' => $provider->refreshToken
             ]
         );
-        Auth::loginUsingId($user->uid);
+        Auth::loginUsingId($user->id, true);
         return redirect(RouteServiceProvider::HOME);
     }
     public function redirectGitHub() {
