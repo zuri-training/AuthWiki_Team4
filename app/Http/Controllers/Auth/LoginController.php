@@ -13,7 +13,6 @@ use Illuminate\{
     Http\Request,
     Foundation\Auth\AuthenticatesUsers,
     Support\Facades\Redirect,
-    Support\Facades\DB,
     Support\Str,
     Support\Facades\Auth
 };
