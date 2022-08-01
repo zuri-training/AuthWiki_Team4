@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\{
     Http\Controllers\Controller,
     Providers\RouteServiceProvider,
-    // Models\Github,
-    // Models\Google,
+    Models\Github,
+    Models\Google,
     Models\User
 };
 use Illuminate\{
@@ -69,80 +69,62 @@ class LoginController extends Controller
         return Redirect::intended($this->redirectTo);
     }
 
-    // public function gitHubLogin()
-    // {
-    //     $_user = Socialite::driver('github')->user();
-    //     $user = User::where('email', $_user->getEmail());
-    //     if($user->exists() && $user->github->github_id <> $_user->getId()) {
-    //         return redirect()->to(route('login', [
-    //             'error' => 'A user with this email already exist. Login first, then connect your Github account to your profile.'
-    //         ]));
-    //     } else {
-    //         $_provider = Github::updateOrCreate([
-    //             [
-    //                 'github_id' => $_user->getId()
-    //             ],
-    //             [
-    //                 'users_id' => $user->exists() ? $user->id : null,
-    //                 'github_token' => $_user->token,
-    //                 'github_refresh_token' => $_user->refreshToken
-    //             ]
-    //         ]);
-    //         if($user->doesntExist()) {
-    //             $user = User::create([
-    //                 'name' => $_user->getName(),
-    //                 'user_name' => $_user->getNickname().'#'.Str::random(8),
-    //                 'email' => $_user->getEmail(),
-    //                 'photo' => $_user->getAvatar(),
-    //                 'password' => Str::random(8),
-    //             ]);
-    //             Github::find($_provider->id)->update([
-    //                 'users_id' => $user->id
-    //             ]);
-    //         }
-    //         Auth::loginUsingId($user->id);
-    //         return redirect(RouteServiceProvider::HOME);
-    //     }
-    // }
-    // public function googleLogin()
-    // {
-    //     $_user = Socialite::driver('google')->user();
-    //     $user = User::where('email', $_user->getEmail());
-    //     if($user->exists() && $user->google->google_id <> $_user->getId()) {
-    //         return redirect()->to(route('login', [
-    //             'error' => 'A user with this email already exist. Login first, then connect your Google account to your profile'
-    //         ]));
-    //     } else {
-    //         $_provider = Google::updateOrCreate([
-    //             [
-    //                 'google_id' => $_user->getId()
-    //             ],
-    //             [
-    //                 'users_id' => $user->exists() ? $user->id : null,
-    //                 'google_token' => $_user->token,
-    //                 'google_refresh_token' => $_user->refreshToken
-    //             ]
-    //         ]);
-    //         if($user->doesntExist()) {
-    //             $user = User::create([
-    //                 'name' => $_user->getName(),
-    //                 'user_name' => $_user->getNickname().'#'.Str::random(8),
-    //                 'email' => $_user->getEmail(),
-    //                 'photo' => $_user->getAvatar(),
-    //                 'password' => Str::random(8),
-    //             ]);
-    //             Github::find($_provider->id)->update([
-    //                 'users_id' => $user->id
-    //             ]);
-    //         }
-    //         Auth::loginUsingId($user->id);
-    //         return redirect(RouteServiceProvider::HOME);
-    //     }
-    // }
-    // public function redirectGitHub() {
-    //     return Socialite::driver('github')->redirect();
-    // }
-    // public function redirectGoogle() {
-    //     return Socialite::driver('google')->redirect();
-    // }
+    public function gitHubLogin()
+    {
+        $provider = Socialite::driver('github')->user();
+        $user = User::firstOrCreate(
+            [
+                'email' => $provider->getEmail()
+            ],
+            [
+                'name' => $provider->getName(),
+                'user_name' => Str::words($provider->getNickname(), 1, '#').Str::random(8),
+                'photo' => $provider->getAvatar(),
+                'password' => Str::random(8),
+            ]
+        );
+        Github::updateOrCreate(
+            ['github_id' => $provider->getId()],
+            [
+                'users_id' => $user->uid,
+                'github_token' => $provider->token,
+                'github_refresh_token' => $provider->refreshToken
+            ]
+        );
+        Auth::loginUsingId($user->uid);
+        return redirect(RouteServiceProvider::HOME);
+    }
+    public function googleLogin()
+    {
+        $provider = Socialite::driver('google')->user();
+        $user = User::firstOrCreate(
+            [
+                'email' => $provider->getEmail()
+            ],
+            [
+                'name' => $provider->getName(),
+                'user_name' => Str::words($provider->getNickname(), 1, '#').Str::random(8),
+                'photo' => $provider->getAvatar(),
+                'password' => Str::random(8),
+            ]
+        );
+        Google::updateOrCreate(
+            [
+                'google_id' => $provider->getId()
+            ],
+            [
+                'users_id' => $user->uid,
+                'google_token' => $provider->token,
+                'google_refresh_token' => $provider->refreshToken
+            ]
+        );
+        Auth::loginUsingId($user->uid);
+        return redirect(RouteServiceProvider::HOME);
+    }
+    public function redirectGitHub() {
+        return Socialite::driver('github')->redirect();
+    }
+    public function redirectGoogle() {
+        return Socialite::driver('google')->redirect();
+    }
 }
