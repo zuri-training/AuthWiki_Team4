@@ -124,8 +124,7 @@ class BlogController extends Controller
         return back()->with('success', 'Comment saved');
     }
     public function search($keyword) {
-        $blog = Blog::search($keyword)
-            ->within('title')
+        $blog = Blog::where('title', 'LIKE', "%{$keyword}%")
             ->latest()
             ->paginate(10);
         return view('blog.search', [
