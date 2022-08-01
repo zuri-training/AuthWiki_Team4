@@ -88,7 +88,7 @@ class WikiController extends Controller
     }
 
     public function search($keyword) {
-        $wiki = Wiki::where('title', 'like', "%{$keyword}%")
+        $wiki = Wiki::where('title', 'LIKE', "%{$keyword}%")
             ->where(function($query) {
                 if(request()->has('category')) {
                     $query->where('category', request()->input('category'));
@@ -104,7 +104,7 @@ class WikiController extends Controller
     // Only available to api calls
     public function searchAPI($keyword) {
         $wiki = Wiki::select('title', 'views', 'downloads')
-            ->where('title', 'like', "%{$keyword}%")
+            ->where('title', 'LIKE', "%{$keyword}%")
             ->where(function($query) {
                 if(request()->has('category')) {
                     $query->where('category', request()->input('category'));
