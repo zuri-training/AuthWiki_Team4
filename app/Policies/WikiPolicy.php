@@ -7,8 +7,7 @@ use App\Models\{
     Wiki
 };
 use Illuminate\{
-    Auth\Access\HandlesAuthorization,
-    Support\Facades\Auth
+    Auth\Access\HandlesAuthorization
 };
 
 class WikiPolicy

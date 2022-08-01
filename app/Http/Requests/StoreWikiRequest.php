@@ -24,8 +24,12 @@ class StoreWikiRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string', 'min:10', 'max:250'],
-            'usage' => ['required', 'string', 'max:4000000000']
+            'user_id' => ['required', 'numeric', 'exists:users,id'],
+            'type' => ['required', 'string', 'in:wiki,blog,forum'],
+            'stack' => ['required', 'string', 'max:25'],
+            'file_dir' => ['required', 'string', 'max:250'],
+            'title' => ['required', 'string', 'min:10', 'max:150'],
+            'content' => ['required', 'string', 'max:2000000000']
         ];
     }
 }

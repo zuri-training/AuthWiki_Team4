@@ -14,20 +14,20 @@ class Wiki extends Model
 
     protected $fillable = [
         'user_id',
-        'category',
-        'title',
-        'usage',
-        'views',
+        'type',
+        'stack',
         'file_dir',
+        'title',
+        'content',
+        'views',
         'viewed_at',
         'downloads',
         'downloaded_at'
     ];
     protected $appends = [
-        'stars',
-        'stack',
         'comments',
-        'rated'
+        'stars',
+        'stared'
     ];
     protected $casts = [
         'viewed_at' => 'datetime',
@@ -37,29 +37,22 @@ class Wiki extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
-    public function category() {
-        return $this->belongsTo(Category::class);
-    }
     public function comment() {
         return $this->hasMany(Comment::class);
     }
-    public function rating()
+    public function reaction()
     {
-        return $this->hasMany(Rating::class);
+        return $this->hasMany(Reaction::class);
     }
 
-    public function getStarsAttribute()
-    {
-        return floor($this->rating()->avg('rating') * 20);
-    }
-    public function getStackAttribute()
-    {
-        return $this->category()->first()->stack;
-    }
     public function getCommentsAttribute() {
         return $this->comment()->count();
     }
-    public function getRatedAttribute() {
-        return $this->rating()->where('user_id', Auth::id())->exists();
+    public function getStarsAttribute()
+    {
+        return floor($this->reaction()->where('comment_id', null)->avg('rating') * 20);
+    }
+    public function getStaredAttribute() {
+        return $this->reaction()->where(['comment_id' => null, 'user_id' => Auth::id()])->exists();
     }
 }

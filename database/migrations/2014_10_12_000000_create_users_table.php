@@ -23,6 +23,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->text('photo')->default('default.jpg');
+            $table->text('github_id')->nullable();
+            $table->text('google_id')->nullable();
             $table->tinyInteger('admin')->default(0);
             $table->rememberToken();
             $table->timestamps();

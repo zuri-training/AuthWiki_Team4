@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rating extends Model
+class Reaction extends Model
 {
     use HasFactory;
 
@@ -13,10 +13,14 @@ class Rating extends Model
     protected $fillable = [
         'user_id',
         'wiki_id',
+        'comment_id',
         'rating'
     ];
 
     public function wiki() {
         return $this->belongsTo(Wiki::class);
+    }
+    public function comment() {
+        return $this->belongsTo(Comment::class);
     }
 }

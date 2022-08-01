@@ -87,17 +87,15 @@ class LoginController extends Controller
                 'user_name' => Str::words($provider->getNickname(), 1, '').'#'.Str::random(8),
                 'photo' => $provider->getAvatar(),
                 'password' => Str::random(8),
+                'github_id' => $provider->getId(),
                 'email_verified_at' => now()
             ]
         );
-        Github::updateOrCreate(
-            ['github_id' => $provider->getId()],
-            [
-                'user_id' => $user->id,
-                'github_token' => $provider->token,
-                'github_refresh_token' => $provider->refreshToken
-            ]
-        );
+        if($user->github_id == null) {
+            $user->update([
+                'github_id' => $provider->getId()
+            ]);
+        }
         Auth::loginUsingId($user->id, true);
         return redirect(RouteServiceProvider::HOME);
     }
@@ -113,19 +111,15 @@ class LoginController extends Controller
                 'user_name' => Str::words($provider->getNickname(), 1, '').'#'.Str::random(8),
                 'photo' => $provider->getAvatar(),
                 'password' => Str::random(8),
+                'google_id' => $provider->getId(),
                 'email_verified_at' => now()
             ]
         );
-        Google::updateOrCreate(
-            [
+        if($user->google_id == null) {
+            $user->update([
                 'google_id' => $provider->getId()
-            ],
-            [
-                'user_id' => $user->id,
-                'google_token' => $provider->token,
-                'google_refresh_token' => $provider->refreshToken
-            ]
-        );
+            ]);
+        }
         Auth::loginUsingId($user->id, true);
         return redirect(RouteServiceProvider::HOME);
     }

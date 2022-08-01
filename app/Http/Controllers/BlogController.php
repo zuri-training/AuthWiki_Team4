@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\{
-    Blog,
-    BlogComment
+    Wiki,
+    Reaction,
+    User
 };
 use App\Http\Requests\{
-    StoreBlogRequest,
-    UpdateBlogRequest
+    StoreWikiRequest,
+    UpdateWikiRequest
 };
 use Illuminate\{
     Database\Eloquent\SoftDeletes,
     Support\Facades\Auth,
-    Http\Request
+    Http\Request,
+    Support\Facades\Validator
 };
 
 class BlogController extends Controller
@@ -22,113 +24,142 @@ class BlogController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'verified'])->except(['index', 'show']);
+        $this->middleware(['auth', 'verified'])->except(['index', 'show', 'search', 'searchAPI', 'indexID']);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $blog =  Blog::paginate(10);
-        return view('blog.index', compact('blog'));
+        $wiki =  Wiki::where('type', 'blog')
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+        return view('wiki.index', compact('wiki'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('blog.create');
+        return view('wiki.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreBlogRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreBlogRequest $request)
+    public function store(StorewikiRequest $request)
     {
-        Blog::create([
+        Wiki::create([
             'user_id' => Auth::id(),
+            'type' => 'blog',
+            'stack' => $request->stack,
+            'file_dir' => $request->file_dir,
             'title' => $request->title,
-            'body' => $request->body
+            'content' => $request->content
         ]);
-        return redirect(route('blog.index'))->with('message', 'Blog created successful!');
+        return redirect(route('user.wiki'))->with('success', 'Wiki created successful!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Blog $blog)
+    public function show(Wiki $wiki)
     {
-        return view('blog.show', compact('blog'));
+        $wiki->touch('viewed_at');
+        $wiki->increment('views');
+        return view('wiki.show', compact('wiki'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Blog $blog)
+    public function edit(Wiki $wiki)
     {
-        return view('blog.edit', compact('blog'));
+        return view('wiki.edit', compact('wiki'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateBlogRequest  $request
-     * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateBlogRequest $request, Blog $blog)
+    public function update(UpdatewikiRequest $request, Wiki $wiki)
     {
-        $blog->update([
-            'body' => $request->body
+        $wiki->update([
+            'content' => $request->content
         ]);
-        return redirect(route('blog.show', compact('blog')))->with('message', 'Blog details updated!');
+        return redirect(route('wiki.show', compact('wiki')))->with('success', 'Wiki details updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Blog $blog)
+    public function destroy(Wiki $wiki)
     {
-        $blog->delete();
-        return redirect(route('blog.index'))->with('message', 'Blog deleted!');
+        $wiki->softDelete();
+        return redirect(route('user.wiki'))->with('success', 'Wiki deleted!');
     }
 
-    public function comment(Request $request, Blog $blog) {
-        $request->validate([
-            'comment' => ['required', 'string', 'max:500']
-        ]);
-        BlogComment::create([
-            [
-                'blog_id' => $blog->id,
-                'user_id' => Auth::id(),
-                'comment' => $request->input('comment')
-            ]
-        ]);
-        return back()->with('success', 'Comment saved');
+    public function destroyPerm(Wiki $wiki)
+    {
+        $wiki->forceDelete();
+        return redirect(route('user.wiki'))->with('success', 'Wiki deleted!');
     }
-    public function search($keyword) {
-        $blog = Blog::where('title', 'LIKE', "%{$keyword}%")
-            ->latest()
+
+    public function indexID(User $user)
+    {
+        $wiki =  Wiki::where(['type' => 'blog', 'user_id' => $user->id])
+            ->latest('updated_at')
             ->paginate(10);
-        return view('blog.search', [
-            'blog' => $blog
+        return view('user.index', compact('wiki'));
+    }
+
+    public function search(Request $request) {
+        $request->validate([
+            'keyword' => 'required|string|max:25',
+            'stack' => 'string|max:10'
+        ]);
+        $keyword = $request->input('keyword');
+        $wiki = Wiki::where('type', 'blog')
+            ->where('title', 'LIKE', "%{$keyword}%")
+            ->where(function($query) {
+                if(request()->has('stack')) {
+                    $query->where('stack', request()->input('stack'));
+                }
+            })
+            ->paginate(10)
+            ->get();
+        return view('wiki.search', [
+            'wiki' => $wiki
+        ]);
+    }
+
+    public function searchAPI(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'keyword' => 'required|string|max:25',
+            'stack' => 'string|max:10'
+        ]);
+        if($validator->fails()) {
+            return response()->json([
+                'status' => false
+            ]);
+        }
+        $wiki = Wiki::select('title')
+            ->where('type', 'blog')
+            ->where('title', 'LIKE', "%{$request->keyword}%")
+            ->where(function($query) {
+                if(request()->has('stack')) {
+                    $query->where('stack', request()->input('stack'));
+                }
+            })
+            ->limit(15)
+            ->get();
+        return response()->json([
+            'data' => $wiki
+        ]);
+    }
+    public function rating(Request $request, Wiki $wiki)
+    {
+        $validator = Validator::make($request->all(), [
+            'rating' => 'required|numeric|between:0,5'
+        ]);
+        if($validator->fails()) {
+            return response()->json([
+                'status' => false
+            ]);
+        }
+        Reaction::updateOrCreate(
+            [
+                'user_id' => Auth::id(),
+                'wiki_id' => $wiki->id,
+                'comment_id' => null
+            ],
+            [
+                'rating' => $request->rating,
+            ]
+        );
+        return response()->json([
+            'status' => true,
+            'ratings' => $wiki->stars
         ]);
     }
 }

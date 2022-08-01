@@ -15,20 +15,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blogs', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->text('title');
-            $table->longText('body');
-            $table->softDeletes();
-            $table->timestamps();
-        });
-
-        Schema::create('blog_comments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->foreignId('blog_id')->references('id')->on('blogs')->cascadeOnDelete();
+            $table->foreignId('wiki_id')->references('id')->on('wikis')->cascadeOnDelete();
             $table->longText('comment');
+            $table->integer('vote')->default(0);
             $table->timestamps();
         });
     }
@@ -40,7 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blogs');
-        Schema::dropIfExists('blog_comments');
+        Schema::dropIfExists('comments');
     }
 };

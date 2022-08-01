@@ -24,7 +24,7 @@ class UpdateWikiRequest extends FormRequest
     public function rules()
     {
         return [
-            'usage' => ['required', 'string', 'max:4000000000']
+            'content' => ['required', 'string', 'max:2000000000']
         ];
     }
 }

@@ -20,9 +20,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'user_name',
         'email',
+        'email_verified_at',
         'password',
         'photo',
-        'email_verified_at'
+        'github_id',
+        'google_id'
     ];
     protected $hidden = [
         'password',
@@ -30,6 +32,8 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
     protected $appends = [
         'libraries',
+        'blogs',
+        'forums',
         'contributions'
     ];
     protected $casts = [
@@ -37,25 +41,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'admin' => 'boolean'
     ];
 
-    public function github() {
-        return $this->hasOne(Github::class);
-    }
-    public function google() {
-        return $this->hasOne(Google::class);
-    }
-
     public function wiki() {
         return $this->hasMany(Wiki::class);
     }
     public function comment() {
         return $this->hasManyThrough(Comment::class, Wiki::class);
-    }
-
-    public function blog() {
-        return $this->hasMany(Blog::class);
-    }
-    public function blogComment() {
-        return $this->hasManyThrough(BlogComment::class, Blog::class);
     }
 
     public function setNameAttribute($value)
@@ -77,7 +67,15 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getLibrariesAttribute()
     {
-        return $this->wiki()->count();
+        return $this->wiki()->where('type', 'wiki')->count();
+    }
+    public function getBlogsAttribute()
+    {
+        return $this->wiki()->where('type', 'blog')->count();
+    }
+    public function getForumsAttribute()
+    {
+        return $this->wiki()->where('type', 'forum')->count();
     }
     public function getContributionsAttribute()
     {

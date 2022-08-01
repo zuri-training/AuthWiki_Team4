@@ -18,7 +18,7 @@ use Illuminate\{
     Support\Facades\Validator
 };
 
-class WikiController extends Controller
+class ForumController extends Controller
 {
     use SoftDeletes;
 
@@ -29,7 +29,7 @@ class WikiController extends Controller
 
     public function index()
     {
-        $wiki =  Wiki::where('type', 'wiki')
+        $wiki =  Wiki::where('type', 'forum')
             ->orderBy('id', 'desc')
             ->paginate(10);
         return view('wiki.index', compact('wiki'));
@@ -44,7 +44,7 @@ class WikiController extends Controller
     {
         Wiki::create([
             'user_id' => Auth::id(),
-            'type' => 'wiki',
+            'type' => 'forum',
             'stack' => $request->stack,
             'file_dir' => $request->file_dir,
             'title' => $request->title,
@@ -87,7 +87,7 @@ class WikiController extends Controller
 
     public function indexID(User $user)
     {
-        $wiki =  Wiki::where(['type' => 'wiki', 'user_id' => $user->id])
+        $wiki =  Wiki::where(['type' => 'forum', 'user_id' => $user->id])
             ->latest('updated_at')
             ->paginate(10);
         return view('user.index', compact('wiki'));
@@ -95,11 +95,11 @@ class WikiController extends Controller
 
     public function search(Request $request) {
         $request->validate([
-            'keyword' => 'required|string|between:3,25',
+            'keyword' => 'required|string|max:25',
             'stack' => 'string|max:10'
         ]);
         $keyword = $request->input('keyword');
-        $wiki = Wiki::where('type', 'wiki')
+        $wiki = Wiki::where('type', 'forum')
             ->where('title', 'LIKE', "%{$keyword}%")
             ->where(function($query) {
                 if(request()->has('stack')) {
@@ -115,7 +115,7 @@ class WikiController extends Controller
 
     public function searchAPI(Request $request) {
         $validator = Validator::make($request->all(), [
-            'keyword' => 'required|string|between:3,25',
+            'keyword' => 'required|string|max:25',
             'stack' => 'string|max:10'
         ]);
         if($validator->fails()) {
@@ -124,7 +124,7 @@ class WikiController extends Controller
             ]);
         }
         $wiki = Wiki::select('title')
-            ->where('type', 'wiki')
+            ->where('type', 'forum')
             ->where('title', 'LIKE', "%{$request->keyword}%")
             ->where(function($query) {
                 if(request()->has('stack')) {
