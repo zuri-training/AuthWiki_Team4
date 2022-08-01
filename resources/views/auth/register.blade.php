@@ -1,91 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+<!DOCTYPE html>
+<html lang="en">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+   
+</head>
 
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+<body>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="user_name" class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="user_name" type="text" class="form-control @error('user_name') is-invalid @enderror" name="user_name" value="{{ old('user_name') }}" required autocomplete="user_name">
-
-                                @error('user_name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+    <p class="signup-title"><strong>Create your free account</strong></p>
+    <div class="signup-box">
+        <form method="POST" action="#">
+            <label class="lab">Full Name</label><br>
+            <input type="text" class="int" placeholder="Enter username" size="50" required /><br>
+            <label class="lab">Username</label><br>
+            <input type="text" class="int" placeholder="Enter username" size="50" required /><br>
+            <label class="lab">Email</label><br>
+            <input type="email" class="int" placeholder="Enter email address" size="50" required /><br>
+            <label class="lab">Password</label><br>
+            <input type="password" class="int" placeholder="Enter password" size="50"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required /><br>
     </div>
-</div>
+    <p class="guide">Use 8 or more characters with a mix of letters, numbers and<br> symbols. Must not contain your name
+        or username.</p>
+
+    <!-- I think this should be added -->
+    <!-- <label>Confirm Password</label>
+            <input type="password" placeholder="" /> -->
+
+    <button class="button">Create account</button>
+
+    <div class="right-line"></div>
+    <p class="continue-with">Continue with</p>
+    <div class="left-line"></div>
+    <a href="google.com" class="fa fa-google"></a>
+    <a href="github.com" class="fa fa-github"></a>
+
+
+    </form>
+    <p class="lastP">
+        Already have an Auth-Wiki Account? <a href="{{ url('login') }}">Sign in here</a>
+    </p>
+
+</body>
+
+</html>
 @endsection
