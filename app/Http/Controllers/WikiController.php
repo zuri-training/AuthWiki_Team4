@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\{
+    Category,
     Wiki,
     Rating,
     User
@@ -81,18 +82,19 @@ class WikiController extends Controller
 
     public function indexID(User $user)
     {
-        $wiki =  Wiki::where('user_id', $user)
+        $wiki =  Wiki::where('user_id', $user->id)
             ->latest('updated_at')
             ->paginate(10, ['*'], 'wikis');
         return view('user.index', compact('wiki'));
     }
 
     public function search($keyword) {
-        $wiki = Wiki::search($keyword)
-            ->within('title')
+        $wiki = Wiki::where('title', 'LIKE', "%{$keyword}%")
             ->where(function($query) {
                 if(request()->has('category')) {
-                    $query->where('category', request()->input('category'));
+                    $category = request()->input('category');
+                    $findCategory = Category::where('stack', $category)->firstOrFail();
+                    $query->where('category_id', $findCategory->id);
                 }
             })
             ->paginate(10, ['*'], 'search_wikis');
@@ -101,16 +103,30 @@ class WikiController extends Controller
         ]);
     }
 
-    // Only available to api calls
-    public function searchAPI($keyword) {
+    public function searchAPI(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'keyword' => ['required', 'string', 'max:25']
+        ]);
+        if($validator->fails()) {
+            return response()->json([
+                'status' => false
+            ]);
+        }
         $wiki = Wiki::select('title', 'views', 'downloads')
-            ->search($keyword)
-            ->within('title')
-            ->where(function($query) {
-                if(request()->has('category')) {
-                    $query->where('category', request()->input('category'));
-                }
-            })
+            ->where('title', 'LIKE', "%{$request->keyword}%")
+            // ->where(function($query) {
+            //     if(request()->has('category')) {
+            //         $category = request()->input('category');
+            //         $findCategory = Category::where('stack', $category)->firstOr(function(){
+            //             exit(
+            //                 json_encode([
+            //                     'data' => null
+            //                 ])
+            //             );
+            //         });
+            //         $query->where('category_id', $findCategory->id);
+            //     }
+            // })
             ->limit(15)
             ->get();
         return response()->json([
@@ -133,7 +149,7 @@ class WikiController extends Controller
                 'wiki_id' => $wiki->id
             ],
             [
-                'rating' => $request->input('rating')
+                'rating' => $request->rating
             ]
         ]);
         return response()->json([
