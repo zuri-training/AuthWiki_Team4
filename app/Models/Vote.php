@@ -16,7 +16,7 @@ class Vote extends Model
         'comment_id'
     ];
 
-    public function comments() {
+    public function comment() {
         return $this->belongsTo(Comment::class);
     }
 }

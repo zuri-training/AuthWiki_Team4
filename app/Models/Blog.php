@@ -17,10 +17,10 @@ class Blog extends Model
         'body'
     ];
 
-    public function blogComments() {
+    public function blogComment() {
         return $this->hasMany(BlogComment::class);
     }
-    public function users() {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 }

@@ -23,17 +23,17 @@ class Comment extends Model
         'voted'
     ];
 
-    public function wikis() {
+    public function wiki() {
         return $this->belongsTo(Wiki::class);
     }
-    public function users() {
+    public function user() {
         return $this->belongsToThrough(User::class, Wiki::class);
     }
-    public function votes() {
+    public function vote() {
         return $this->hasMany(Vote::class);
     }
     public function getVotedAttribute()
     {
-        return $this->votes()->where(['comment_id' => $this->id, 'user_id' => Auth::id()])->exists();
+        return $this->vote()->where(['user_id' => Auth::id()])->exists();
     }
 }

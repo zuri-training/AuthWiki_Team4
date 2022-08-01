@@ -16,7 +16,7 @@ class Rating extends Model
         'rating'
     ];
 
-    public function wikis() {
+    public function wiki() {
         return $this->belongsTo(Wiki::class);
     }
 }

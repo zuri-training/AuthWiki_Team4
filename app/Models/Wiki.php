@@ -24,39 +24,42 @@ class Wiki extends Model
         'downloaded_at'
     ];
     protected $appends = [
-        'rating',
-        'rated',
-        'stack'
+        'stars',
+        'stack',
+        'comments',
+        'rated'
     ];
     protected $casts = [
         'viewed_at' => 'datetime',
         'downloaded_at' => 'datetime'
     ];
 
-    public function users() {
+    public function user() {
         return $this->belongsTo(User::class);
     }
-    public function categorys() {
+    public function category() {
         return $this->belongsTo(Category::class);
     }
-    public function comments() {
+    public function comment() {
         return $this->hasMany(Comment::class);
     }
-    public function ratings()
+    public function rating()
     {
         return $this->hasMany(Rating::class);
     }
 
-    public function getRatingAttribute()
+    public function getStarsAttribute()
     {
-        return round($this->ratings()->avg('rating'));
-    }
-    public function getRatedAttribute()
-    {
-        return $this->ratings()->where('user_id', Auth::id())->exists();
+        return floor($this->rating()->avg('rating') * 20);
     }
     public function getStackAttribute()
     {
-        return $this->categorys->stack;
+        return $this->category()->first()->stack;
+    }
+    public function getCommentsAttribute() {
+        return $this->comment()->count();
+    }
+    public function getRatedAttribute() {
+        return $this->rating()->where('user_id', Auth::id())->exists();
     }
 }

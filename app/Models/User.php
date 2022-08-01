@@ -44,17 +44,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Google::class);
     }
 
-    public function wikis() {
+    public function wiki() {
         return $this->hasMany(Wiki::class);
     }
-    public function comments() {
+    public function comment() {
         return $this->hasManyThrough(Comment::class, Wiki::class);
     }
 
-    public function blogs() {
+    public function blog() {
         return $this->hasMany(Blog::class);
     }
-    public function blogComments() {
+    public function blogComment() {
         return $this->hasManyThrough(BlogComment::class, Blog::class);
     }
 
@@ -77,10 +77,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getLibrariesAttribute()
     {
-        return $this->wikis()->count();
+        return $this->wiki()->count();
     }
     public function getContributionsAttribute()
     {
-        return $this->comments()->count();
+        return $this->comment()->count();
     }
 }

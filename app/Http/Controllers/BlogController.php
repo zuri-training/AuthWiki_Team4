@@ -131,5 +131,4 @@ class BlogController extends Controller
             'blog' => $blog
         ]);
     }
-
 }

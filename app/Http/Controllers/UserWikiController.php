@@ -18,7 +18,7 @@ use Illuminate\{
     Http\Request
 };
 
-class WikiController extends Controller
+class UserWikiController extends Controller
 {
     use SoftDeletes;
 

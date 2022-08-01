@@ -18,10 +18,10 @@ class BlogComment extends Model
         'comment'
     ];
 
-    public function blogs() {
+    public function blog() {
         return $this->belongsTo(Blog::class);
     }
-    public function users() {
+    public function user() {
         return $this->belongsToThrough(User::class, Blog::class);
     }
 }

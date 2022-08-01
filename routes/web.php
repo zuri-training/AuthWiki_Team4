@@ -3,7 +3,6 @@ use Illuminate\Support\Facades\{
     Auth,
     Route
 };
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +23,9 @@ Route::get('/home', function () {
     return Auth::user();
 })->middleware('auth');
 
-Route::get('/google-auth/callback', [\App\Http\Controllers\Auth\LoginController::class, 'googleLogin']);
-Route::get('/google-auth/redirect', [\App\Http\Controllers\Auth\LoginController::class, 'redirectGoogle'])->name('login.google');
-Route::get('/github-auth/callback', [\App\Http\Controllers\Auth\LoginController::class, 'gitHubLogin']);
-Route::get('/github-auth/redirect', [\App\Http\Controllers\Auth\LoginController::class, 'redirectGithub'])->name('login.github');
+Route::controller(\App\Http\Controllers\Auth\LoginController::class)->group(function(){
+    Route::get('/google-auth/callback', 'googleLogin');
+    Route::get('/google-auth/redirect', 'redirectGoogle')->name('login.google');
+    Route::get('/github-auth/callback', 'gitHubLogin');
+    Route::get('/github-auth/redirect', 'redirectGithub')->name('login.github');
+});

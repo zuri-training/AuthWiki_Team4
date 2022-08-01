@@ -19,7 +19,7 @@ class Github extends Model
         'github_refresh_token'
     ];
 
-    public function users() {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 }

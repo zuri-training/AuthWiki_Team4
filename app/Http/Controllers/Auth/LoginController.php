@@ -93,7 +93,7 @@ class LoginController extends Controller
         Github::updateOrCreate(
             ['github_id' => $provider->getId()],
             [
-                'user_id' => $user->uid,
+                'user_id' => $user->id,
                 'github_token' => $provider->token,
                 'github_refresh_token' => $provider->refreshToken
             ]
@@ -121,7 +121,7 @@ class LoginController extends Controller
                 'google_id' => $provider->getId()
             ],
             [
-                'user_id' => $user->uid,
+                'user_id' => $user->id,
                 'google_token' => $provider->token,
                 'google_refresh_token' => $provider->refreshToken
             ]

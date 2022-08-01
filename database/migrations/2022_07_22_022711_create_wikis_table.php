@@ -15,7 +15,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('stack');
@@ -25,7 +25,7 @@ return new class extends Migration
         Schema::create('wikis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->foreignId('category_id')->references('id')->on('category')->cascadeOnDelete();
+            $table->foreignId('category_id')->references('id')->on('categories')->cascadeOnDelete();
             $table->string('file_dir');
             $table->string('title');
             $table->longText('usage');
@@ -49,7 +49,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreignId('wiki_id')->references('id')->on('wikis')->cascadeOnDelete();
             $table->longText('comment');
-            $table->integer('vote');
+            $table->integer('vote')->default(0);
             $table->timestamps();
         });
 
