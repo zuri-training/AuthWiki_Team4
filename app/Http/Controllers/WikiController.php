@@ -95,7 +95,6 @@ class WikiController extends Controller
                     $query->where('category', request()->input('category'));
                 }
             })
-            ->orderBy('ratings', 'desc')
             ->paginate(10, ['*'], 'search_wikis');
         return view('wiki.search', [
             'wiki' => $wiki
@@ -112,7 +111,6 @@ class WikiController extends Controller
                     $query->where('category', request()->input('category'));
                 }
             })
-            ->orderBy('ratings', 'desc')
             ->limit(15)
             ->get();
         return response()->json([
