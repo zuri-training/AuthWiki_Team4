@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\{
     Wiki,
     Comment,
+    Reaction,
     Vote
 };
 use Illuminate\{
@@ -20,8 +21,8 @@ class WikiComment extends Controller
         $this->middleware(['auth', 'verified'])->except('show');
     }
     public function show(Wiki $wiki) {
-        $comments = Comment::where('wiki_id', $wiki->id)
-            ->paginate(15, ['*'], 'comments');
+        $comment = Comment::where('wiki_id', $wiki->id)
+            ->paginate(15);
         return view('wiki.comments', compact('comments'));
     }
     public function create(Request $request, Wiki $wiki) {
@@ -33,19 +34,19 @@ class WikiComment extends Controller
             'user_id' => Auth::id(),
             'comment' => $request->input('comment')
         ]);
-        return redirect()->back()->with('success', 'Comment added');
+        return back();
     }
-    public function edit(Request $request, Comment $comments) {
+    public function edit(Request $request, Comment $comment) {
         $request->validate([
             'comment' => ['required', 'string', 'max:500']
         ]);
-        $comments->update([
+        $comment->update([
             'comment' => $request->input('comment')
         ]);
-        return redirect()->back()->with('success', 'Comment edited');
+        return back();
     }
 
-    public function vote(Request $request, Comment $comments)
+    public function vote(Request $request, Comment $comment)
     {
         $validator = Validator::make($request->all(), [
             'vote' => ['required', 'in:up,down']
@@ -55,25 +56,25 @@ class WikiComment extends Controller
                 'status' => false
             ]);
         }
-        $vote = Vote::where([
-            'wiki_id' => $comments->wikis->id,
+        $vote = Reaction::where([
+            'wiki_id' => $comment->wiki->id,
             'user_id' => Auth::id(),
-            'comment_id' => $comments->id
+            'comment_id' => $comment->id
         ]);
         if($request->input('vote') == 'up' && $vote->doesntExist()) {
-            $vote = Vote::create([
-                'wiki_id' => $comments->wikis->id,
+            $vote = Reaction::create([
+                'wiki_id' => $comment->wiki->id,
                 'user_id' => Auth::id(),
-                'comment_id' => $comments->id
+                'comment_id' => $comment->id
             ]);
-            $comments->increment('vote');
+            $comment->increment('vote');
         } elseif($request->input('vote') == 'down' && $vote->exists()) {
             $vote->delete();
-            $comments->decrement('vote');
+            $comment->decrement('vote');
         }
         return response()->json([
             'status' => true,
-            'votes' => $vote->vote
+            'votes' => $comment->vote
         ]);
         return back();
     }

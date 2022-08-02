@@ -15,7 +15,7 @@ class Category extends Model
         'description'
     ];
 
-    public function wikis() {
+    public function wiki() {
         return $this->hasMany(Wiki::class);
     }
 
