@@ -9,7 +9,6 @@
     --sidebar_color : #284E6B;
     --search_box_color : #3C627E;
     --button-color : #FFB37C;
-
 }
 
 *{
@@ -30,6 +29,10 @@ body{
     font-family: 'Manrope';
     font-style: normal;
     background-color: #FFF;
+}
+
+a:hover{
+    color: var(--highlight_color);
 }
 
 main{
@@ -95,6 +98,16 @@ section{
 .side-bar-content a{
     color: #fff;
     text-decoration: none;
+    transition-timing-function: ease-in;
+    transition-duration: 60ms;
+}
+
+.side-bar-content a:hover{
+    color: var(--highlight_color);
+}
+
+.side-bar-content a:active{
+    color: var(--button-color);
 }
 
 .side-bar-text{
