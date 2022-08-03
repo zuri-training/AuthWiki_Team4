@@ -1,0 +1,144 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+main{
+    /* margin-left: 72px;
+    margin-right: 80px; */
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* --- Welcome Section --- */
+.welcome{
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+/* Page Name */
+.page-name{
+    margin-top: 48px;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 46px;
+    color: #143A56;
+}
+
+/* Welcome Picture */
+.dp{
+    max-width: 941px;
+    max-height: 520px;
+    width: 100%;
+    height: auto;
+    margin-top: 64px;
+    border-radius: 4px;
+}
+
+/* Name of Code */
+.heading{
+    left: 80px;
+    padding-top: 98px;
+    padding-bottom: 35px;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 66px;
+    color: #143A56;
+}
+
+/* Name of Sections */
+h3 {
+    padding-top: 42px;
+    padding-bottom: 22px;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 34px;
+    color: #143A56;
+}
+
+/* Detail of sections */
+.body-text, p{
+    text-align: justify;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 40px;
+    color: #1F1F1F;
+}
+
+
+.bold-text{
+    font-weight:bold;
+}
+
+ol{
+    padding: 55px;
+}
+
+li{
+    max-width: 1133px;
+    height: 46px;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 46px;
+        /* identical to box height, or 192% */
+    color: #1F1F1F;
+}
+
+p {
+    padding-bottom: 12px;
+}
+
+button {
+    padding: 16px 24px;
+    margin-top: 44px;
+    width: 192px;
+    height: 56px;
+    background-color: #FFB37C;
+    border: none;
+    border-radius: 4px;
+    font-style: normal;
+    font-family: 'Manrope';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #1f1f1f;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: #1f1f1f;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.download-btn{
+    margin-right: 104.49px;
+}
+
+.btn-group{
+    margin-bottom: 60px;
+}
+
+.count a {
+    font-family: 'Manrope';
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 700px;
+    font-style: normal;
+    margin-left: 16px;
+    margin-right: 32px;
+}
