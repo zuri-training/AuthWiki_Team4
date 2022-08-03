@@ -10,6 +10,7 @@ function closeNavOnOutsideClick(){
             closeNav()
         }
 });
+    
 }
 
 function openNav() {
