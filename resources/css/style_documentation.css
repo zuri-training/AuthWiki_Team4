@@ -172,7 +172,7 @@ main .section:last-child{
 }
 
 .search_bar:focus-within{
-    border: 2.3px solid var(--header_color);
+    border: 3px solid var(--header_color);
     
 }
 
