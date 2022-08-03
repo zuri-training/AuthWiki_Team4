@@ -14,7 +14,8 @@
   
  .container {
     margin: 0 auto;
-    width: 1014px;
+    /* width: 1014px; */
+    width: 76%;
   }
   
   .suggestion-text {
@@ -169,6 +170,7 @@
     width: 100%;
     justify-content: space-evenly;
     align-items: center;
+    flex-wrap: wrap;
   }
   
   .card-view-details {
