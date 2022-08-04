@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->enum('type', ['wiki', 'blog', 'forum']);
             $table->string('stack');
-            $table->string('file_dir');
+            $table->text('file_dir');
             $table->string('title');
             $table->longText('content');
             $table->integer('views')->default(0);
