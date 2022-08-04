@@ -728,6 +728,12 @@ footer hr{
      }
 }
 
+@media screen and (max-width:500px){
+    header div[class=container]{
+        justify-content:flex-start;
+        gap: 60px;
+     }
+} 
 
 
 /* PAGE HEADER */
