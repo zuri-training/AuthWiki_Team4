@@ -6,9 +6,7 @@ use App\Models\{
     User,
     Wiki
 };
-use Illuminate\{
-    Auth\Access\HandlesAuthorization
-};
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class WikiPolicy
 {
@@ -93,6 +91,6 @@ class WikiPolicy
      */
     public function forceDelete(User $user, Wiki $wiki)
     {
-        return $user->admin;
+        return $user->id == 1;
     }
 }

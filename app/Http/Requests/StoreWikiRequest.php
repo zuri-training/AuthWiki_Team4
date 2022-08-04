@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Wiki;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreWikiRequest extends FormRequest
@@ -13,7 +14,7 @@ class StoreWikiRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('create', Wiki::class);
     }
 
     /**
@@ -24,12 +25,12 @@ class StoreWikiRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'numeric', 'exists:users,id'],
-            'type' => ['required', 'string', 'in:wiki,blog,forum'],
-            'stack' => ['required', 'string', 'max:25'],
-            'file_dir' => ['required', 'string', 'max:250'],
-            'title' => ['required', 'string', 'min:10', 'max:150'],
-            'content' => ['required', 'string', 'max:2000000000']
+            'user_id' => 'required|numeric|exists:users,id',
+            'type' => 'required|string|in:wiki,blog,forum',
+            'stack' => 'required|string|max:25',
+            'file_dir' => 'string|nullable',
+            'title' => 'required|string|min:10|max:150',
+            'content' => 'required|string|max:2000000000'
         ];
     }
 }
