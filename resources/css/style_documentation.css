@@ -425,6 +425,8 @@ footer a:hover{
 .footer_newsletter #site_logo{
     align-self: flex-end;
     margin-bottom: 26px;
+    max-height: 43px;
+    max-width: 175px;
 }
 
 .footer_newsletter p{
