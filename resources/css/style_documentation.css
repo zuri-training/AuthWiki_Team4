@@ -1020,6 +1020,7 @@ footer hr{
     .search_bar #search_form{
         padding-top: 3px !important;
         padding-bottom: 3px !important;
+        flex-shrink: 1;
     }
 
     #search_form #search_field::placeholder, #search_form #search_field{
