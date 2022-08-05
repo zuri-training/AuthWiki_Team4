@@ -823,6 +823,7 @@ footer hr{
     outline: none !important;
     border-radius: 4px;
     max-width: 118px;
+    min-width: 116px;
     color: var(--text_color);
     display: flex;
     justify-content: center;
@@ -1021,6 +1022,10 @@ footer hr{
         padding-bottom: 3px !important;
         padding-right: 3px !important;
         flex-shrink: 1;
+    }
+
+    #search_form #search_button{
+        min-width: none;
     }
 
     #search_form #search_field::placeholder, #search_form #search_field{
