@@ -731,7 +731,7 @@ footer hr{
 @media screen and (max-width:500px){
     header div[class=container]{
         justify-content:flex-start;
-        gap: 60px;
+        gap: 35px;
      }
 } 
 
@@ -1084,9 +1084,3 @@ footer hr{
     }
 
 }
-@media screen and (max-width:500px){
-    header div[class=container]{
-        justify-content:flex-start;
-        gap: 35px;
-     }
-} 
