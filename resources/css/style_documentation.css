@@ -1025,7 +1025,7 @@ footer hr{
     }
 
     #search_form #search_button{
-        min-width: none;
+        min-width: 96px;
     }
 
     #search_form #search_field::placeholder, #search_form #search_field{
