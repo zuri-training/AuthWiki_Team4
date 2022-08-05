@@ -11,6 +11,7 @@
     --button_active_color :  #FFD791;
     --button_color : #FF9243;
     --button_hover_color : rgba(255, 215, 145, 0.5);
+    scroll-behavior: smooth;
 }
 
 *{

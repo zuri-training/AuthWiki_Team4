@@ -11,6 +11,7 @@
     --button_active_color :  #FFD791;
     --button_color : #FF9243;
     --button_hover_color : rgba(255, 215, 145, 0.5);
+    scroll-behavior: smooth;
 }
 
 *{
@@ -470,7 +471,6 @@ header #nav_button:active{
         margin-top: 55px;
      }
 }
-<<<<<<< HEAD
 
 @media screen and (max-width:500px){
     header div[class=container]{
@@ -478,5 +478,3 @@ header #nav_button:active{
         gap: 35px;
      }
 } 
-=======
->>>>>>> upstream/Frontend
