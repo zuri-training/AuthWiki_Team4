@@ -823,7 +823,7 @@ footer hr{
     outline: none !important;
     border-radius: 4px;
     max-width: 118px;
-    min-width: 96px;
+    min-width: 114px;
     color: var(--text_color);
     display: flex;
     justify-content: center;
@@ -1084,9 +1084,3 @@ footer hr{
     }
 
 }
-@media screen and (max-width:500px){
-    header div[class=container]{
-        justify-content:flex-start;
-        gap: 35px;
-     }
-} 
