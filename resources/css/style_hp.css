@@ -60,15 +60,6 @@ header a{
     transition: 0.2s; 
 }
 
-header #current_page_link a{
-    color: var(--highlight_color);
- }
-
- header a:hover:not(header .site_logo a:hover){
-    opacity: 0.6;
- }
-
-
  header div[class=container]{
     height: 110px;
     display: flex;
@@ -198,7 +189,7 @@ header #nav_button:active{
 }
 
 .menu_item:last-of-type{
-    gap: 20.5px;
+    gap: 18.25px;
 }
 
 .side_menu button{
@@ -335,6 +326,77 @@ header #nav_button:active{
     
 }
 
+/* HOVER MENU */
+
+.hover_menu{
+    position: fixed;
+    top: 120px;
+    right: 60px;
+    display: none;
+    flex-direction: column;
+    padding-top: 37px;
+    padding-left: 30px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 243px;
+    height: 205px;
+    gap: 20px;
+    background: #F0F0F0;
+    border-radius: 8px;
+    box-shadow: 0px 3px 5px  4px rgba(0, 0, 0, 0.1) ;
+    border: 1px #FFF solid;
+    animation: hover_menu ease-in-out 0.3s;
+    animation-fill-mode: forwards;
+    transform-origin: 100% 0%;
+}
+
+.hover_menu .hover_menu_item{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 27px;
+    display: flex;
+    align-items: center;
+    
+}
+
+@keyframes hover_menu {
+    0%{
+        transform: scale(0);
+        border-radius: 50%;
+        opacity: 0;
+    }
+    100%{
+        transform: scale(1);
+        border-radius: 8px;
+        opacity: 1;
+    }
+    
+}
+
+.hover_menu a{
+    color: var(--text_color);
+    transition: 0.2s;
+}
+
+.hover_menu a:hover{
+    color: var(--highlight_color);
+    opacity: 0.8;
+}
+
+.hover_menu a:active{
+    color: var(--button_active_color);
+}
+
+
+
+
+
 /* MEDIA QUERIES */
 
 @media screen and  (max-width:1000px){
@@ -470,13 +532,3 @@ header #nav_button:active{
         margin-top: 55px;
      }
 }
-<<<<<<< HEAD
-
-@media screen and (max-width:500px){
-    header div[class=container]{
-        justify-content:flex-start;
-        gap: 35px;
-     }
-} 
-=======
->>>>>>> upstream/Frontend
