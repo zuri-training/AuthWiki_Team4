@@ -700,7 +700,7 @@ footer hr{
     }
     header div[class=container]{
         justify-content:flex-start;
-        gap: 87.23px;
+        gap: 60px;
      }
 
      .side_menu{
