@@ -463,6 +463,7 @@ header #nav_button:active{
         margin-top: 55px;
      }
 }
+<<<<<<< HEAD
 
 @media screen and (max-width:500px){
     header div[class=container]{
@@ -470,3 +471,5 @@ header #nav_button:active{
         gap: 35px;
      }
 } 
+=======
+>>>>>>> upstream/Frontend
