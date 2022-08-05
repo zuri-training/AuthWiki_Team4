@@ -4,7 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     WikiController,
-    WikiComment
+    WikiComment,
+    UserController
 };
 
 /*
@@ -26,4 +27,11 @@ Route::controller(WikiController::class)->group(function(){
     Route::get('search', 'searchAPI');
     Route::get('rating/{wiki}', 'rating');
 });
+
 Route::get('voting/{comments}', [WikiComment::class, 'vote']);
+
+Route::controller(UserController::class)->group(function(){
+    Route::prefix('user')->group(function(){
+        Route::get('{user}/crown', 'toggleCrown');
+    });
+});

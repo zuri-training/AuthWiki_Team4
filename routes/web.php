@@ -24,6 +24,15 @@ Route::get('/home', function () {
     return Auth::user();
 })->middleware('auth');
 
+Route::get('/documentation', function(){
+    return view('documentation');
+})->name('page.documentation');
+
+Route::controller(\App\Http\Controllers\UserController::class)->prefix('newsletter')->group(function(){
+    Route::post('subscribe', 'subscribe')->name('newsletter.subscribe');
+    Route::get('unsubscribe', 'unsubscribe')->name('newsletter.unsubscribe');    
+});
+
 Route::controller(\App\Http\Controllers\Auth\LoginController::class)->group(function(){
     Route::get('/google-auth/callback', 'googleLogin');
     Route::get('/google-auth/redirect', 'redirectGoogle')->name('login.google');

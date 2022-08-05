@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\{
     Wiki,
     Comment,
-    Reaction,
-    Vote
+    Reaction
 };
 use Illuminate\{
     Support\Facades\Auth,

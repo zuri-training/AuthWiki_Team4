@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\{
     Http\Controllers\Controller,
     Providers\RouteServiceProvider,
-    Models\Github,
-    Models\Google,
     Models\User
 };
 use Illuminate\{
