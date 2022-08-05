@@ -823,7 +823,7 @@ footer hr{
     outline: none !important;
     border-radius: 4px;
     max-width: 118px;
-    min-width: 114px;
+    min-width: 96px;
     color: var(--text_color);
     display: flex;
     justify-content: center;
