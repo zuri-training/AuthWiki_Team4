@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    background-image: url(/resources/images/Background.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 900px;
+    display: flex;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin: auto;
+}
+
+h4 {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 32px;
+    color: rgb(20, 58, 86);
+    margin: 2px;
+}
+
+p {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: rgb(31, 31, 31);
+    margin: 5px;
+}
+
+a {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    color: rgb(40, 78, 107);
+    padding-left: 30%;
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+    padding: 8px 24px;
+    border-width: 0.5mm;
+    border-style: solid;
+    border-color: rgba(251, 86, 7, 0.37);
+    margin: 12px;
+    border-radius: 8px;
+}
+
+hr {
+    border: 0.1% solid;
+}
+
+.img {
+    width: 125px;
+    height: 125px;
+}
+
+.icon {
+    width: 15px;
+    height: 15px;
+    padding-right: 2px;
+}
+
+.alpha {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+}
+
+.div1 {
+    height: 360px;
+    align-content: center;
+    text-align: center;
+    background-color: rgb(240, 240, 240);
+    padding-top: 25px;
+    border-radius: 8px;
+}
+
+.div2 {
+    background-color: rgb(240, 240, 240);
+    margin-top: 8px;
+    padding: 5px;
+}
+
+.div3 {
+    width: 600px;
+    height: 375px;
+    background-color: rgb(240, 240, 240);
+    padding-top: 10px;
+    padding-right: 15px;
+    padding-left: 20px;
+    margin-top: 15px;
+    text-align: left;
+}
+
+.div2p {
+    margin: 2px;
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.div3h4 {
+    color: rgb(20, 58, 86);
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 40px;
+    margin: 10px;
+    text-align: left;
+}
+
+.div3p {
+    margin: 5px;
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 25px;
+    background-color: rgb(205, 209, 222);
+    text-align: left;
+}
