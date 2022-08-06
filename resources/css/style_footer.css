@@ -237,6 +237,14 @@ footer hr{
     .nav_menu{
         display: none;
     }
+
+    header nav, header #nav_secondary{
+        display: none;
+    }
+
+    header .nav_secondary{
+        margin-left: 0;
+    }
    
 }
 

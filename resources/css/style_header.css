@@ -11,7 +11,6 @@
     --button_active_color :  #FFD791;
     --button_color : #FF9243;
     --button_hover_color : rgba(255, 215, 145, 0.5);
-    scroll-behavior: smooth;
 }
 
 *{
@@ -23,6 +22,7 @@
 .container{
     width: 90%;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 a{
@@ -30,7 +30,6 @@ a{
 }
 
 body{
-    position: relative;
     font-family: 'Manrope';
     font-style: normal;
     background-color: #FFF;
@@ -45,7 +44,7 @@ button{
 }
 
 
-/* HEADER */
+/*  HEADER  */
 header{
     min-height: 110px;
     width: 100vw;
@@ -103,6 +102,14 @@ header #nav_secondary{
     gap: 70px;
 }
 
+header .nav_secondary{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-left: 112px;
+}
+
 header #nav_button{
     height: 56px;
     width: 156px;
@@ -133,6 +140,10 @@ header #nav_button:hover{
 header #nav_button:active{
     background-color: var(--button_active_color);
     transform: scale(0.97);
+}
+
+.nav_secondary .icon:hover{
+    opacity: 0.6;
 }
 
 /* MENU BAR */
@@ -169,7 +180,7 @@ header #nav_button:active{
 }
 
 .side_menu {
-    height: 100%;
+    height: 100% !important;
     width: 0;
     opacity: 0;
     position: fixed;
@@ -336,6 +347,89 @@ header #nav_button:active{
     
 }
 
+/* HOVER MENU */
+
+.hover_menu{
+    position: fixed;
+    top: 120px;
+    right: 60px;
+    display: none;
+    flex-direction: column;
+    padding-top: 37px;
+    padding-left: 30px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 243px;
+    height: 205px;
+    gap: 20px;
+    background: #F0F0F0;
+    border-radius: 8px;
+    box-shadow: 0px 3px 5px  4px rgba(0, 0, 0, 0.1) ;
+    border: 1px #FFF solid;
+    animation: hover_menu ease-in-out 0.3s;
+    animation-fill-mode: forwards;
+    transform-origin: 100% 0%;
+    transition: 0.3s;
+}
+
+
+.hover_menu .hover_menu_item{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 27px;
+    display: flex;
+    align-items: center;
+    
+}
+
+@keyframes hover_menu {
+    0%{
+        transform: scale(0);
+        border-radius: 50%;
+        opacity: 0;
+    }
+    100%{
+        transform: scale(1);
+        border-radius: 8px;
+        opacity: 1;
+    }
+    
+}
+
+.hover_menu a{
+    color: var(--text_color);
+    transition: 0.2s;
+}
+
+.hover_menu .hover_menu_item a:hover{
+    color: var(--text_color) ;
+    opacity: 0.6;
+}
+
+.hover_menu .hover_menu_item:last-of-type a{
+    color: #FA2C2C;
+}
+
+.hover_menu a:hover{
+    color: var(--highlight_color);
+    opacity: 0.8;
+}
+
+.hover_menu a:active{
+    color: var(--button_active_color);
+}
+
+
+
+
+
+
 /* MEDIA QUERIES */
 
 @media screen and  (max-width:1000px){
@@ -346,11 +440,19 @@ header #nav_button:active{
     .nav_menu{
         display: none;
     }
+
+    header nav, header #nav_secondary{
+        display: none;
+    }
+
+    header .nav_secondary{
+        margin-left: 0;
+    }
    
 }
 
 @media screen and (max-width:1200px) {
-    .footer_content{
+    /* .footer_content{
         flex-direction: column;
         gap: 50px;
     }
@@ -363,27 +465,22 @@ header #nav_button:active{
         align-self: flex-start;
         height: 36px;
         width: 150px;
-    }
+    } */
 }
 
 @media screen and (max-width: 900px) {
-    .footer_bottom{
+    /* .footer_bottom{
         flex-direction: column;
         gap: 15px;
-    }
+    } */
 }
 
 @media screen and (max-width: 700px) {
-    footer{
-        padding: 25px 0;
+    /*footer{
+        padding: 44px 0 20.87px 0;
+        width: 100vw;
     }
-    footer #hr2{
-        display: none;
-    }
-    footer #hr1{
-        display: inline-block;
-    }
-
+    
     .footer_main{
         width: 100%;
         padding: 0 40px;
@@ -433,10 +530,14 @@ header #nav_button:active{
         font-weight: 500;
         font-size: 12px;
         line-height: 16px;
-    }
+    } */
 }
 
 @media screen and (max-width:600px) {
+
+    main[class=container]{
+        margin-top: 55px;
+     }
     
     .site_logo{
         order: 2;

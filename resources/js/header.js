@@ -1,13 +1,44 @@
 
+
 function openNav() {
-    document.getElementById("mySidemenu").style.width = "322px";
-    document.getElementById("mySidemenu").style.opacity = "1";
+    var mySidemenu = document.getElementById("mySidemenu");
+    mySidemenu.style.width = "322px";
+    mySidemenu.style.opacity = "1";
+
 }
 
 function closeNav() {
-    document.getElementById("mySidemenu").style.width = "0px";
-    document.getElementById("mySidemenu").style.opacity= "0";
+    var mySidemenu = document.getElementById("mySidemenu");
+    mySidemenu.style.width = "0px";
+    mySidemenu.style.opacity= "0";
+
 }
+
+
+function closeNavOnOutsideClick(){
+    var ignoreClickOnMeElement = document.getElementById('mySidemenu');
+    var ignoreClickOnMeElement1 = document.getElementById('menu_button');
+    document.addEventListener('click', function(event) {
+        var isClickInsideElement = ignoreClickOnMeElement.contains(event.target);
+        var isClickInsideElement1 = ignoreClickOnMeElement1.contains(event.target);
+        if (!isClickInsideElement && !isClickInsideElement1) {
+            closeNav()
+        }
+});
+}
+
+function closeHoverMenuOnOutsideClick(){
+    var ignoreClickOnMeElement = document.getElementById('myHovermenu');
+    var ignoreClickOnMeElement1 = document.getElementById('icon');
+    document.addEventListener('click', function(event) {
+        var isClickInsideElement = ignoreClickOnMeElement.contains(event.target);
+        var isClickInsideElement1 = ignoreClickOnMeElement1.contains(event.target);
+        if (!isClickInsideElement && !isClickInsideElement1) {
+            hideHoverMenu()
+        }
+});
+}
+
 
 function submit_form(){
     var form = document.getElementById("menu_search_form");
@@ -15,11 +46,13 @@ function submit_form(){
 }
 
 function showHoverMenu() {
-    document.getElementById("myHovermenu").style.display = "flex";
+    var myHovermenu = document.getElementById("myHovermenu");
+    myHovermenu.style.display = "flex";
 }
 
 function hideHoverMenu() {
-    document.getElementById("myHovermenu").style.display = "none";
+    var myHovermenu = document.getElementById("myHovermenu");
+    myHovermenu.style.display = "none";
 }
 
 function moveToPosition(id) {
