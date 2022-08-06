@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ asset('images/Authwiki.svg') }}">
-    <link rel="stylesheet" href="{{ asset('css/style_header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style_hp_header.css') }}">
     <script src="{{ asset('js/header.js') }}"></script>
-    <title>General Header</title>
+    <title>Home Page Header</title>
 </head>
-<body>
+<body onclick="hideHoverMenu()" >
     <header>
         <div class="container">
             <div class="site_logo">
@@ -47,18 +47,35 @@
                         <ul>
                             <a href=""><li class="nav_link">Doc</li></a>
                             <a href=""><li class="nav_link">About</li></a>
-                            <span id="current_page_link"><a href=""><li class="nav_link">Library</li></a></span>
+                            <a href=""><li class="nav_link">Library</li></a>
                         </ul>
                     </nav>
         
-                    <div id="nav_secondary">
-                        <a href="">Login</a>
-                        <button id="nav_button">Get started <img src="{{ asset('images/caret.svg') }}"></button>
+                    <div onpointerover="showHoverMenu()" id="nav_secondary">
+                        <svg class="icon" width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M35.75 19.5C35.75 22.0859 34.7228 24.5658 32.8943 26.3943C31.0658 28.2228 28.5859 29.25 26 29.25C23.4141 29.25 20.9342 28.2228 19.1057 26.3943C17.2772 24.5658 16.25 22.0859 16.25 19.5C16.25 16.9141 17.2772 14.4342 19.1057 12.6057C20.9342 10.7772 23.4141 9.75 26 9.75C28.5859 9.75 31.0658 10.7772 32.8943 12.6057C34.7228 14.4342 35.75 16.9141 35.75 19.5Z" fill="#00192C"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0 26C0 19.1044 2.73928 12.4912 7.61522 7.61522C12.4912 2.73928 19.1044 0 26 0C32.8956 0 39.5088 2.73928 44.3848 7.61522C49.2607 12.4912 52 19.1044 52 26C52 32.8956 49.2607 39.5088 44.3848 44.3848C39.5088 49.2607 32.8956 52 26 52C19.1044 52 12.4912 49.2607 7.61522 44.3848C2.73928 39.5088 0 32.8956 0 26ZM26 3.25C21.7158 3.25023 17.5187 4.46018 13.8918 6.74059C10.2649 9.021 7.35567 12.2792 5.49888 16.1401C3.6421 20.0011 2.91326 24.3079 3.39624 28.5648C3.87923 32.8217 5.55442 36.8557 8.229 40.2025C10.5365 36.4845 15.6163 32.5 26 32.5C36.3838 32.5 41.4603 36.4813 43.771 40.2025C46.4456 36.8557 48.1208 32.8217 48.6038 28.5648C49.0867 24.3079 48.3579 20.0011 46.5011 16.1401C44.6443 12.2792 41.7351 9.021 38.1082 6.74059C34.4813 4.46018 30.2842 3.25023 26 3.25Z" fill="#00192C"/>
+                        </svg>
+                        <!-- HOVER MENU -->
+                        <div id=myHovermenu class="hover_menu">
+                            <div class="hover_menu_item">
+                                <a href="#">Profile</a>
+                            </div>
+                            <div class="hover_menu_item">
+                                <a href="#">Settings</a>
+                            </div>
+                            <div class="hover_menu_item">
+                                <img src="{{ asset('images/signout2.svg') }}">
+                                <a href="#">Sign out</a>
+                            </div>
+                        </div>     
                     </div>
                 </div>  
             </div>   
         </div>
     </header>
+
+    <!-- SIDE MENU -->
     <div id="mySidemenu" class="side_menu">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="menu_search" >
@@ -84,23 +101,23 @@
             <img src="{{ asset('images/library.svg') }}">
             <a href="#">Library</a>
         </div>
-        <!-- <div class="menu_item">
-            <img src="../images/profile.svg">
+        <div class="menu_item">
+            <img src="{{ asset('images/profile.svg') }}">
             <a href="#">Profile</a>
         </div>
         <div class="menu_item">
-            <img src="../images/settings.svg">
+            <img src="{{ asset('images/settings.svg') }}">
             <a href="#">Settings</a>
-        </div> -->
-        <div class="menu_item">
-            <img src="{{ asset('images/login.svg') }}">
-            <a href="#">Login</a>
         </div>
         <!-- <div class="menu_item">
-            <img src="../images/signout.svg">
-            <a href="#">Sign out</a>
+            <img src="../images/login.svg">
+            <a href="#">Login</a>
         </div> -->
-        <button>Get started</button>
+        <div class="menu_item">
+            <img src="{{ asset('images/signout.svg') }}">
+            <a href="#">Sign out</a>
+        </div>
+        <!-- <button>Get started</button> -->
     </div>
 
 </body>
