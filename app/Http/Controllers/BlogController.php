@@ -100,12 +100,12 @@ class BlogController extends Controller
             'keyword' => 'required|string|max:25',
             'stack' => 'string|max:10'
         ]);
-        $keyword = $request->input('keyword');
+        $keyword = $request->keyword;
         $wiki = Wiki::where('type', 'blog')
             ->where('title', 'LIKE', "%{$keyword}%")
             ->where(function($query) {
                 if(request()->has('stack')) {
-                    $query->where('stack', request()->input('stack'));
+                    $query->where('stack', request()->stack);
                 }
             })
             ->paginate(10)
@@ -130,7 +130,7 @@ class BlogController extends Controller
             ->where('title', 'LIKE', "%{$request->keyword}%")
             ->where(function($query) {
                 if(request()->has('stack')) {
-                    $query->where('stack', request()->input('stack'));
+                    $query->where('stack', request()->stack);
                 }
             })
             ->limit(15)

@@ -42,13 +42,13 @@ class UserController extends Controller
     }
     public function subscribe(Request $request)
     {
-        $validator = Validator::make($request->only('email'), [
+        $validator = Validator::make($request->all(), [
             'email' => 'required|string|email'
         ]);
         if($validator->fails()) {
-            return back()->with('error', 'Invalid email');
+            return back()->with('error', 'Invalid email address');
         } else {
-            $email = Str::lower($request->input('email'));
+            $email = Str::lower($request->email);
             $user = User::where('email', $email);
             $name = [];
             if($user->exists()) {
@@ -70,7 +70,7 @@ class UserController extends Controller
         $request->validate([
             'email' => 'required|string|email'
         ]);
-        $email = Str::lower($request->input('email'));
+        $email = Str::lower($request->email);
         if(Newsletter::hasMember($email)) {
             Newsletter::unsubscribe($email);
         }

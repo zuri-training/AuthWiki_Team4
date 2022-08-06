@@ -31,7 +31,7 @@ class WikiComment extends Controller
         Comment::create([
             'wiki_id' => $wiki->id,
             'user_id' => Auth::id(),
-            'comment' => $request->input('comment')
+            'comment' => $request->comment
         ]);
         return back();
     }
@@ -40,7 +40,7 @@ class WikiComment extends Controller
             'comment' => 'required|string|max:500'
         ]);
         $comment->update([
-            'comment' => $request->input('comment')
+            'comment' => $request->comment
         ]);
         return back();
     }
@@ -60,14 +60,14 @@ class WikiComment extends Controller
             'user_id' => Auth::id(),
             'comment_id' => $comment->id
         ]);
-        if($request->input('vote') == 'up' && $vote->doesntExist()) {
+        if($request->vote == 'up' && $vote->doesntExist()) {
             $vote = Reaction::create([
                 'wiki_id' => $comment->wiki->id,
                 'user_id' => Auth::id(),
                 'comment_id' => $comment->id
             ]);
             $comment->increment('vote');
-        } elseif($request->input('vote') == 'down' && $vote->exists()) {
+        } elseif($request->vote == 'down' && $vote->exists()) {
             $vote->delete();
             $comment->decrement('vote');
         }

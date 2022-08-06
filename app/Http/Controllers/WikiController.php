@@ -100,12 +100,12 @@ class WikiController extends Controller
             'keyword' => 'required|string|between:3,25',
             'stack' => 'string|max:10'
         ]);
-        $keyword = $request->input('keyword');
+        $keyword = $request->keyword;
         $wiki = Wiki::where('type', 'wiki')
             ->where('title', 'LIKE', "%{$keyword}%")
             ->where(function($query) {
                 if(request()->has('stack')) {
-                    $query->where('stack', request()->input('stack'));
+                    $query->where('stack', request()->stack);
                 }
             })
             ->paginate(15)
@@ -128,7 +128,7 @@ class WikiController extends Controller
             ->where('title', 'LIKE', "%{$request->keyword}%")
             ->where(function($query) {
                 if(request()->has('stack')) {
-                    $query->where('stack', request()->input('stack'));
+                    $query->where('stack', request()->stack);
                 }
             })
             ->limit(10)

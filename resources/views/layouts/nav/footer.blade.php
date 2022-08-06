@@ -51,8 +51,33 @@
                 <p>&copy; 2022 Auth-wiki. All rights reserved.</p>
             </div>
         </div>
-        
+        <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+            @csrf
+        </form>
     </footer>
-    @stack('foot')
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"> </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('#menu_button').click(function(){
+            $('#mySidemenu').fadeTo(500, 1).width('322px');
+        });
+        $('.closebtn').click(function(){
+            $('#mySidemenu').fadeTo(500, 0).width('0px');
+        });
+        $('#show_profile_menu').hover(function(){
+            $('#myHovermenu').show();
+        }, function(){});
+        $('body').click(function(){
+            $('#myHovermenu').hide();
+        });
+        $('#logoutBtn').click(function(){
+            $('#logoutForm').submit();
+        });
+        $('#nav_button').click(function(){
+            window.location = '{{ route('register') }}';
+        });
+    });
+    </script>
+    @stack('js')
 </body>
 </html>

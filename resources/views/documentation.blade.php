@@ -2,7 +2,7 @@
 
 @section('title', 'Authwiki | Documetation')
 
-@push('head')
+@push('css')
     <link rel="stylesheet" href="{{ asset('css/documentation.css') }}">
 @endpush
 
