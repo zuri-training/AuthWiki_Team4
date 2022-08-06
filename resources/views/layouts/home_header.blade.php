@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../images/Authwiki.svg">
-    <link rel="stylesheet" href="../css/style_lp_header.css">
-    <script src="../js/header.js"></script>
-    <title>Landing Header</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/Authwiki.svg') }}">
+    <link rel="stylesheet" href="{{ asset('css/style_hp_header.css') }}">
+    <script src="{{ asset('js/header.js') }}"></script>
+    <title>Home Page Header</title>
 </head>
-<body>
+<body onclick="hideHoverMenu()" >
     <header>
         <div class="container">
             <div class="site_logo">
@@ -33,84 +33,91 @@
                 </svg></a>
             </div>
             
-            <button id="menu_button" onclick="openNav()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 12C0 13.1046 0.895431 14 2 14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 
-                    10 22 10H2C0.89543 10 0 10.8954 0 12ZM0 22C0 23.1046 0.895431 24 2 24H12H22C23.1046 24 24 23.1046 24 
-                    22C24 20.8954 23.1046 20 22 20H12H2C0.895431 20 0 20.8954 0 22ZM2 0C0.89543 0 0 0.895431 0 2C0 3.10457
-                        0.895431 4 2 4H22C23.1046 4 24 3.10457 24 2C24 0.895431 23.1046 0 22 0H2Z" fill="#284E6B"/>
-                </svg>     
-            </button>
-
-            <nav>
-                <ul>
-                    <a href=""><li class="nav_link">Doc</li></a>
-                    <a href=""><li class="nav_link">About</li></a>
-                    <a href=""><li class="nav_link">Library</li></a>
-                </ul>
-            </nav>
-
-            <div id="nav_secondary">
-                <a href="">Login</a>
-                <button id="nav_button">Get started <img src="../images/caret.svg"></button>
-            </div>
-            
+            <div class="nav_container">
+                <button id="menu_button" onclick="openNav()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 12C0 13.1046 0.895431 14 2 14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 
+                        10 22 10H2C0.89543 10 0 10.8954 0 12ZM0 22C0 23.1046 0.895431 24 2 24H12H22C23.1046 24 24 23.1046 24 
+                        22C24 20.8954 23.1046 20 22 20H12H2C0.895431 20 0 20.8954 0 22ZM2 0C0.89543 0 0 0.895431 0 2C0 3.10457
+                         0.895431 4 2 4H22C23.1046 4 24 3.10457 24 2C24 0.895431 23.1046 0 22 0H2Z" fill="#284E6B"/>
+                    </svg>     
+                </button>
+                <div class="nav_menu">
+                    <nav>
+                        <ul>
+                            <a href=""><li class="nav_link">Doc</li></a>
+                            <a href=""><li class="nav_link">About</li></a>
+                            <a href=""><li class="nav_link">Library</li></a>
+                        </ul>
+                    </nav>
+        
+                    <div onpointerover="showHoverMenu()" id="nav_secondary">
+                        <svg class="icon" width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M35.75 19.5C35.75 22.0859 34.7228 24.5658 32.8943 26.3943C31.0658 28.2228 28.5859 29.25 26 29.25C23.4141 29.25 20.9342 28.2228 19.1057 26.3943C17.2772 24.5658 16.25 22.0859 16.25 19.5C16.25 16.9141 17.2772 14.4342 19.1057 12.6057C20.9342 10.7772 23.4141 9.75 26 9.75C28.5859 9.75 31.0658 10.7772 32.8943 12.6057C34.7228 14.4342 35.75 16.9141 35.75 19.5Z" fill="#00192C"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0 26C0 19.1044 2.73928 12.4912 7.61522 7.61522C12.4912 2.73928 19.1044 0 26 0C32.8956 0 39.5088 2.73928 44.3848 7.61522C49.2607 12.4912 52 19.1044 52 26C52 32.8956 49.2607 39.5088 44.3848 44.3848C39.5088 49.2607 32.8956 52 26 52C19.1044 52 12.4912 49.2607 7.61522 44.3848C2.73928 39.5088 0 32.8956 0 26ZM26 3.25C21.7158 3.25023 17.5187 4.46018 13.8918 6.74059C10.2649 9.021 7.35567 12.2792 5.49888 16.1401C3.6421 20.0011 2.91326 24.3079 3.39624 28.5648C3.87923 32.8217 5.55442 36.8557 8.229 40.2025C10.5365 36.4845 15.6163 32.5 26 32.5C36.3838 32.5 41.4603 36.4813 43.771 40.2025C46.4456 36.8557 48.1208 32.8217 48.6038 28.5648C49.0867 24.3079 48.3579 20.0011 46.5011 16.1401C44.6443 12.2792 41.7351 9.021 38.1082 6.74059C34.4813 4.46018 30.2842 3.25023 26 3.25Z" fill="#00192C"/>
+                        </svg>
+                        <!-- HOVER MENU -->
+                        <div id=myHovermenu class="hover_menu">
+                            <div class="hover_menu_item">
+                                <a href="#">Profile</a>
+                            </div>
+                            <div class="hover_menu_item">
+                                <a href="#">Settings</a>
+                            </div>
+                            <div class="hover_menu_item">
+                                <img src="{{ asset('images/signout2.svg') }}">
+                                <a href="#">Sign out</a>
+                            </div>
+                        </div>     
+                    </div>
+                </div>  
+            </div>   
         </div>
     </header>
+
+    <!-- SIDE MENU -->
     <div id="mySidemenu" class="side_menu">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="menu_search" >
-            <img src="../images/search_icon.svg" alt="search icon" class="search_icon">
+            <img src="{{ asset('images/search_icon.svg') }}" alt="search icon" class="search_icon">
             <form action="" id="menu_search_form" onchange="submit_form()" method="POST">
-<<<<<<< HEAD
                 <input id="search_field" type="text" placeholder="Search">
-=======
-                <input id="search_field" placeholder="Search">
->>>>>>> upstream/Frontend
             </form>
         </div>
         
         <div class="menu_item">
-            <img src="../images/home.svg">
+            <img src="{{ asset('images/home.svg') }}">
             <a href="#">Home</a>
         </div>
         <div class="menu_item">
-            <img src="../images/docs.svg">
+            <img src="{{ asset('images/docs.svg') }}">
             <a href="#">Doc</a>
         </div>
         <div class="menu_item">
-<<<<<<< HEAD
-            <img src="../images/resources.svg">
-=======
-            <!-- <img src="../images/resources.svg"> -->
-            <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.84 7.70001H14.865C14.917 7.96434 14.9537 8.23145 14.975 8.50001H7.74499L3.14999 14.035C2.02474 12.9426 1.29891 11.504 1.08891 9.94982C0.87891 8.39566 1.19689 6.816 1.99187 5.46413C2.78685 4.11227 4.01276 3.06652 5.47304 2.49458C6.93332 1.92264 8.54336 1.85764 10.045 2.31001L10.545 1.43001C8.93963 0.891323 7.20475 0.87592 5.59008 1.38602C3.97541 1.89612 2.56424 2.9054 1.55972 4.26859C0.555191 5.63178 0.00912012 7.27855 0.000113235 8.97185C-0.00889365 10.6652 0.519628 12.3176 1.5096 13.6914C2.49956 15.0652 3.89992 16.0895 5.50907 16.6167C7.11822 17.144 8.85316 17.147 10.4642 16.6254C12.0752 16.1039 13.4791 15.0846 14.4739 13.7143C15.4687 12.344 16.003 10.6933 16 9.00001C15.9974 8.5626 15.9589 8.12613 15.885 7.69501L15.84 7.70001ZM7.99999 16C6.53435 15.9993 5.10641 15.5355 3.91999 14.675L8.21499 9.50001H14.975C14.8486 11.2642 14.0591 12.9152 12.7652 14.1211C11.4712 15.3269 9.76872 15.9982 7.99999 16Z" fill="#1F1F1F" fill-opacity="0.6"/>
-                <path d="M12.4249 0.570029L9.56494 5.50003C9.49841 5.59769 9.46021 5.71187 9.45458 5.82992C9.44896 5.94796 9.47613 6.06526 9.53308 6.1688C9.59003 6.27235 9.67454 6.35811 9.77724 6.41657C9.87995 6.47504 9.99683 6.50392 10.1149 6.50003H15.8399C15.9581 6.50392 16.0749 6.47504 16.1776 6.41657C16.2803 6.35811 16.3649 6.27235 16.4218 6.1688C16.4788 6.06526 16.5059 5.94796 16.5003 5.82992C16.4947 5.71187 16.4565 5.59769 16.3899 5.50003L13.5299 0.570029C13.4735 0.473557 13.3929 0.393534 13.2959 0.337924C13.199 0.282313 13.0892 0.253052 12.9774 0.253052C12.8657 0.253052 12.7559 0.282313 12.659 0.337924C12.562 0.393534 12.4813 0.473557 12.4249 0.570029Z" fill="#1F1F1F" fill-opacity="0.6"/>
-            </svg>
->>>>>>> upstream/Frontend
+            <img src="{{ asset('images/resources.svg') }}">
             <a href="#">About</a>
         </div>
         <div class="menu_item">
-            <img src="../images/library.svg">
+            <img src="{{ asset('images/library.svg') }}">
             <a href="#">Library</a>
         </div>
-        <!-- <div class="menu_item">
-            <img src="../images/profile.svg">
+        <div class="menu_item">
+            <img src="{{ asset('images/profile.svg') }}">
             <a href="#">Profile</a>
         </div>
         <div class="menu_item">
-            <img src="../images/settings.svg">
+            <img src="{{ asset('images/settings.svg') }}">
             <a href="#">Settings</a>
-        </div> -->
-        <div class="menu_item">
-            <img src="../images/login.svg">
-            <a href="#">Login</a>
         </div>
         <!-- <div class="menu_item">
-            <img src="../images/signout.svg">
-            <a href="#">Sign out</a>
+            <img src="../images/login.svg">
+            <a href="#">Login</a>
         </div> -->
-        <button>Get started</button>
+        <div class="menu_item">
+            <img src="{{ asset('images/signout.svg') }}">
+            <a href="#">Sign out</a>
+        </div>
+        <!-- <button>Get started</button> -->
     </div>
 
 </body>
