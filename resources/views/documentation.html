@@ -7,17 +7,19 @@
     <link rel="icon" type="image/x-icon" href="../images/Authwiki.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
+
+    <link rel="stylesheet" href="../css/style_header.css">
+    <link rel="stylesheet" href="../css/style_footer.css">
     <link rel="stylesheet" href="../css/style_documentation.css">
     <script src="../js/header.js"></script>
     <title>Documetation</title>
 </head>
-<body>
+<body onpointerenter="closeNavOnOutsideClick()" onclick="closeHoverMenuOnOutsideClick()">
         <!-- HEADER AND MENU BAR -->
     <header>
         <div class="container">
             <div class="site_logo">
-                <a href="#"><svg width="175" height="43" viewBox="0 0 175 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <a href="#"><svg width="100%" height="100%" viewBox="0 0 175 43" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M38.6103 31.2513L46.3143 9.96662H50.6478L58.3518 31.2513H54.259L52.5738 26.3254H44.3582L42.6428 31.2513H38.6103ZM45.4115 23.2847H51.5205L48.4509 14.4364L45.4115 23.2847Z" fill="#1F1F1F"/>
                     <path d="M65.7068 31.6162C63.841 31.6162 62.3965 31.0283 61.3734 29.8526C60.3702 28.6769 59.8687 26.9538 59.8687 24.6834V16.1696H63.6906V24.3186C63.6906 25.6159 63.9514 26.6092 64.473 27.2984C64.9946 27.9876 65.8172 28.3322 66.9407 28.3322C68.004 28.3322 68.8767 27.9471 69.5589 27.1768C70.261 26.4065 70.6121 25.3321 70.6121 23.9537V16.1696H74.4641V31.2513H71.0635L70.7626 28.6971C70.3012 29.589 69.6291 30.2985 68.7463 30.8256C67.8836 31.3526 66.8705 31.6162 65.7068 31.6162Z" fill="#1F1F1F"/>
                     <path d="M84.4973 31.2513C82.9325 31.2513 81.6786 30.8661 80.7356 30.0958C79.7927 29.3255 79.3212 27.9572 79.3212 25.9909V19.4231H76.7632V16.1696H79.3212L79.7726 12.1255H83.1732V16.1696H87.2058V19.4231H83.1732V26.0213C83.1732 26.7511 83.3237 27.2579 83.6246 27.5417C83.9456 27.8052 84.4873 27.937 85.2497 27.937H87.1155V31.2513H84.4973Z" fill="#1F1F1F"/>
@@ -63,7 +65,8 @@
             </div>   
         </div>
     </header>
-    <div id="mySidemenu" class="side_menu">
+
+    <div id="mySidemenu" class="side_menu" onpointerover="closeNavOnOutsideClick()">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="menu_search" >
             <img src="../images/search_icon.svg" alt="search icon" class="search_icon">
@@ -72,38 +75,16 @@
             </form>
         </div>
         
-        <div class="menu_item">
-            <img src="../images/home.svg">
-            <a href="#">Home</a>
-        </div>
-        <div class="menu_item">
-            <img src="../images/docs.svg">
-            <a href="#">Doc</a>
-        </div>
-        <div class="menu_item">
-            <img src="../images/resources.svg">
-            <a href="#">About</a>
-        </div>
-        <div class="menu_item">
-            <img src="../images/library.svg">
-            <a href="#">Library</a>
-        </div>
-        <!-- <div class="menu_item">
-            <img src="../images/profile.svg">
-            <a href="#">Profile</a>
-        </div>
-        <div class="menu_item">
-            <img src="../images/settings.svg">
-            <a href="#">Settings</a>
-        </div> -->
-        <div class="menu_item">
-            <img src="../images/login.svg">
-            <a href="#">Login</a>
-        </div>
-        <!-- <div class="menu_item">
-            <img src="../images/signout.svg">
-            <a href="#">Sign out</a>
-        </div> -->
+        <ul class='menu_links'>
+            <li style="list-style-image: url('../images/home.svg')"><a href="#">Home</a></li>
+            <li style="list-style-image: url('../images/docs.svg')"><a href="#">Doc</a></li>
+            <li style="list-style-image: url('../images/resources.svg')"><a href="#">Resources</a></li>
+            <li style="list-style-image: url('../images/library.svg')"><a href="#">Library</a></li>
+            <!-- <li style="list-style-image: url('../images/profile.svg')"><a href="#">Profile</a></li>
+            <li style="list-style-image: url('../images/settings.svg')"><a href="#">Settings</a></li> -->
+            <li style="list-style-image: url('../images/login.svg')"><a href="#">Login</a></li>
+            <!-- <li style="list-style-image: url('../images/signout.svg')"><a href="#"><span style= "color: red">Sign out</span></a></li> -->
+        </ul>
         <button>Get started</button>
     </div>
 

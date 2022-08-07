@@ -4,7 +4,7 @@
 }
 
 body {
-    background-image: url(/resources/images/Background.svg);
+    background-image: url(../images/Background.svg) no-repeat center center fixed;
     padding-top: 3%;
 }
 
