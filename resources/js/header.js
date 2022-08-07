@@ -1,26 +1,5 @@
 
 
-function openNav() {
-    var mySidemenu = document.getElementById("mySidemenu");
-    var screenWidth = window.innerWidth;
-    mySidemenu.style.paddingLeft = "32px";
-    mySidemenu.style.boxShadow = "0px 0px 100px 100vw  rgba(0, 0, 0, 0.2), 0px 4px 100px 20px rgba(0, 0, 0, 0.2)";
-    if (screenWidth < 768) {
-        mySidemenu.style.width = screenWidth * 0.8 + "px";
-    }
-    else {
-    mySidemenu.style.width = '322px' ;
-    }
-}
-
-function closeNav() {
-    var mySidemenu = document.getElementById("mySidemenu");
-    mySidemenu.style.width = "0px";
-    mySidemenu.style.paddingLeft = "0px";
-    mySidemenu.style.boxShadow = "none"
-}
-
-
 function closeNavOnOutsideClick(){
     var ignoreClickOnMeElement = document.getElementById('mySidemenu');
     var ignoreClickOnMeElement1 = document.getElementById('menu_button');
@@ -32,6 +11,32 @@ function closeNavOnOutsideClick(){
         }
 });
 }
+
+function openNav() {
+    var mySidemenu = document.getElementById("mySidemenu");
+    var screenWidth = window.innerWidth;
+    mySidemenu.style.paddingLeft = "32px";
+    mySidemenu.style.boxShadow = "0px 0px 100px 100vw  rgba(0, 0, 0, 0.2), 0px 4px 100px 20px rgba(0, 0, 0, 0.2)";
+    if (screenWidth < 768) {
+        mySidemenu.style.width = screenWidth * 0.8 + "px";
+    }
+    else {
+        mySidemenu.style.width = '322px' ;
+    }
+    mySidemenu.style.opacity = "1";
+}
+
+  
+
+function closeNav() {
+    var mySidemenu = document.getElementById("mySidemenu");
+    mySidemenu.style.width = "0px";
+    mySidemenu.style.paddingLeft = "0px";
+    mySidemenu.style.opacity = "0";
+    mySidemenu.style.boxShadow = "none"
+
+}
+
 
 function closeHoverMenuOnOutsideClick(){
     var ignoreClickOnMeElement = document.getElementById('myHovermenu');

@@ -191,6 +191,7 @@ header #nav_button:active{
     z-index: 9999;
     top: 0;
     right: 0;
+    opacity: 0;
     font-weight: 700;
     font-size: 18px;
     line-height: 28px;
@@ -200,7 +201,7 @@ header #nav_button:active{
     background-color: #FFF;
     overflow-x: hidden;
     overflow-y: auto;
-    transition: 0.3s;
+    transition: 0.3s ease-in-out;
   }
   
 .menu_links{
@@ -301,9 +302,9 @@ header #nav_button:active{
     margin-bottom: 32px;
     margin-right: 20px;
     transition: 20ms ease-out ;
-
-
 }
+
+
 
 .menu_search img{
     margin-left: 11.26px;

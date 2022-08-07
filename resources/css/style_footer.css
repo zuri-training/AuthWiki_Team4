@@ -365,3 +365,22 @@ footer hr{
     }
 }
 
+@media screen and (max-width:300px){
+    .footer_content .footer_newsletter #site_logo{
+        height: 27px;
+        width: 90px;
+        margin-bottom: 13px;
+    }
+
+    .footer_form #news_form #email_field{
+        width: 80%;
+        height: 100%;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .footer_links:nth-of-type(1){
+        margin-right: 64px;
+    }
+}
