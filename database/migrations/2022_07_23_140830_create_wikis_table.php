@@ -19,9 +19,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->enum('type', ['wiki', 'blog', 'forum']);
-            $table->string('stack');
+            $table->enum('stack', ['javascript', 'python', 'django']);
             $table->text('file_dir');
             $table->string('title');
+            $table->string('description');
             $table->longText('content');
             $table->integer('views')->default(0);
             $table->dateTime('viewed_at')->nullable();

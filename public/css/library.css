@@ -1,0 +1,138 @@
+
+body{
+    font-family: 'manrope', sans-serif;
+    background: url(../images/Background.svg);
+    overflow-x: hidden;
+}
+header{
+    margin-bottom: 6rem;
+}
+.input-box{
+    border: 2px solid rgb(0, 37, 71);
+    border-radius: 4px;
+}
+.input-box input{
+    outline: none;
+    border: none;
+    background: transparent;
+
+}
+.input-box button{
+    border: none;
+    background-color: var(--button_color);
+    color: var(--text_color);
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+    margin: 5px 8px;
+    gap: 10px;
+    width: 135px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0 !important;
+}
+.input-box button::before{
+  content: '';
+  position: relative;
+  height: 40px;
+  width: 20px;
+  top: 12px;
+  left: 0;
+  background: url(../images/search_icon.svg) no-repeat;
+}
+.input-box button:hover{
+  background-color: var(--button_hover_color);
+  border: 1px solid rgba(255, 146, 67, 0.85);
+  box-shadow: 0px 2px 10px 2px rgba(31, 31, 31, 0.1);
+  transform: scale(1.02);
+}
+.input-box button span{
+    margin-left: .5rem;
+}
+/* Search */
+.search_result{
+  position: absolute;        
+  z-index: 999;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+  margin-top: 5px;
+  border: 2px solid rgb(0, 37, 71);
+  border-radius: 4px;
+}
+.search_result p{
+  margin: 0;
+  padding: 7px 10px;
+  border: 1px solid #CCCCCC;
+  border-top: none;
+  cursor: pointer;
+}
+.search_result p:hover{
+  background: #b5d113;
+}
+
+.form-control:focus, .btn:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  .btn:hover{
+    background:#ffb37cd8 ;
+    color: rgb(0, 37, 71);
+  }
+  .row{
+    row-gap: 30px;
+    margin-top: 2rem;
+  }
+  .card{
+    position: relative;
+    border: none;
+    box-shadow: 0px 4px 5px 2px rgba(31, 31, 31, 0.12);
+    display: flex;
+    align-items: flex-start;
+    padding: 40px 22px;
+    border-radius: 4px;
+
+  }
+  .card-body {
+    padding: 1rem 0rem;
+    height: 258px;
+    overflow: hidden;
+  }
+  .card-title{
+    font-size: 24px;
+    color: #143A56;
+    line-height: 34px;
+  }
+  .card-text{
+    font-size: 14px;
+  }
+  .card-footer{
+    background: transparent;
+    border: none;
+    display: flex;
+    width: 100% !important;
+    padding: 0;
+    justify-content: space-between;
+  }
+ .card-footer .download span {
+    font-size: 12px;
+    color:#011320;
+    margin: 0 5px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .card {
+      padding: 20px 11px;
+    }
+  }
+/* hover effect trial */
+  .card:hover, .card:focus{
+    border: 2px rgb(70, 91, 126) solid;
+    box-shadow: 0 5px 10px 2px rgba(31,31,31,.25);
+    transform: scale(1.05);
+  }

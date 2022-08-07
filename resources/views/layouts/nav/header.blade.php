@@ -3,11 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.svg') }}">
-    <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <title>@yield('title', 'AuthWiki')</title>
     @stack('css')
+    <style type="text/css">
+        .be_container {
+            margin-top: 156px;
+            margin-bottom: 56px;
+        }
+        @media screen and (max-width:600px) {
+            .be_container{
+                margin-top: 55px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -25,7 +38,7 @@
                         <ul>
                             <a href="{{ route('page.documentation') }}"><li class="nav_link">Doc</li></a>
                             <a href="#"><li class="nav_link">About</li></a>
-                            <span id="current_page_link"><a href="#"><li class="nav_link">Library</li></a></span>
+                            <span id="current_page_link"><a href="{{ route('page.library') }}"><li class="nav_link">Library</li></a></span>
                         </ul>
                     </nav>
                     @auth
@@ -79,7 +92,7 @@
         </div>
         <div class="menu_item">
             <img src="{{ asset('images/library.svg') }}">
-            <a href="#">Library</a>
+            <a href="{{ route('page.library') }}">Library</a>
         </div>
         @auth
         <div class="menu_item">
@@ -99,4 +112,4 @@
         <button id="nav_button">Get started <img src="{{ asset('images/caret.svg') }}"></button>
         @endguest
     </div>
-    <div>
+    <div class="be_container">

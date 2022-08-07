@@ -17,10 +17,10 @@ class commentFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 11, //rand(1, 10),
-            'wiki_id' => rand(40, 60),
+            'user_id' => 1, //rand(1, 10),
+            'wiki_id' => rand(1, 10),
             'comment' => fake()->realText(),
-            'vote' => 0 // rand(0, 20)
+            'vote' => 0 // rand(0, 5)
         ];
     }
 }

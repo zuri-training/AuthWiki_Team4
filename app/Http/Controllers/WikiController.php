@@ -96,34 +96,25 @@ class WikiController extends Controller
     }
 
     public function search(Request $request) {
-        $request->validate([
-            'keyword' => 'required|string|between:3,25',
-            'stack' => 'string|max:10'
-        ]);
-        $keyword = $request->keyword;
-        $wiki = Wiki::where('type', 'wiki')
-            ->where('title', 'LIKE', "%{$keyword}%")
+        $wikis = Wiki::where('type', 'wiki')
             ->where(function($query) {
+                if(request()->has('keyword')) {
+                    $query->where('title', 'LIKE', '%'.request()->keyword.'%')
+                        ->orderBy('downloads', 'desc')
+                        ->latest('updated_at');
+                } else {
+                    $query->latest();
+                }
                 if(request()->has('stack')) {
                     $query->where('stack', request()->stack);
                 }
             })
-            ->paginate(15)
-            ->get();
-        return view('wiki.search', compact('wiki'));
+            ->paginate(15);
+        return view('library', compact('wikis'));
     }
 
     public function searchAPI(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'keyword' => 'required|string|between:3,25',
-            'stack' => 'string|max:10'
-        ]);
-        if($validator->fails()) {
-            return response()->json([
-                'status' => false
-            ]);
-        }
-        $wiki = Wiki::select('title')
+        $wiki = Wiki::select('title', 'id')
             ->where('type', 'wiki')
             ->where('title', 'LIKE', "%{$request->keyword}%")
             ->where(function($query) {
@@ -137,12 +128,13 @@ class WikiController extends Controller
             'data' => $wiki
         ]);
     }
-    public function rating(Request $request, Wiki $wiki)
+    public function rating(Request $request, $id)
     {
+        $wiki = Wiki::find($id);
         $validator = Validator::make($request->all(), [
             'rating' => 'required|numeric|between:0,5'
         ]);
-        if($validator->fails()) {
+        if($validator->fails() || !$wiki) {
             return response()->json([
                 'status' => false
             ]);

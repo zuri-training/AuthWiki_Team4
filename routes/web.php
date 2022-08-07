@@ -4,6 +4,12 @@ use Illuminate\Support\Facades\{
     Auth,
     Route
 };
+use App\Http\Controllers\{
+    WikiController,
+    WikiComment,
+    UserController,
+    PageController
+};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,9 +34,27 @@ Route::get('/documentation', function(){
     return view('documentation');
 })->name('page.documentation');
 
+Route::controller(WikiController::class)->group(function(){
+    Route::get('/library', 'search')->name('page.library');
+    Route::post('/search', 'searchAPI')->name('search.library');
+});
+
 Route::controller(\App\Http\Controllers\UserController::class)->prefix('newsletter')->group(function(){
     Route::post('subscribe', 'subscribe')->name('newsletter.subscribe');
     Route::get('unsubscribe', 'unsubscribe')->name('newsletter.unsubscribe');    
+});
+
+Route::controller(WikiController::class)->group(function(){
+    Route::get('search', 'searchAPI');
+    Route::get('rating/{id}', 'rating');
+});
+
+Route::get('voting/{id}', [WikiComment::class, 'vote']);
+
+Route::controller(UserController::class)->group(function(){
+    Route::prefix('user')->group(function(){
+        Route::get('{user}/crown', 'toggleCrown');
+    });
 });
 
 Route::controller(\App\Http\Controllers\Auth\LoginController::class)->group(function(){

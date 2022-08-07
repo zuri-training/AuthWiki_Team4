@@ -8,7 +8,7 @@
 
 @section('content')
     <!-- HEADER & SEARCH -->
-    <div class="showcase container">
+    <div class="container showcase">
         <div class="page_header">
             <h1>WELCOME  TO AUTHWIKI DOCUMENTATION</h1>
             <p>Explore our guides and articles on how to use the codes.</p>

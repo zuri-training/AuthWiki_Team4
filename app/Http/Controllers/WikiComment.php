@@ -45,12 +45,13 @@ class WikiComment extends Controller
         return back();
     }
 
-    public function vote(Request $request, Comment $comment)
+    public function vote(Request $request, $id)
     {
+        $comment = Comment::find($id);
         $validator = Validator::make($request->all(), [
             'vote' => 'required|in:up,down'
         ]);
-        if($validator->fails()) {
+        if($validator->fails() || !$comment) {
             return response()->json([
                 'status' => false
             ]);

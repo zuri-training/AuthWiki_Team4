@@ -58,7 +58,7 @@ class UserController extends Controller
             }
             if(!Newsletter::hasMember($email)) {
                 if(!Newsletter::isSubscribed($email)) {
-                    Newsletter::subscribe($email, $name, $name);
+                    Newsletter::subscribe($email, $name);
                     return back()->with('succes', 'Subscribed');
                 }
             }

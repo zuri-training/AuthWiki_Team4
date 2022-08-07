@@ -96,23 +96,15 @@ class BlogController extends Controller
     }
 
     public function search(Request $request) {
-        $request->validate([
-            'keyword' => 'required|string|max:25',
-            'stack' => 'string|max:10'
-        ]);
-        $keyword = $request->keyword;
-        $wiki = Wiki::where('type', 'blog')
-            ->where('title', 'LIKE', "%{$keyword}%")
+        $wikis = Wiki::where('type', 'blog')
             ->where(function($query) {
-                if(request()->has('stack')) {
-                    $query->where('stack', request()->stack);
+                if(request()->has('keyword')) {
+                    $query->where('title', 'LIKE', '%'.request()->keyword.'%');
                 }
             })
-            ->paginate(10)
-            ->get();
-        return view('wiki.search', [
-            'wiki' => $wiki
-        ]);
+            ->latest()
+            ->paginate(15);
+        return view('blog', compact('wikis'));
     }
 
     public function searchAPI(Request $request) {

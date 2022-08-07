@@ -2,11 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{
-    WikiController,
-    WikiComment,
-    UserController
-};
 
 /*
 |--------------------------------------------------------------------------
@@ -21,17 +16,4 @@ use App\Http\Controllers\{
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
-
-Route::controller(WikiController::class)->group(function(){
-    Route::get('search', 'searchAPI');
-    Route::get('rating/{wiki}', 'rating');
-});
-
-Route::get('voting/{comments}', [WikiComment::class, 'vote']);
-
-Route::controller(UserController::class)->group(function(){
-    Route::prefix('user')->group(function(){
-        Route::get('{user}/crown', 'toggleCrown');
-    });
 });

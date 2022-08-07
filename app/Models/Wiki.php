@@ -18,6 +18,7 @@ class Wiki extends Model
         'stack',
         'file_dir',
         'title',
+        'description',
         'content',
         'views',
         'viewed_at',
