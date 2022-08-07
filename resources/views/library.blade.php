@@ -20,7 +20,7 @@
             <div class="col-md-10">
                 <form method="GET" action="{{ route('page.library') }}">
                     <div class="input-group flex-nowrap mb-3 input-box">
-                        <input type="text" name="keyword" class="form-control" placeholder="Search for code..." aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ request()->input('keyword') }}">
+                        <input type="text" name="keyword" class="form-control" placeholder="Search for code..." autocomplete="off" aria-label="Search" aria-describedby="button-search" value="{{ request()->input('keyword') }}">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="submit">Search</button>
                         </div>
@@ -102,6 +102,11 @@
                         }
                     }
                 });
+            });
+            $('body').click(function(e){
+                if($(e.target).parents('.input-box').length == 0) {
+                    $('.search_result').addClass('d-none');
+                }
             });
         });
     </script>
