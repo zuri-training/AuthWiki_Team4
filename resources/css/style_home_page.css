@@ -34,6 +34,7 @@ body{
     font-style: normal;
     background-color: #FFF;
     overflow-x: hidden;
+    background: url(../images/Background.svg) no-repeat center center fixed;
 }
 
 a:hover{
@@ -531,9 +532,18 @@ main[class=container]{
         margin-top: 55px;
      }
 
+     body{
+        background:none;
+     }
+
 }
 
 @media screen and (max-width:500px){
+
+    .showcase_images{
+        min-width: auto;
+        height: auto;
+    }
 
      .showcase_images img:nth-of-type(2), .showcase_images img:nth-of-type(3){
         display: none;
