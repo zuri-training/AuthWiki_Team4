@@ -4,13 +4,12 @@ function openNav() {
     var mySidemenu = document.getElementById("mySidemenu");
     var screenWidth = window.innerWidth;
     mySidemenu.style.paddingLeft = "32px";
+    mySidemenu.style.boxShadow = "0px 0px 100px 100vw  rgba(0, 0, 0, 0.2), 0px 4px 100px 20px rgba(0, 0, 0, 0.2)";
     if (screenWidth < 768) {
         mySidemenu.style.width = screenWidth * 0.8 + "px";
-        mySidemenu.style.opacity= "1";
     }
     else {
     mySidemenu.style.width = '322px' ;
-    mySidemenu.style.opacity = "1";
     }
 }
 
@@ -18,8 +17,7 @@ function closeNav() {
     var mySidemenu = document.getElementById("mySidemenu");
     mySidemenu.style.width = "0px";
     mySidemenu.style.paddingLeft = "0px";
-    mySidemenu.style.opacity= "0";
-
+    mySidemenu.style.boxShadow = "none"
 }
 
 
