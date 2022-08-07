@@ -103,6 +103,7 @@ main .section:last-child{
     height: 56px;
     border: 2px solid #3C627E;
     border-radius: 4px;
+    position: relative;
 
 }
 
@@ -441,3 +442,10 @@ main .section:last-child{
         min-width: 70px;
     }
 }
+
+@media screen and (max-width:300px){
+    #search_form #search_field{
+        width: 50%;
+    }
+}
+
