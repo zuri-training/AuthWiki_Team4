@@ -3,15 +3,21 @@
     padding: 0;
 }
 
-main {
+body {
     background-image: url(/resources/images/Background.svg);
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+main {
     width: 900px;
-    display: flex;
+    display: grid;
     padding-top: 30px;
     padding-bottom: 30px;
     margin: auto;
+    grid-template-areas:
+        "div1 div3"
+        "div2 .";
 }
 
 h4 {
@@ -70,37 +76,35 @@ hr {
     padding-right: 2px;
 }
 
-.alpha {
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    margin: 15px;
-}
-
 .div1 {
+    width: 380px;
     height: 360px;
+    margin-right: 12px;
     align-content: center;
     text-align: center;
     background-color: rgb(240, 240, 240);
     padding-top: 25px;
     border-radius: 8px;
+    grid-area: div1;
 }
 
 .div2 {
+    width: 365px;
     background-color: rgb(240, 240, 240);
     margin-top: 8px;
-    padding: 5px;
+    padding: 8px;
+    grid-area: div2;
 }
 
 .div3 {
-    width: 600px;
+    width: 520px;
     height: 375px;
     background-color: rgb(240, 240, 240);
     padding-top: 10px;
     padding-right: 15px;
     padding-left: 20px;
-    margin-top: 15px;
     text-align: left;
+    grid-area: div3;
 }
 
 .div2p {
@@ -132,4 +136,70 @@ hr {
     line-height: 25px;
     background-color: rgb(205, 209, 222);
     text-align: left;
+}
+
+@media only screen and (max-width: 450px) {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    .div1 {
+        width: 95%;
+        height: 270px;
+        margin: 0;
+        margin-bottom: 6%;
+    }
+
+    .div2 {
+        width: 92.5%;
+        margin-top: 8%;
+    }
+
+    .div3 {
+        width: 85%;
+        height: 100%;
+    }
+
+    main {
+        width: 350px;
+        grid-template-areas:
+            "div1"
+            "div3"
+            "div2";
+    }
+
+    h4 {
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    p {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+    }
+
+    a {
+        font-weight: 400;
+        font-size: 14.3989px;
+        line-height: 16px;
+    }
+
+    .img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .div3h4 {
+        font-weight: 700;
+        font-size: 16.4828px;
+        line-height: 22px;
+    }
+
+    .div3p {
+        font-weight: 500;
+        font-size: 12.3621px;
+        line-height: 18px;
+    }
 }
