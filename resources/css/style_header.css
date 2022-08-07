@@ -187,7 +187,6 @@ header #nav_button:active{
 .side_menu {
     height: 100% !important;
     width: 0;
-    opacity: 0;
     position: fixed;
     z-index: 9999;
     top: 0;
@@ -197,16 +196,14 @@ header #nav_button:active{
     line-height: 28px;
     color: rgba(31, 31, 31, 0.6);
     padding-top: 83px;
-    padding-left: 32px;
     gap: 16px;
     background-color: #FFF;
     overflow-x: hidden;
     overflow-y: auto;
-    box-shadow: 0px 0px 100px 100vw  rgba(0, 0, 0, 0.2), 0px 4px 100px 20px rgba(0, 0, 0, 0.2); 
     transition: 0.3s;
   }
   
-.menu_items{
+.menu_links{
     margin-left: 32px;
     display: flex;
     flex-direction: column;
@@ -214,7 +211,7 @@ header #nav_button:active{
     gap: 24px;
 }
 
-.menu_items li{
+.menu_links li{
     padding-left: 18.25px;
 }
 
@@ -532,7 +529,4 @@ header #nav_button:active{
         width: 120px;
      }
 
-     .side_menu{
-        width:8;
-     }
 } 
