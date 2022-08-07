@@ -23,7 +23,6 @@
 .container{
     width: 90%;
     margin: 0 auto;
-    overflow: hidden;
 }
 
 a{
@@ -31,10 +30,10 @@ a{
 }
 
 body{
-    position: relative;
     font-family: 'Manrope';
     font-style: normal;
     background-color: #FFF;
+    overflow-x: hidden;
 }
 
 a:hover{
@@ -63,7 +62,9 @@ main[class=container]{
     height: auto;
     flex-wrap: auto;
     margin-bottom: 120px;
+    margin-top: 0px;
 }
+
 
 .showcase_body{
     display: flex;
@@ -529,6 +530,7 @@ main[class=container]{
      main[class=container]{
         margin-top: 55px;
      }
+
 }
 
 @media screen and (max-width:500px){

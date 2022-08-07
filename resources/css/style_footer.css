@@ -30,10 +30,10 @@ a{
 }
 
 body{
-    position: relative;
     font-family: 'Manrope';
     font-style: normal;
     background-color: #FFF;
+    overflow-x: hidden;
 }
 
 a:hover{
@@ -227,27 +227,6 @@ footer hr{
 }
 
 
-
-
-@media screen and  (max-width:1000px){
-    #menu_button{
-        display: flex;
-    }
-
-    .nav_menu{
-        display: none;
-    }
-
-    header nav, header #nav_secondary{
-        display: none;
-    }
-
-    header .nav_secondary{
-        margin-left: 0;
-    }
-   
-}
-
 @media screen and (max-width:1200px) {
     .footer_content{
         flex-direction: column;
@@ -384,41 +363,5 @@ footer hr{
         font-size: 12px;
         line-height: 16px;
     }
-}
-
-@media screen and (max-width:600px) {
-    
-    .site_logo{
-        order: 2;
-        
-    }
-    header div[class=container]{
-        justify-content:flex-start;
-        gap: 87.23px;
-     }
-
-     .side_menu{
-        position: fixed;
-        top: 0;
-        left: 0;
-     }
-
-     @keyframes closebtn_active {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(-360deg);
-        }
-      }
-
-     header{
-        position: static;
-        box-shadow: none;
-     }
-
-     .showcase{
-        margin-top: 55px;
-     }
 }
 

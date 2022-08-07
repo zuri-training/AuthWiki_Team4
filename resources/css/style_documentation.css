@@ -23,7 +23,6 @@
 .container{
     width: 90%;
     margin: 0 auto;
-    overflow: hidden;
 }
 
 a{
@@ -35,6 +34,7 @@ body{
     font-family: 'Manrope';
     font-style: normal;
     background-color: #FFF;
+    overflow-x: hidden;
     
 }
 
@@ -48,9 +48,8 @@ button{
 
 main{
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
     margin-bottom: 72px !important;
-    align-items: flex-start;
 }
 
 main .section{
@@ -186,11 +185,14 @@ main .section:last-child{
     
 }
 
+
+
 /*SIDEBAR*/
 
-main .side-bar{
+.side-bar{
     position: sticky;
-    top:115px !important;
+    position: -webkit-sticky;
+    top:115px;
     animation: sidebar 400ms ease-out 0ms forwards;
     transform-origin: 0% 0%;
 }
@@ -269,6 +271,7 @@ main .side-bar{
 }
 
 
+
 /* SECTIONS */
 
 .section{
@@ -283,7 +286,6 @@ main .side-bar{
     letter-spacing: 0.03em;
     color: var(--text_color);
     padding: 5px 0; 
-    position: relative;
 }
 
 .section-header{
@@ -332,6 +334,10 @@ main .side-bar{
 }
 
 @media  screen and (max-width:600px) {
+
+     .showcase{
+        margin-top: 55px;
+     }
 
     .page_header{
         margin-bottom: 40px;
@@ -422,4 +428,16 @@ main .side-bar{
 
     }
 
+}
+
+@media screen and (max-width:500px){
+    #search_form #search_button{
+        min-width: 90px;
+    }
+}
+
+@media screen and (max-width:400px){
+    #search_form #search_button{
+        min-width: 70px;
+    }
 }

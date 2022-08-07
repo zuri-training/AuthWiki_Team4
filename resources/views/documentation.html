@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style_footer.css">
-    <link rel="stylesheet" href="../css/style_header.css">
     <link rel="icon" type="image/x-icon" href="../images/Authwiki.svg">
-    <link rel="stylesheet" href="../css/style_home_page.css">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link rel="stylesheet" href="../css/style_header.css">
+    <link rel="stylesheet" href="../css/style_footer.css">
+    <link rel="stylesheet" href="../css/style_documentation.css">
     <script src="../js/header.js"></script>
-    <title>Home</title>
+    <title>Documetation</title>
 </head>
 <body onpointerenter="closeNavOnOutsideClick()" onclick="closeHoverMenuOnOutsideClick()">
+        <!-- HEADER AND MENU BAR -->
     <header>
         <div class="container">
             <div class="site_logo">
@@ -48,39 +51,21 @@
                 <div class="nav_menu">
                     <nav>
                         <ul>
-                            <a href=""><li class="nav_link">Home</li></a>
-                            <a href=""><li class="nav_link">Doc</li></a>
+                            <span id="current_page_link"><a href=""><li class="nav_link">Doc</li></a></span>
                             <a href=""><li class="nav_link">About</li></a>
+                            <a href=""><li class="nav_link">Library</li></a>
                         </ul>
                     </nav>
         
                     <div id="nav_secondary">
-                        <a href="">Library</a>
-                        <img>
-                        <svg onpointerover="showHoverMenu()" onclick="showHoverMenu()" id=icon class="icon" width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M35.75 19.5C35.75 22.0859 34.7228 24.5658 32.8943 26.3943C31.0658 28.2228 28.5859 29.25 26 29.25C23.4141 29.25 20.9342 28.2228 19.1057 26.3943C17.2772 24.5658 16.25 22.0859 16.25 19.5C16.25 16.9141 17.2772 14.4342 19.1057 12.6057C20.9342 10.7772 23.4141 9.75 26 9.75C28.5859 9.75 31.0658 10.7772 32.8943 12.6057C34.7228 14.4342 35.75 16.9141 35.75 19.5Z" fill="#00192C"/>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0 26C0 19.1044 2.73928 12.4912 7.61522 7.61522C12.4912 2.73928 19.1044 0 26 0C32.8956 0 39.5088 2.73928 44.3848 7.61522C49.2607 12.4912 52 19.1044 52 26C52 32.8956 49.2607 39.5088 44.3848 44.3848C39.5088 49.2607 32.8956 52 26 52C19.1044 52 12.4912 49.2607 7.61522 44.3848C2.73928 39.5088 0 32.8956 0 26ZM26 3.25C21.7158 3.25023 17.5187 4.46018 13.8918 6.74059C10.2649 9.021 7.35567 12.2792 5.49888 16.1401C3.6421 20.0011 2.91326 24.3079 3.39624 28.5648C3.87923 32.8217 5.55442 36.8557 8.229 40.2025C10.5365 36.4845 15.6163 32.5 26 32.5C36.3838 32.5 41.4603 36.4813 43.771 40.2025C46.4456 36.8557 48.1208 32.8217 48.6038 28.5648C49.0867 24.3079 48.3579 20.0011 46.5011 16.1401C44.6443 12.2792 41.7351 9.021 38.1082 6.74059C34.4813 4.46018 30.2842 3.25023 26 3.25Z" fill="#00192C"/>
-                        </svg>
-                        <!-- HOVER MENU -->
-                        <div id=myHovermenu class="hover_menu" onpointerover="closeHoverMenuOnOutsideClick()">
-                            <div class="hover_menu_item">
-                                <a href="#">Profile</a>
-                            </div>
-                            <div class="hover_menu_item">
-                                <a href="#">Settings</a>
-                            </div>
-                            <div class="hover_menu_item">
-                                <img src="../images/signout2.svg">
-                                <a href="#">Sign out</a>
-                            </div>
-                        </div>     
+                        <a href="">Login</a>
+                        <button id="nav_button">Get started <img src="../images/caret.svg"></button>
                     </div>
                 </div>  
             </div>   
         </div>
     </header>
 
-    <!-- SIDE MENU -->
     <div id="mySidemenu" class="side_menu" onpointerover="closeNavOnOutsideClick()">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="menu_search" >
@@ -106,117 +91,284 @@
             <img src="../images/library.svg">
             <a href="#">Library</a>
         </div>
-        <div class="menu_item">
+        <!-- <div class="menu_item">
             <img src="../images/profile.svg">
             <a href="#">Profile</a>
         </div>
         <div class="menu_item">
             <img src="../images/settings.svg">
             <a href="#">Settings</a>
-        </div>
-        <!-- <div class="menu_item">
-            <img src="../images/login.svg">
-            <a href="#">Login</a>
         </div> -->
         <div class="menu_item">
+            <img src="../images/login.svg">
+            <a href="#">Login</a>
+        </div>
+        <!-- <div class="menu_item">
             <img src="../images/signout.svg">
             <a href="#">Sign out</a>
-        </div>
-        <!-- <button>Get started</button> -->
+        </div> -->
+        <button>Get started</button>
     </div>
 
-    <!-- HOME PAGE BODY -->
-
+    <!-- PAGE HEADER & SEARCH -->
+    <div class="showcase container">
+        <div class="page_header">
+            <h1>WELCOME  TO AUTHWIKI DOCUMENTATION</h1>
+            <p>Explore our guides and articles on how to use the codes.</p>
+        </div>
+        <div class="search_bar" >
+            <img src="../images/search_icon.svg" alt="search icon" class="search_icon">
+            <form action="" id="search_form" method="POST">
+                <input id="search_field" type="text" placeholder="Search glossary">
+                <button id="search_button" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    
     <main class="container">
-        <section class="showcase">
-            <div class="showcase_body">
-                <h1>Get unlimited access to authentication codes from Auth-wiki</h1>
-                <p>Our extensive component library for auth codes simplifies authentication.</p>
-                <button id="showcase_button" href="">View Library</button>
-            </div>
-
-            <div class="showcase_images">
-                <img src="../images/homepage_showcase_img.svg" alt="my code">
-                <img src="../images/homepage_showcase_img2.svg" alt="my code">
-                <img src="../images/homepage_showcase_img2.svg" alt="my code">
-            </div>
-        </section>
-
-        <section class="site_actions">
-            <div class="site_actions_header">
-                <h1>Steps to accessing auth codes of your choice</h1>
-            </div>
-
-            <div class="site_actions_sub">
-                <div class="sub1">
-                    <div class="sub1_item">
-                        <img src="../images/user2.svg" alt="user icon">
-                        <h3>Sign up</h3>
-                        <p>Create and verify your free  account on Auth-wiki to begin your auth codes journey</p>
+        <aside>
+            <div class="side-bar">
+                <div class="side-bar-body">
+                    <div class="side-bar-content">
+                        <a onclick="moveToPosition('library_description')"><p>Library description</p></a>
                     </div>
-                    <div class="sub1_item">
-                        <div id="lib">
-                            <img src="../images/lib1.svg" alt="library">
-                            <img src="../images/lib2.svg" alt="">
-                        </div>
-                        <h3>Explore library</h3>
-                        <p>Browse through Auth-wiki's library for auth codes of your choice.</p>
+                    <div class="side-bar-content">
+                        <a onclick="moveToPosition('authentication')"><p>Authentication</p></a>
                     </div>
-                    <div class="sub1_item">
-                        <img src="../images/download.svg" alt="download">
-                        <h3>Download codes</h3>
-                        <p>Easily download the authentication codes of your choice with no stress.</p>
+                    <div class="side-bar-content">
+                        <a onclick="moveToPosition('features')"><p>Features</p></a>
+                    </div>
+                    <div class="side-bar-content">
+                        <a onclick="moveToPosition('usage')"><p>Usage</p></a>
+                    </div>
+                    <div class="side-bar-content">
+                        <a onclick="moveToPosition('glossary')"><p>Glossary</p></a>
+                    </div>
+                    <div class="side-bar-content">
+                        <a onclick="moveToPosition('faqs')"><p>FAQ</p></a>
+                    </div>
+                    <div class="side-bar-content">
+                        <a onclick="moveToPosition('feedback')"><p>Feedback</p></a>
                     </div>
                 </div>
-
-                <div class="sub2">
-                    <img src="../images/community.svg" alt="community">
-                    <h3>Join community</h3>
-                    <p>There's already a community of developers ready to make your journey on Auth-wiki smooth</p>
+                
+                <div class="side-bar-text">
+                    <p>Authwiki: experience a library of Auth codes. Download in seconds</p>
+                    <div>
+                        <a href="#"> Sign Up Now!</a>
+                    </div>  
                 </div>
             </div>
-            <button>Get started for free</button>
-        </section>
-        
-        <!-- ARTICLE -->
+        </aside>
 
-        <article class="contents">
-            <div class="contents_header">
-                <h1>Why use Auth-wiki's library of auth codes?</h1>
-            </div>
-
-            <section class="content_section">
-                <h3><li>Easy Navigation</li></h3>
-                <p>To download auth codes of your choice, all you have to do is sign up! 
-                    Unauthorized users are permitted to visit the platform to view basic information about it; while authorized users have full access to the platform, they are allowed to contribute,
-                     comment and react. Authorized users can also view example, code usage and also download code samples.
-                </p>
+        <article>
+            <!-- LIBRARY DESCRIPTION -->
+            <section id="library_description" class="section">
+                <div class="section-header">
+                    <h1>Library Description</h1>
+                </div>
+                <div class="section-content">
+                    <p>
+                        Building of Authentication codes might be a long process for developers . Authwiki takes that away by providing already built authentication codes, 
+                        all you need to do is create an account and get on to download the secure codes of your preference.    
+                    </p>
+                </div>
             </section>
 
-            <section class="content_section">
-                <h3><li>Detailed Guide</li></h3>
-                <p>
-                    The website contains a detailed or at least near detailed guide on the requirements for specific authentication systems and how to use them to aid easy implementation. 
-                    Authwiki is envisioned to be an inclusive and exhaustive library. So, no programming language or framework is left out, allowing it to feed a vast community of developers.
-                </p>
+            <!-- AUTHENTICATION -->
+            <section  id="authentication" class="section">
+                <div class="section-header">
+                    <h1>Authentication</h1>
+                </div>
+                <div class="section-content">
+                    <p>
+                        Authenticating  the user involves obtaining an ID token and validating it. ID tokens area standardized feature designed for use in sharing identity assertions on the internet.
+                    </p>
+                    <p>
+                        The most comonly used  approaches for authenticating a user and obtaining an ID tok-en are called the “server” flow and the “implicit” flow. The server flow allows the back-
+                        end server of an application to verify the identity of the person using a browser or mobile device. The implicit flow is used when a client-side application (typically a java-script app running in the browser) needs to access APIS directly instead of via its back-
+                        end server.
+                    </p>
+                    <p>
+                        This document describes how to perfrom the server flow for authenticating the user. The implicit flow is significally more complicated because of security risks in handling and using tokens on the client side. If you need to impliment an implicit flow, we highly
+                        recommend using Authwiki.    
+                    </p>
+                </div>
             </section>
 
-            <section class="content_section">
-                <h3><li>Time Efficiency</li></h3>
-                <p>
-                    Once you've created an account on Auth wiki, navigating through the documentation page and download will only take you seconds!
-                     It will help you finish your project faster than you had planned. You don't have to worry so much about building authentication, 
-                     and you can easily focus on what matters the most.
-                </p>
+            <!-- FEATURES -->
+            <section id="features" class="section">
+                <div class="section-header">
+                    <h1>Features</h1>
+                </div>
+                <div class="section-content">
+                    <p>
+                        Authwiki handles protocol level details for you and stays up to date with latest security standards.
+                    </p>
+                    <p>
+                        <strong>Unauthenticated Users :</strong>
+                        <br>
+                        Visit the platform to view basic information about it, view and interact with the documentation. Browse through library with limited informantion and download and con-
+                        tribute cant be accessed till user has registered.
+                    </p>
+                    <p>    
+                        <strong>Authenticated Users :</strong>
+                        <br>
+                        Full access to the platform, can contribute, comment and react. Also able to view examples, code usage and also download code samples. 
+                    </p>
+                </div>
             </section>
 
-            <section class="content_section">
-                <h3><li>Quick Access</li></h3>
-                <p>
-                    Developers who want to build their own authentication system can get quick access to code modules and packages without going through 
-                    the hassle of browsing through websites 
-                    (like stack overflow) for code samples.
-                </p>
+            <!-- USAGE -->
+            <section id="usage" class="section">
+                <div class="section-header">
+                    <h1>Usage</h1>
+                </div>
+                <div class="section-content">
+                    <p>
+                        To use Authwiki authentication library, the user must first Sign Up or Log In, if the user already has an account then he'd have full access.
+                         An unauthorized user is welcomed with a brief information showing the various programming languages on Authwiki.
+                    </p>
+                    <p>
+                        <strong>Are you a user?</strong><br>
+                        you can sign up with your Github account or using your Google account and receive a confirmation email right after.
+                    </p>
+                    <p>
+                        Welcome, you are now an authorized Authwiki user. Browse through the library page for authentication codes in different programming languages (well categorized)  pick a code
+                        of your choice by using the search bar. Lastly, you can like, comment or download the document.  
+                    </p>
+                </div>
+            </section>
+
+            <!-- GLOSSARY-->
+            <section id="glossary" class="section">
+                <div class="section-header">
+                    <h1>Glossary</h1>
+                </div>
+                <div class="section-content">
+                    <p class="head">APIs</p>
+                    <p>
+                        API stands for Application Programming Interface. In the context of APIs, the word Application refers to any software with a distinct function. Interface can be thought of as a contract of service between two applications. This contract defines how the two communicate with each other using requests and responses. 
+                        Their API documentation contains information on how developers are to structure those requests and responses. It is a software code that helps two different software's to communicate and exchange data with each other
+                    </p>
+                </div>
+                <div class="section-content">
+                    <p class="head">Application</p>
+                    <p>
+                        Your software that relies on Authwiki for authentication and identity management. Auth0 supports single-page, regular web, native, and machine-to-machine applications.
+                    </p>
+                </div>
+                <div class="section-content">
+                    <p class="head">Assertions</p>
+                    <p>
+                        A verifiable statement from an Identity Provider to a Relying Party that contains information about an end user.
+                        Assertions may also contain information about the end user's authentication event at the Identity Provider.
+                        It is a statement from a verifier to a Relying Party that contains information about a subscriber. Assertions may also contain verified attributes.
+                    </p>
+                </div>
+                <div class="section-content">
+                    <p class="head">Authentication</p>
+                    <p>
+                        Authentication is the process of determining whether someone or something is, in fact, who or what it says it is. 
+                        Authentication technology provides access control for systems by checking to see if a user's credentials match the credentials in a database of authorised users or in a data authentication server.
+                        In doing this, authentication assures secure systems, secure processes and enterprise information security.
+                    </p>
+                </div>
+                <div class="section-content">
+                    <p class="head">Authwiki</p>
+                    <p>
+                        Your go-to authentication codes platform.
+                    </p>
+                </div>
+                <div class="section-content">
+                    <p class="head">Backend</p>
+                    <p>
+                        Back end development refers to the server side of an application and everything that communicates between the database and the browser.
+                    </p>
+                </div>
+                <div class="section-content">
+                    <p class="head">Blog</p>
+                    <p>
+                        a regularly updated website or web page, typically one run by an individual or small group, that is written in an informal or conversational style.
+                        The blog keeps you updated about Authwiki.
+                    </p>
+                </div>
+                <div class="section-content">
+                    <p class="head">Client</p>
+                    <p>
+                        A Web client typically refers to the Web browser in the user's machine or mobile device. An Authwiki User.
+                    </p>
+                </div>
+                <div class="section-content">
+                    <p class="head">Codes</p>
+                    <p>
+                        A keyed cryptographic checksum based on an approved security function
+                    </p>
+                </div> 
+                
+                <!-- OTHER GLOSSARY CONTENTS GO HERE -->
+            </section>
+
+            <!-- FAQs -->
+            <section id="faqs" class="section">
+                <div class="section-header">
+                    <h1>FAQs</h1>
+                </div>
+                <div class="section-content-faq">
+                    <p class="faq" >
+                        <strong>How can I Create an account?</strong><br>
+                        You can create an account on Authwiki either by signing up with your Gmail or Google account. You can also use the Github toggle to conveniently sign up as a Programmer.
+                    </p>
+                    <p class="faq">
+                        <strong>How can I Log In?</strong><br>
+                        You can Log In on Authwiki either by signing up with your Gmail or Google account. You can also use the Github toggle to conveniently sign up as a Programmer.
+                    </p>
+                    <p class="faq">
+                        <strong>Forgot your Authwiki login Password?</strong><br>
+                        Click on 'Forgot Password' on the login page. Follow all necessary steps after to reset your password.
+                    </p>
+                    <p class="faq">
+                        <strong>How can I search for Authentication Codes?</strong><br>
+                        Navigate to the Library Page and pick a programming Language code of your choice.
+                    </p>
+                    <p class="faq">
+                        <strong>How can I download authentication codes?</strong><br>
+                        Go to the download page, go through the requirements until the examples. The Download button is right under.
+                    </p>
+                    <p class="faq">
+                        <strong>I can't place a comment?</strong><br>
+                        Register to contribute
+                    </p>
+                    <p class="faq">
+                        <strong>Need the latest update?</strong><br>
+                        Subscribe to our newsletter to get the most recent feeds and news about Authwiki.
+                    </p>
+                    <p class="faq">
+                        <strong>I have limited access to the Platform?</strong><br>
+                        To gain full access you have to become an authenticated user.                    
+                    </p>
+                    <p class="faq">
+                        <strong>Need Help?</strong><br>
+                        You can contact us via the contact button or help Centre at the bottom of this page.
+                    </p>
+                    <p class="faq">
+                        <strong>Are you new to using this site?</strong><br>
+                        Leverage on the benefit of joining our community of developers.
+                    </p> 
+                </div>
+            </section>
+
+            <!-- FEEDBACK -->
+            <section id="feedback" class="section">
+                <div class="section-header">
+                    <h1>Feedback</h1>
+                </div>
+                <div class="section-content">
+                    <p>
+                        Feedback is very welcome on Authwiki. we need to know your thoughts and ideas on how to make this
+                        project better. so do leave comments in the comment section or send an email to team4@authwiki.net
+                    </p>
+                </div>
             </section>
         </article>
     </main>
@@ -249,7 +401,6 @@
                         <a href="">FAQ</a>
                     </div>
                 </div>
-
                 <div class="footer_newsletter">
                     <a id="site_logo" href="">
                         <svg width="100%" height="100%" viewBox="0 0 175 43" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -291,6 +442,5 @@
         </div>
         
     </footer>
-
 </body>
 </html>
