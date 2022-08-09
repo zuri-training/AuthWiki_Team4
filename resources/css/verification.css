@@ -1,0 +1,203 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url(../images/Background.svg) no-repeat center center fixed;
+    padding-top: 3%;
+}
+
+main {
+    width: 415px;
+    height: 470px;
+    margin: auto;
+    padding: 6%;
+    padding-top: 1%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    text-align: center;
+}
+
+p {
+    font-family: "Manrope";
+    font-style: normal;
+    padding: 8px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+h4 {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 31px;
+    line-height: 41px;
+    margin: 5%;
+}
+
+h5 {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 25px;
+    padding: 15px;
+}
+
+button {
+    cursor: pointer;
+}
+
+.alpha {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alpha:before {
+    content: "";
+    background-color: #929090;
+    position: absolute;
+    background-size: contain;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.verify {
+    color: #181818;
+    width: 415px;
+    height: 40px;
+    background-color: #ffb37c;
+    border-color: transparent;
+    border-radius: 8px;
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 25px;
+}
+
+.social {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    box-shadow: 0px 4px 5px 2px rgba(31, 31, 31, 0.12);
+    border-color: transparent;
+    border-radius: 4px;
+    background-color: #ffffff;
+}
+
+.p1 {
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 29px;
+}
+
+.div1 {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    justify-content: center;
+}
+
+.hr {
+    width: 81px;
+    align-self: center;
+    margin: auto;
+    margin-top: 16px;
+    margin-bottom: 18px;
+}
+
+.img {
+    width: 145px;
+    height: 145px;
+}
+
+.icon {
+    width: 35px;
+    height: 35px;
+    align-content: center;
+}
+
+button:hover {
+    outline-style: outset;
+    outline-color: transparent;
+    box-shadow: 0px 6px 7px 4px rgba(31, 31, 31, 0.12);
+}
+
+button:active {
+    outline-style: inset;
+}
+
+@media only screen and (max-width: 450px) {
+    body {
+        padding-top: 15%;
+    }
+
+    main {
+        width: 85%;
+        height: 425px;
+        padding-top: 8%;
+    }
+
+    p {
+        font-weight: 300;
+        font-size: 10px;
+        line-height: 13px;
+        margin: 10px;
+    }
+
+    hr {
+        border: 0.5px solid #143a56;
+    }
+
+    h4 {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    h5 {
+        padding: 3px;
+    }
+
+    .social {
+        width: 48px;
+        height: 48px;
+    }
+
+    .verify {
+        width: 80%;
+        height: 44px;
+        padding: 10px 24px;
+        gap: 10px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .icon {
+        width: 35px;
+        height: 35px;
+        align-content: center;
+    }
+
+    .p1 {
+        text-align: center;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 17px;
+        padding: 2px;
+    }
+}
