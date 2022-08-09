@@ -55,6 +55,7 @@ main[class=container]{
 hr{
     width: 100%;
     border: 1px solid rgba(31, 31, 31, 0.6);
+    background-color: rgba(31, 31, 31, 0.1);
 }
 
 .container_head{
@@ -109,6 +110,7 @@ hr{
     box-shadow: 0 0 0 100vmax rgba(31, 31, 31, 0.6);
     clip-path: inset(0 -100vmax);
     margin-bottom: 41px;
+    background-color: rgba(31, 31, 31, 0.1);
 }
 
 .avatar_section{
@@ -280,6 +282,7 @@ hr{
     border: 2px solid var(--search_box_color);
 }
 
+
 /* CHANGE PASSWORD */
 
 .change_pwd_form{
@@ -410,6 +413,7 @@ hr{
 #delete_button:active{
     background-color: hsl(0, 100%, 80%);
     transform: scale(0.97);
+    color: #FFF;
 }
 
 @media screen and (max-width:1280px) {
@@ -468,6 +472,7 @@ hr{
 
     #hr1{
         margin-bottom: 43px;
+        
     }
 
     .avatar_container{
@@ -513,11 +518,20 @@ hr{
         padding: 10px 20px;
         font-family: 'Manrope';
         font-style: normal;
-        font-weight: 200;
+        font-weight: 100;
         font-size: 8px;
         line-height: 10px;
         color: var(--text_color);
         width: 100% !important;
+    }
+
+    .form_fields input{
+        font-family: 'Manrope';
+        font-style: normal;
+        font-weight: 100;
+        font-size: 8px;
+        line-height: 10px;
+        color: var(--text_color);
     }
 
 
