@@ -1,8 +1,8 @@
 function displayPopup(id) {
     var body = document.getElementsByTagName('body');
     var popup = document.getElementById(id);
-    body[0].style.height = '100%';
-    body[0].style.overflow = 'hidden';
+    body[0].style.setProperty('height', '100%', 'important')
+    body[0].style.setProperty('overflow', 'hidden', 'important');
     disableInputsAndButtons()
     popup.style.display = 'flex';
 }
