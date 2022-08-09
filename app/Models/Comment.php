@@ -14,8 +14,8 @@ class Comment extends Model
     use \Znck\Eloquent\Traits\BelongsToThrough;
 
     protected $fillable = [
-        'wiki_id',
         'user_id',
+        'wiki_id',
         'comment',
         'vote'
     ];
@@ -23,17 +23,17 @@ class Comment extends Model
         'voted'
     ];
 
-    public function wikis() {
-        return $this->belongsTo(Wiki::class);
-    }
-    public function users() {
+    public function user() {
         return $this->belongsToThrough(User::class, Wiki::class);
     }
-    public function votes() {
-        return $this->hasMany(Vote::class);
+    public function wiki() {
+        return $this->belongsTo(Wiki::class);
+    }
+    public function reaction() {
+        return $this->hasMany(Reaction::class);
     }
     public function getVotedAttribute()
     {
-        return $this->votes()->where(['comment_id' => $this->id, 'user_id' => Auth::id()])->exists();
+        return $this->reaction()->where(['user_id' => Auth::id()])->exists();
     }
 }

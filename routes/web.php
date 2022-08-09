@@ -1,9 +1,9 @@
 <?php
+
 use Illuminate\Support\Facades\{
     Auth,
     Route
 };
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +20,20 @@ Auth::routes(['verify' => true]);
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('documentation', function () {
+    return view('documentation.index');
+});
+
+
+Route::get('comment', function () {
+    return view('comment.index');
+});
+
+Route::get('library', function () {
+    return view('library.index');
+});
+
 Route::get('/home', function () {
     return Auth::user();
 })->middleware('auth');
