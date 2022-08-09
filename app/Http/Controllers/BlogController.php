@@ -24,7 +24,8 @@ class BlogController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'verified'])->except(['index', 'show', 'search', 'searchAPI', 'indexID']);
+        $this->middleware('auth')->except(['index', 'indexID', 'show', 'search', 'searchAPI']);
+        $this->middleware('verified')->except('rating');
     }
 
     public function index()
@@ -50,7 +51,7 @@ class BlogController extends Controller
             'title' => $request->title,
             'content' => $request->content
         ]);
-        return redirect(route('user.wiki'))->with('success', 'Wiki created successful!');
+        return redirect(route('user.wiki'));
     }
 
     public function show(Wiki $wiki)
@@ -70,24 +71,25 @@ class BlogController extends Controller
         $wiki->update([
             'content' => $request->content
         ]);
-        return redirect(route('wiki.show', compact('wiki')))->with('success', 'Wiki details updated!');
+        return redirect(route('wiki.show', compact('wiki')));
     }
 
     public function destroy(Wiki $wiki)
     {
         $wiki->softDelete();
-        return redirect(route('user.wiki'))->with('success', 'Wiki deleted!');
+        return redirect(route('user.wiki'));
     }
 
     public function destroyPerm(Wiki $wiki)
     {
         $wiki->forceDelete();
-        return redirect(route('user.wiki'))->with('success', 'Wiki deleted!');
+        return redirect(route('user.wiki'));
     }
 
     public function indexID(User $user)
     {
-        $wiki =  Wiki::where(['type' => 'blog', 'user_id' => $user->id])
+        $wiki =  $user->wiki()
+            ->where('type', 'blog')
             ->latest('updated_at')
             ->paginate(10);
         return view('user.index', compact('wiki'));

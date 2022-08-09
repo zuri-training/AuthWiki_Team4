@@ -27,7 +27,7 @@ class WikiComment extends Controller
     }
     public function create(Request $request, Wiki $wiki) {
         $request->validate([
-            'comment' => ['required', 'string', 'max:500']
+            'comment' => 'required|string|max:500'
         ]);
         Comment::create([
             'wiki_id' => $wiki->id,
@@ -38,7 +38,7 @@ class WikiComment extends Controller
     }
     public function edit(Request $request, Comment $comment) {
         $request->validate([
-            'comment' => ['required', 'string', 'max:500']
+            'comment' => 'required|string|max:500'
         ]);
         $comment->update([
             'comment' => $request->input('comment')
@@ -49,7 +49,7 @@ class WikiComment extends Controller
     public function vote(Request $request, Comment $comment)
     {
         $validator = Validator::make($request->all(), [
-            'vote' => ['required', 'in:up,down']
+            'vote' => 'required|in:up,down'
         ]);
         if($validator->fails()) {
             return response()->json([

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Wiki;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateWikiRequest extends FormRequest
@@ -13,7 +14,8 @@ class UpdateWikiRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        $wiki = Wiki::find($this->route('wiki'));
+        return $wiki && $this->user()->can('update', $wiki);
     }
 
     /**
@@ -24,7 +26,7 @@ class UpdateWikiRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => ['required', 'string', 'max:2000000000']
+            'content' => 'required|string|max:2000000000'
         ];
     }
 }

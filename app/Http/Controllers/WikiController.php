@@ -24,7 +24,8 @@ class WikiController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'verified'])->except(['index', 'show', 'search', 'searchAPI', 'indexID']);
+        $this->middleware('auth')->except(['index', 'indexID', 'show', 'search', 'searchAPI']);
+        $this->middleware('verified')->except('rating');
     }
 
     public function index()
@@ -50,13 +51,13 @@ class WikiController extends Controller
             'title' => $request->title,
             'content' => $request->content
         ]);
-        return redirect(route('user.wiki'))->with('success', 'Wiki created successful!');
+        return redirect(route('user.wiki'));
     }
 
     public function show(Wiki $wiki)
     {
-        $wiki->touch('viewed_at');
         $wiki->increment('views');
+        $wiki->touch('viewed_at');
         return view('wiki.show', compact('wiki'));
     }
 
@@ -70,24 +71,25 @@ class WikiController extends Controller
         $wiki->update([
             'content' => $request->content
         ]);
-        return redirect(route('wiki.show', compact('wiki')))->with('success', 'Wiki details updated!');
+        return redirect(route('wiki.show', compact('wiki')));
     }
 
     public function destroy(Wiki $wiki)
     {
         $wiki->softDelete();
-        return redirect(route('user.wiki'))->with('success', 'Wiki deleted!');
+        return redirect(route('user.wiki'));
     }
 
     public function destroyPerm(Wiki $wiki)
     {
         $wiki->forceDelete();
-        return redirect(route('user.wiki'))->with('success', 'Wiki deleted!');
+        return redirect(route('user.wiki'));
     }
 
     public function indexID(User $user)
     {
-        $wiki =  Wiki::where(['type' => 'wiki', 'user_id' => $user->id])
+        $wiki =  $user->wiki()
+            ->where('type', 'wiki')
             ->latest('updated_at')
             ->paginate(10);
         return view('user.index', compact('wiki'));
@@ -106,11 +108,9 @@ class WikiController extends Controller
                     $query->where('stack', request()->input('stack'));
                 }
             })
-            ->paginate(10)
+            ->paginate(15)
             ->get();
-        return view('wiki.search', [
-            'wiki' => $wiki
-        ]);
+        return view('wiki.search', compact('wiki'));
     }
 
     public function searchAPI(Request $request) {
@@ -131,7 +131,7 @@ class WikiController extends Controller
                     $query->where('stack', request()->input('stack'));
                 }
             })
-            ->limit(15)
+            ->limit(10)
             ->get();
         return response()->json([
             'data' => $wiki
