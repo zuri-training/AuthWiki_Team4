@@ -413,7 +413,7 @@ hr{
 #delete_button:active{
     background-color: hsl(0, 100%, 80%);
     transform: scale(0.97);
-    color: #FFF;
+    color: #FFF !important;
 }
 
 @media screen and (max-width:1280px) {
