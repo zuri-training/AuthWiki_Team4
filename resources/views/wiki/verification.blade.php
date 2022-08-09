@@ -5,10 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Verification</title>
-        <link rel="stylesheet" href="/resources/css/verification.css" />
+        <link rel="stylesheet" href="{{ asset('css/verification.css') }}" />
         <link
             rel="shortcut icon"
-            href="/resources/images/Auth_wiki logo.svg"
+            href="{{ asset('images/Auth_wiki logo.svg') }}"
             type="image/x-icon"
         />
         <link
@@ -25,7 +25,7 @@
             <main>
                 <div>
                     <img
-                        src="/resources/images/envelope.svg"
+                        src="{{ asset('images/envelope.svg') }}"
                         alt="envelope"
                         class="img"
                     />
@@ -52,7 +52,7 @@
                     <div>
                         <button class="social">
                             <img
-                                src="/resources/images/twitter.svg"
+                                src="{{ asset('images/twitter.svg') }}"
                                 alt="twitter"
                             />
                         </button>
@@ -61,7 +61,7 @@
                     <div>
                         <button class="social">
                             <img
-                                src="/resources/images/slack.svg"
+                                src="{{ asset('images/slack.svg') }}"
                                 alt="slack"
                                 class="icon"
                             />
@@ -71,7 +71,7 @@
                     <div>
                         <button class="social">
                             <img
-                                src="/resources/images/gmail.svg"
+                                src="{{ aaset('images/gmail.svg') }}"
                                 alt="gmail"
                                 class="icon"
                             />

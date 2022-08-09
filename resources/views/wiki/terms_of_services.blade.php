@@ -91,14 +91,14 @@
             </div>
             
             <ul class='menu_links'>
-            <li style="list-style-image: url('../images/home.svg')"><a href="#">Home</a></li>
-            <li style="list-style-image: url('../images/docs.svg')"><a href="#">Doc</a></li>
-            <li style="list-style-image: url('../images/resources.svg')"><a href="#">Resources</a></li>
-            <li style="list-style-image: url('../images/library.svg')"><a href="#">Library</a></li>
-            <li style="list-style-image: url('../images/profile.svg')"><a href="#">Profile</a></li>
-            <li style="list-style-image: url('../images/settings.svg')"><a href="#">Settings</a></li>
+            <li style="list-style-image: url('{{ asset('images/home.svg') }}')"><a href="#">Home</a></li>
+            <li style="list-style-image: url('{{ asset('images/docs.svg') }}')"><a href="#">Doc</a></li>
+            <li style="list-style-image: url('{{ asset('images/resources.svg') }}')"><a href="#">Resources</a></li>
+            <li style="list-style-image: url('{{ asset('images/library.svg') }}')"><a href="#">Library</a></li>
+            <li style="list-style-image: url('{{ asset('images/profile.svg') }}')"><a href="#">Profile</a></li>
+            <li style="list-style-image: url('{{ asset('images/settings.svg') }}')"><a href="#">Settings</a></li>
             <!-- <li style="list-style-image: url('../images/login.svg')"><a href="#">Login</a></li> -->
-            <li style="list-style-image: url('../images/signout.svg')"><a href="#"><span style= "color: red">Sign out</span></a></li>
+            <li style="list-style-image: url('{{ asset('images/signout.svg') }}')"><a href="#"><span style= "color: red">Sign out</span></a></li>
         </ul>
             <!-- <button>Get started</button> -->
         </div>

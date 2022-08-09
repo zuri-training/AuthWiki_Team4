@@ -5,10 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Profile</title>
-        <link rel="stylesheet" href="/resources/css/profile.css" />
+        <link rel="stylesheet" href="{{ asset('css/profile.css') }}" />
         <link
             rel="shortcut icon"
-            href="/resources/images/favicon.svg"
+            href="{{ asset('images/favicon.svg') }}"
             type="image/x-icon"
         />
         <link
@@ -25,7 +25,7 @@
             <div class="div1">
                 <div>
                     <img
-                        src="/resources/images/indiana.png"
+                        src="{{ asset('images/indiana.png') }}"
                         alt="profile picture"
                         class="img"
                     />
@@ -37,14 +37,14 @@
                 <button>
                     Edit Profile
                     <img
-                        src="/resources/images/edit.svg"
+                        src="{{ asset('images/edit.svg') }}"
                         alt="edit"
                         style="width: 12px; height: 12px"
                     />
                 </button>
                 <p>
                     <img
-                        src="/resources/images/calendar.svg"
+                        src="{{ asset('images/calendar.svg') }}"
                         alt="calendar"
                         style="width: 15px; height: 15px; padding-right: 5px"
                     />
@@ -56,7 +56,7 @@
                 <div>
                     <p class="div2p">
                         <img
-                            src="/resources/images/website.svg"
+                            src="{{ asset('images/website.svg') }}"
                             alt="website"
                             class="icon"
                         />
@@ -69,7 +69,7 @@
                 <div>
                     <p class="div2p">
                         <img
-                            src="/resources/images/github.svg"
+                            src="{{ asset('images/github.svg') }}"
                             alt="github"
                             class="icon"
                         />
@@ -82,7 +82,7 @@
                 <div>
                     <p class="div2p">
                         <img
-                            src="/resources/images/twitter2.svg"
+                            src="{{ asset('images/twitter2.svg') }}"
                             alt="twitter"
                             class="icon"
                         />
