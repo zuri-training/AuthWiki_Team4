@@ -12,6 +12,7 @@
 
 .profile_card1{
     position: fixed;
+    z-index: 999999;
     width: 671px;
     height: 512px;
     top: 50%;
@@ -75,6 +76,7 @@
 /* FOR DELETE PROFILE */
 
 .profile_card{
+    z-index: 999999;
     position: fixed;
     width:  846px;
     height: 512px;

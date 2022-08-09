@@ -10,11 +10,13 @@ function closeNavOnOutsideClick(){
             closeNav()
         }
 });
+    
 }
 
 function openNav() {
     var mySidemenu = document.getElementById("mySidemenu");
     var screenWidth = window.innerWidth;
+    var body = document.getElementsByTagName('body');
     mySidemenu.style.paddingLeft = "32px";
     mySidemenu.style.boxShadow = "0px 0px 100px 100vw  rgba(0, 0, 0, 0.2), 0px 4px 100px 20px rgba(0, 0, 0, 0.2)";
     if (screenWidth < 768) {
@@ -24,16 +26,21 @@ function openNav() {
         mySidemenu.style.width = '322px' ;
     }
     mySidemenu.style.opacity = "1";
+    body[0].style.height = '100%';
+    body[0].style.overflow = 'hidden';
 }
 
   
 
 function closeNav() {
     var mySidemenu = document.getElementById("mySidemenu");
+    var body = document.getElementsByTagName('body');
     mySidemenu.style.width = "0px";
     mySidemenu.style.paddingLeft = "0px";
     mySidemenu.style.opacity = "0";
     mySidemenu.style.boxShadow = "none"
+    body[0].style.height = 'auto';
+    body[0].style.overflow = 'auto';
 
 }
 
