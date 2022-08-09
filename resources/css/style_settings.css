@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=DM+Sans');
 @import url('https://fonts.googleapis.com/css?family=Manrope');
-@import url('https://fonts.googleapis.com/css?family=Poppins');
 
 :root{
     --highlight_color : #FF9243;
@@ -252,7 +251,7 @@ hr{
     position: relative;
     width: 100%;
     gap: 4px 0;
-    font-family: 'Poppins';
+    font-family: 'Manrope';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
