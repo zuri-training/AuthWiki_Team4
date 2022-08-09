@@ -355,4 +355,13 @@
   }
   
 
+  @media screen and (max-width: 1300px) {
+    
+    .section-container{
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: ;
+    }
+}
   
