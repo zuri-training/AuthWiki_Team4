@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\{
+    Database\Migrations\Migration,
+    Database\Schema\Blueprint,
+    Support\Facades\Schema
+};
 
 return new class extends Migration
 {
@@ -20,7 +22,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('photo')->default('default.jpg');
+            $table->text('photo')->default('default.jpg');
+            $table->text('github_id')->nullable();
+            $table->text('google_id')->nullable();
             $table->tinyInteger('admin')->default(0);
             $table->rememberToken();
             $table->timestamps();

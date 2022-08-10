@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\{
     Auth,
     Route
 };
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,13 +15,32 @@ use Illuminate\Support\Facades\{
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/google-auth/callback', [\App\Http\Controllers\Auth\LoginController::class, 'googleLogin']);
-Route::get('/google-auth/redirect', [\App\Http\Controllers\Auth\LoginController::class, 'redirectGoogle']);
-Route::get('/github-auth/callback', [\App\Http\Controllers\Auth\LoginController::class, 'gitHubLogin']);
-Route::get('/github-auth/redirect', [\App\Http\Controllers\Auth\LoginController::class, 'redirectGithub']);
+Route::get('documentation', function () {
+    return view('documentation.index');
+});
+
+
+Route::get('comment', function () {
+    return view('comment.index');
+});
+
+Route::get('library', function () {
+    return view('library.index');
+});
+
+Route::get('/home', function () {
+    return Auth::user();
+})->middleware('auth');
+
+Route::controller(\App\Http\Controllers\Auth\LoginController::class)->group(function(){
+    Route::get('/google-auth/callback', 'googleLogin');
+    Route::get('/google-auth/redirect', 'redirectGoogle')->name('login.google');
+    Route::get('/github-auth/callback', 'gitHubLogin');
+    Route::get('/github-auth/redirect', 'redirectGithub')->name('login.github');
+});

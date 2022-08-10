@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
 }
 .signup-title {
     text-align: center;
@@ -78,7 +78,7 @@
 .fa-google {
     background: grey;
     color: white;
-    
+
   }
   .fa-github {
     background: grey;

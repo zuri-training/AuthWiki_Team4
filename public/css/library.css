@@ -1,0 +1,183 @@
+
+body{
+    font-family: 'manrope', sans-serif;
+    background: url(./images/Background\ .svg);
+    overflow-x: hidden;
+}
+header{
+    margin-bottom: 6rem;
+}
+.input-box{
+    border: 2px solid rgb(0, 37, 71);
+    padding: 10px;
+    border-radius: 4px;
+}
+.input-box input{
+    outline: none;
+    border: none;
+    background: transparent;
+
+}
+.input-box button{
+    border: none;
+    background: #ffb37c;
+    color: #1f1f1fea;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 24px 10px 16px;
+    gap: 10px;
+    width: 135px;
+    height: 44px;
+    align-items: center;
+}
+.input-box button span{
+    margin-left: .5rem;
+}
+.form-control:focus, .btn:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  .btn:hover{
+    background:#ffb37cd8 ;
+    color: rgb(0, 37, 71);
+  }
+  .row{
+    row-gap: 30px;
+    margin-top: 2rem;
+  }
+  .card{
+    position: relative;
+    border: none;
+    box-shadow: 0px 4px 5px 2px rgba(31, 31, 31, 0.12);
+    display: flex;
+    align-items: flex-start;
+    justify-items: flex-start;
+    padding: 40px 22px 40px 22px;
+    border-radius: 4px;
+
+  }
+  .card-body{
+    padding: 1rem 0rem;
+  }
+  .card-title{
+    font-size: 24px;
+    color: #143A56;
+    line-height: 34px;
+  }
+  .card-text{
+        font-size: 14px;
+  }
+  .card-footer{
+    background: transparent;
+    border: none;
+    display: flex;
+  
+    
+  }
+ .card-footer .download p span {
+    font-size: 12px;
+    color:#011320;
+  }
+  .card-footer .stars{
+    margin-left: 2rem;
+  }
+/* hover effect trial */
+  .card:hover{
+    box-shadow: 0 5px 35px 0px rgba(0,0,0,.1);
+  }
+  .card:hover::before, .card:hover::after{
+    display: block;
+    content: '';
+    position: absolute;
+    width: 367px;
+    height: 300px;
+    background: #143A56;
+    border-radius: 4px;
+    z-index: -1;
+    animation: 1s clockwise infinite;
+  }
+  .card:hover::after{
+    background: #F3CE5E;
+  animation: 2s counterclockwise infinite;
+  }
+
+  @keyframes clockwise {
+    0% {
+      top: -5px;
+      left: 0;
+    }
+    12% {
+      top: -2px;
+      left: 2px;
+    }
+    25% {
+      top: 0;
+      left: 5px;    
+    }
+    37% {
+      top: 2px;
+      left: 2px;
+    }
+    50% {
+      top: 5px;
+      left: 0;    
+    }
+    62% {
+      top: 2px;
+      left: -2px;
+    }
+    75% {
+      top: 0;
+      left: -5px;
+    }
+    87% {
+      top: -2px;
+      left: -2px;
+    }
+    100% {
+      top: -5px;
+      left: 0;    
+    }
+  }
+  
+  @keyframes counterclockwise {
+    0% {
+      top: -5px;
+      right: 0;
+    }
+    12% {
+      top: -2px;
+      right: 2px;
+    }
+    25% {
+      top: 0;
+      right: 5px;    
+    }
+    37% {
+      top: 2px;
+      right: 2px;
+    }
+    50% {
+      top: 5px;
+      right: 0;    
+    }
+    62% {
+      top: 2px;
+      right: -2px;
+    }
+    75% {
+      top: 0;
+      right: -5px;
+    }
+    87% {
+      top: -2px;
+      right: -2px;
+    }
+    100% {
+      top: -5px;
+      right: 0;    
+    }
+  }

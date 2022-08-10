@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\{
     Database\Eloquent\Factories\HasFactory,
     Foundation\Auth\User as Authenticatable,
+    Contracts\Auth\MustVerifyEmail,
     Notifications\Notifiable,
     Support\Facades\Hash,
     Support\Str
 };
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -20,8 +20,11 @@ class User extends Authenticatable
         'name',
         'user_name',
         'email',
+        'email_verified_at',
         'password',
-        'photo'
+        'photo',
+        'github_id',
+        'google_id'
     ];
     protected $hidden = [
         'password',
@@ -29,6 +32,8 @@ class User extends Authenticatable
     ];
     protected $appends = [
         'libraries',
+        'blogs',
+        'forums',
         'contributions'
     ];
     protected $casts = [
@@ -36,26 +41,12 @@ class User extends Authenticatable
         'admin' => 'boolean'
     ];
 
-    // public function github() {
-    //     return $this->hasOne(Github::class);
-    // }
-    // public function google() {
-    //     return $this->hasOne(Google::class);
-    // }
-
-    // public function wikis() {
-    //     return $this->hasMany(Wiki::class);
-    // }
-    // public function comments() {
-    //     return $this->hasManyThrough(Comments::class, Wiki::class);
-    // }
-
-    // public function blogs() {
-    //     return $this->hasMany(Blog::class);
-    // }
-    // public function blogComments() {
-    //     return $this->hasManyThrough(BlogComments::class, Blog::class);
-    // }
+    public function wiki() {
+        return $this->hasMany(Wiki::class);
+    }
+    public function comment() {
+        return $this->hasManyThrough(Comment::class, Wiki::class);
+    }
 
     public function setNameAttribute($value)
     {
@@ -74,12 +65,20 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($value);
     }
 
-    // public function getLibrariesAttribute()
-    // {
-    //     return $this->wikis->count();
-    // }
-    // public function getContributionsAttribute()
-    // {
-    //     return $this->comments->count();
-    // }
+    public function getLibrariesAttribute()
+    {
+        return $this->wiki()->where('type', 'wiki')->count();
+    }
+    public function getBlogsAttribute()
+    {
+        return $this->wiki()->where('type', 'blog')->count();
+    }
+    public function getForumsAttribute()
+    {
+        return $this->wiki()->where('type', 'forum')->count();
+    }
+    public function getContributionsAttribute()
+    {
+        return $this->comment()->count();
+    }
 }
