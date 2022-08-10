@@ -1,0 +1,156 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 90%;
+    margin: 0 auto;
+    padding: 1% 5%;
+}
+
+/* --- Welcome Section --- */
+.welcome{
+    text-align: center;
+    margin: 0 5%;
+    min-height: 44px;
+}
+
+/* Page Name */
+.page-name{
+    margin-top: 48px;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 46px;
+    color: #143A56;
+}
+
+/* Welcome Picture */
+.dp{
+    max-width: 941px;
+    max-height: 520px;
+    width: 100%;
+    height: auto;
+    margin-top: 64px;
+    border-radius: 4px;
+}
+
+/* Name of Code */
+.heading{
+    left: 80px;
+    padding-top: 98px;
+    padding-bottom: 35px;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 3.5rem;
+    line-height: 66px;
+    color: #143A56;
+}
+
+/* Name of Sections */
+h3 {
+    padding-top: 42px;
+    padding-bottom: 22px;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 34px;
+    color: #143A56;
+}
+
+/* Detail of sections */
+.body-text, p{
+    text-align: justify;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 40px;
+    color: #1F1F1F;
+}
+
+.code{
+    border-radius: 5px;
+    width: 100%;
+    height: auto;
+}
+
+.snippet{
+    max-width: 1296px;
+    max-height: 1512px;
+    width: 100%;
+    height: auto;
+    margin-top: 64px;
+    border-radius: 4px;
+}
+
+.bold-text{
+    font-weight:bold;
+}
+
+ol{
+    padding: 55px;
+}
+
+li{
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 46px;
+    color: #1F1F1F;
+}
+
+p {
+    padding-bottom: 12px;
+}
+
+button {
+    padding: 16px 24px;
+    margin-top: 44px;
+    width: 192px;
+    height: 56px;
+    background-color: #FFB37C;
+    border: none;
+    border-radius: 4px;
+    font-style: normal;
+    font-family: 'Manrope';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #1f1f1f;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: #1f1f1f;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.download-btn{
+    margin-right: 104.49px;
+}
+
+.btn-group{
+    margin-bottom: 60px;
+        display: flex;
+        justify-content:space-between;
+        align-items: center;
+}
+
+.count a {
+    font-family: 'Manrope';
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 700px;
+    font-style: normal;
+    margin-left: 16px;
+    margin-right: 32px;
+}
