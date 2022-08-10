@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/x-icon" href="../images/Authwiki.svg">
+    <title>Authentication Code Detail</title>
+    <link rel="stylesheet" href="../css/style_authenication_detail.css">
+    <link href='https://fonts.googleapis.com/css?family=DM Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
+</head>
+<body>
+    <header class="welcome container">
+        <h2 class="page-name">Authentication Library</h2>
+        <img class="dp" src="../images/Svgs/Frame 61051.svg" alt="image not supported">
+    </header>
+    
+    <Main class="container">
+        <h1 class="heading">Firebase Auth. (Javascript)</h1>
+        
+        <section class="overview">
+            <h3>Overview</h3>
+            <p class="body-text">
+                Firebase is an authentication service that allows you to easily authenticate users. It provides support for
+                email/password, phone number, Google, Facebook sign-in amongst many others. This library will help get you
+                started with
+                registering users on your React project
+            </p>
+        </section>
+        <section class="requirement">
+            <h3>Packages/dependencies</h3>
+            <p class="body-text">
+                React: This library enables you to set up sign-up authentication on your react app. Ensure you have npm
+                installed on
+                your workstation then set up a new project by running
+                <code>npx create-react-app &#60;APP_NAME&#62;</APP_NAME></code>
+                Firebase module: After setting up your react project, you'd need to install the firebase module in order to use
+                the
+                packages included therein. You can do so by running <code>npm install firebase</code>.
+            </p>
+        </section>
+        <section>
+            <h3>Code snippets</h3>
+                <div class="code">
+                    <iframe
+                        src="https://carbon.now.sh/embed?bg=rgba%28121%2C72%2C185%2C1%29&t=blackboard&wt=bw&l=javascript&width=1280&ds=false&dsyoff=20px&dsblur=68px&wc=false&wa=false&pv=0px&ph=0px&ln=false&fl=1&fm=Fira+Code&fs=14px&lh=150%25&si=false&es=2x&wm=false&code=%250A%2520%2520%2520%2520%2520%2520import%2520React%252C%2520%257BuseEffect%252C%2520useState%252C%2520useRef%2520%257D%2520from%2520%27react%27%253B%250A%2520%2520%2520%2520%2520%2520import%2520firebase%2520from%2520%27firebase%27%253B%250A%2520%2520%2520%2520%2520%2520import%2520%27firebase%252Fauth%27%253B%250A%250A%2520%2520%2520%2520%2520%2520const%2520app%2520%253D%2520firebase.initializeApp%28%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520apiKey%253A%2520process.env.REACT_APP_API_KEY%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520authDomain%253A%2520process.env.REACT_APP_AUTH_DOMAIN%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520projectId%253A%2520process.env.REACT_APP_PROJECT_ID%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520storageBucket%253A%2520process.env.REACT_APP_STORAGE_BUCKET%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520messagingSenderId%253A%2520process.env.REACT_APP_MESSAGING_SENDER_ID%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520appId%253A%2520process.env.REACT_APP_APP_ID%252C%250A%2520%2520%2520%2520%2520%2520%257D%29%253B%250A%250A%2520%2520%2520%2520%2520%2520const%2520auth%2520%253D%2520app.auth%28%29%253B%250A%2520%2520%2520%2520%2520%2520const%2520AuthContext%2520%253D%2520React.createContext%28%29%253B%250A%250A%2520%2520%2520%2520%2520%2520const%2520emailRef%2520%253D%2520useRef%28%29%253B%250A%2520%2520%2520%2520%2520%2520const%2520passwordRef%2520%253D%2520useRef%28%29%253B%250A%2520%2520%2520%2520%2520%2520const%2520passwordConfirmRef%2520%253D%2520useRef%28%29%253B%250A%250A%2520%2520%2520%2520%2520%2520const%2520%255Berror%252C%2520setError%255D%2520%253D%2520useState%28%27%27%29%253B%250A%250A%2520%2520%2520%2520%2520%2520function%2520handleSubmit%28e%29%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520e.preventDefault%28%29%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520if%2520%28passwordRef.current.value%2520%21%253D%253D%2520passwordConfirmRef.current.value%29%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520return%2520setError%28%27Passwords%2520do%2520not%2520match%27%29%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520%257D%250A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520try%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520setError%28%27%27%29%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520await%2520signup%28emailRef.current.value%252C%2520passwordRef.current.value%29%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520%257D%2520catch%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520setError%28%2522Account%2520creation%2520unsuccessful%2522%29%250A%2520%2520%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%2520%2520%257D%250A%250A%250A%2520%2520%2520%2520%2520%2520function%2520AuthProvider%28%257B%2520children%2520%257D%29%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520const%2520%255BcurrentUser%252C%2520setCurrentUser%255D%2520%253D%2520useState%28%29%253B%250A%250A%2520%2520%2520%2520%2520%2520%2520%2520function%2520signup%28email%252C%2520password%29%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520return%2520auth.createUserWithEmailAndPassword%28email%252C%2520password%29%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520%257D%250A%250A%2520%2520%2520%2520%2520%2520%2520%2520useEffect%28%28%29%2520%253D%253E%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520return%2520auth.onStateChanged%28%28user%29%2520%253D%253E%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520setCurrentUser%28user%29%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%257D%29%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520%257D%252C%2520%255B%255D%29%253B%250A%250A%2520%2520%2520%2520%2520%2520%2520%2520const%2520value%2520%253D%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520currentUser%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520signup%252C%250A%2520%2520%2520%2520%2520%2520%2520%2520%257D%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520return%2520%253CAuthContext.Provider%250A%2520%2520%2520%2520%2520%2520%2520value%253D%257Bvalue%257D%253E%257Bchildren%257D%253C%252FAuthContext.Provider%253E%253B%250A%2520%2520%2520%2520%2520%2520%257D%250A%250A"
+                        style="max-width: 1280px; max-height: 1380px; border:0; transform: scale(1); overflow:hidden; padding-top: 56px;"
+                        sandbox="allow-scripts allow-same-origin">
+                    </iframe>
+                </div>
+        </section>
+        <section>
+            <h3 class="examples">Examples</h3>
+            <p class="body-text">
+                Time is precious as a developer, and we want you to get started building that next idea FAST! To get started
+                using the library:
+            </p>
+            
+            <ol>
+                <li>Head over to the <a href="https://console.firebase.google.com/u/0/">Firebase console</a> and click Create a
+                    project.</li>
+                <li>Give your project a name and click create to start the process.</li>
+                <li>Click on the Web icon (&#60;/&#62;) on your project's overview page to register the app.</li>
+                <li>Give your app a name of your choice and click Register app. You don't need to enable Firebase Hosting.</li>
+                <li>Copy the configuration object under “Add Firebase SDK”.</li>
+                <li>Head over to the authentication tab and enable “Email/password” authentication</li>
+            </ol>
+            <p class="body-text">
+                After that is done, create a `.env` to store the configuration information for your project. Your key should
+                match
+                what's after the <code>“REACT_APP_”</code> in the initializeApp object and the value can be obtained from the
+                configuration object
+                retrieved in the previous step
+            </p>
+            <iframe
+                src="https://carbon.now.sh/embed?bg=rgba%28121%2C72%2C185%2C1%29&t=blackboard&wt=bw&l=javascript&width=1280&ds=false&dsyoff=20px&dsblur=68px&wc=false&wa=false&pv=0px&ph=0px&ln=false&fl=1&fm=Fira+Code&fs=14px&lh=143%25&si=false&es=2x&wm=false&code=API_KEY%253Dsup3RDup3Rs3%2540%2524%252F%252Fcur3k3y"
+                style="width: 1280px; height: 115px; border:0; transform: scale(1); overflow:hidden; padding-top: 35px; padding-bottom: 24px;"
+                sandbox="allow-scripts allow-same-origin">
+            </iframe>
+            <p class>
+                <span class="bold-text">Voila!</span> All that remains is to hook up your library with your input field. Happy
+                coding!
+            </p>
+            <p class="bold-text">
+                Note: You can choose to do away with the REACT_APP prefix if you have the “dotenv” package installed and
+                initialized
+            </p>
+        </section>
+        <div class="btn-group">
+            <button class="download-btn"><a href="#">Download  <img src="../images/download-icon.png" alt=""></a></button>
+            <button><a href="#"><img src="../images/like.png" alt=""></a></button>
+            <span class="count likes"><a href="#">11.3k</a></span>
+            <button><a href="#"><img src="../images/dislike.png" alt=""></a></button>
+            <span class="count dislikes"><a href="#">1.5k</a></span>
+        </div>
+    </Main>
+    
+</body>
+</html>
