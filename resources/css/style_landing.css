@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+html, body{
+    overflow-x: hidden;
+}
+
+section{
+    background-color: white;
+}
+
+
+.hero{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 625px;
+    overflow: hidden;
+    margin-bottom: 125px;
+}
+
+#hero-text{
+    margin-left: 50px;   
+}
+
+#hero-text>h3{
+    display: block;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 54px;
+    margin-top: 125px;
+}
+
+#hero-text>p{
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 34px;
+}
+
+#hero-text>button{
+        background: #FFB37C;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 24px;
+        gap: 10px;
+        border-radius: 4px;
+        border: 0px;
+        font-family: 'Manrope';
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+        color: #1F1F1F;
+    }
+
+
+#hero-img{
+    width: 900.74px;
+    height: 805.26px;
+    left: 622px;
+    top: 826px;
+    background: #CFCFCF;
+    transform: rotate(-79.49deg) scale(0.6);
+}
+
+.how-it-works{
+    text-align: center;
+    margin-bottom: 125px;
+}
+
+#oac-header>h2{
+height: 73px;
+left: 557px;
+top: 959px;
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 125px;
+color: #1F1F1F;
+}
+
+#oac-header>p{
+height: 94px;
+left: 336px;
+top: 1000px;
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 36px;
+line-height: 47px;
+text-align: center;
+color: #1F1F1F;
+}
+
+
+#oac-options{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 125px;
+    vertical-align: top;
+    padding: 15px;
+    margin-left: 115px;
+}
+
+#oac-options>p{
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 34px;
+    text-align: center;
+    color: #1F1F1F;
+}
+
+#oac-btn{
+    background: #FFB37C;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 24px;
+    margin-right: 25px;
+    border-radius: 4px;
+    border: 0px;
+    font-family: 'Manrope';
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #1F1F1F;
+}
+
+.snippets{
+    text-align: center;
+}
+
+#snippet-header>h2{
+    width: 676px;
+    height: 66px;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 66px;
+    margin-left: 26%;
+    color: #1F1F1F;
+    left: 100px;
+}
+
+.daily-selections{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    margin-top: 125px;
+    gap: 150px;
+    align-items: center;
+    justify-content: center;
+}
+
+#pick-one{
+    width: 300px;
+    height: 400px;
+    border-radius: 8px;
+}
+
+#title{
+    font-family: 'Manrope';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 24px;
+color: #1F1F1F;
+}
+
+#panel{
+    font-family: 'Manrope';
+font-style: normal;
+font-weight: 500;
+font-size: 10px;
+line-height: 24px;
+color: #1F1F1F;
+word-spacing: 5px;
+}
+
+#options{
+    box-sizing: border-box;
+    width: 300px;
+    height: 72px;
+    background: linear-gradient(180deg, #FCFCFC 0%, #FCFCFC 100%);
+    border-bottom: 2px solid #DCDCDC;
+    border-radius: 0px 0px 8px 8px;
+}
+
+#snippet-btn{
+    background: #FFB37C;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 24px;
+    border-radius: 4px;
+    border: 0px;
+    font-family: 'Manrope';
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #1F1F1F;
+}
