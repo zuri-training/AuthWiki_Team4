@@ -1,6 +1,6 @@
-@extends('layouts.general')
+@extends('layouts.master')
 
-@section('title', 'AuthWiki_Team4')
+@section('title', 'AuthWiki | Library')
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
@@ -15,7 +15,7 @@
 @endpush
 
 @section('content')
-    <div class="container">
+    <div class="container-lg">
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <form method="GET" action="{{ route('page.library') }}">
@@ -32,16 +32,16 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container-lg">
         <div class="row">
             @foreach($wikis as $lib)
             <div class="col-6 col-md-4">
                 <div class="card">
-                    <img width="48" height="54" src="{{ asset("images/stacks/{$lib->stack}.svg") }}">
-                    <div class="card-body">
-                        <h2 class="card-title">{!! $lib->title !!} ({{ Str::ucfirst($lib->stack) }})</h2>
-                        <p class="card-text">
-                            {!! $lib->description !!}
+                    <img width="48" height="54" src="{{ url($lib->category->icon) }}">
+                    <div class="card-body be-break">
+                        <h2 class="card-title be-overflow" id="xx">{{ $lib->title }}</h2>
+                        <p class="card-text be-overflow" id="y">
+                            {{ $lib->description }}
                         </p>
                     </div>
                     <div class="card-footer">
@@ -56,7 +56,7 @@
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 <i class="fa fa-star" aria-hidden="true"></i>
-                                <div class="front-stars" style="width: {!! $lib->stars !!}%;">
+                                <div class="front-stars" style="width: {{ $lib->stars }}%;">
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -76,32 +76,39 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $('[name=keyword]').on('keyup', function(){
-                $.ajax({
-                    url: '{!! route('search.library') !!}',
-                    data: {
-                        'keyword': $(this).val()
-                    },
-                    method: 'GET',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    cache: false,
-                    success: function(data) {
-                        $.each(data.data, function(index, value) {
-                            $('.search_result').append('<p><a href="#">'+value.title+'</a></p>');
-                        });
-                    },
-                    beforeSend: function(){
-                        $('.search_result').html('');
-                    },
-                    complete: function() {
-                        if($('.search_result').children().length > 0) {
-                            $('.search_result').removeClass('d-none');
-                        } else {
-                            $('.search_result').addClass('d-none');
+                if($(this).val().length > 0) {
+                    $.ajax({
+                        url: '{{ route('search.library') }}',
+                        data: {
+                            'keyword': $(this).val()
+                        },
+                        method: 'POST',
+                        success: function(data) {
+                            $.each(data.data, function(index, value) {
+                                $('.search_result').append('<p><a href="#">'+value.title+'</a></p>');
+                            });
+                        },
+                        beforeSend: function(){
+                            $('.search_result').html('');
+                        },
+                        complete: function() {
+                            if($('.search_result').children().length > 0) {
+                                $('.search_result').removeClass('d-none');
+                            } else {
+                                $('.search_result').addClass('d-none');
+                            }
                         }
-                    }
-                });
+                    });                    
+                } else {
+                    // Load search history
+                }
+
+            });
+            $('[name=keyword]').on('blur', function(){
+                // Search history
+                // let _history = localStorage.getItem('search');
+                // JSON.stringify(data)
+                // localStorage.setItem()
             });
             $('body').click(function(e){
                 if($(e.target).parents('.input-box').length == 0) {

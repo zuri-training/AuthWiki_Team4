@@ -8,15 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    protected $table = 'category';
+
+    public $timestamps = false;
     protected $fillable = [
         'name',
-        'stack',
+        'icon',
         'description'
     ];
 
     public function wiki() {
         return $this->hasMany(Wiki::class);
+    }
+    public function glosary() {
+        return $this->hasMany(Glossary::class);
     }
 
 }

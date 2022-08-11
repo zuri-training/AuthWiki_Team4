@@ -20,7 +20,7 @@ class commentFactory extends Factory
             'user_id' => 1, //rand(1, 10),
             'wiki_id' => rand(1, 10),
             'comment' => fake()->realText(),
-            'vote' => 0 // rand(0, 5)
+            'vote' => 0
         ];
     }
 }

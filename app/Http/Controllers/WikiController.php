@@ -12,7 +12,7 @@ use App\Http\Requests\{
     UpdateWikiRequest
 };
 use Illuminate\{
-    Database\Eloquent\SoftDeletes,
+    Database\Eloquent\Builder,
     Support\Facades\Auth,
     Http\Request,
     Support\Facades\Validator
@@ -20,12 +20,12 @@ use Illuminate\{
 
 class WikiController extends Controller
 {
-    use SoftDeletes;
 
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'indexID', 'show', 'search', 'searchAPI']);
-        $this->middleware('verified')->except('rating');
+        $this->middleware('auth')->only('rating');
+        $this->middleware('verified')->except(['index', 'indexID', 'show', 'search', 'searchAPI']);
+        $this->middleware('isAdmin')->only(['create', 'store', 'edit', 'update']);
     }
 
     public function index()
@@ -47,7 +47,7 @@ class WikiController extends Controller
             'user_id' => Auth::id(),
             'type' => 'wiki',
             'stack' => $request->stack,
-            'file_dir' => $request->file_dir,
+            'file_id' => $request->file_id,
             'title' => $request->title,
             'content' => $request->content
         ]);
@@ -76,13 +76,7 @@ class WikiController extends Controller
 
     public function destroy(Wiki $wiki)
     {
-        $wiki->softDelete();
-        return redirect(route('user.wiki'));
-    }
-
-    public function destroyPerm(Wiki $wiki)
-    {
-        $wiki->forceDelete();
+        $wiki->delete();
         return redirect(route('user.wiki'));
     }
 
@@ -98,6 +92,9 @@ class WikiController extends Controller
     public function search(Request $request) {
         $wikis = Wiki::where('type', 'wiki')
             ->where(function($query) {
+                // if(request()->has('stack')) {
+                //     $query->category()->has('name', request()->stack);
+                // }
                 if(request()->has('keyword')) {
                     $query->where('title', 'LIKE', '%'.request()->keyword.'%')
                         ->orderBy('downloads', 'desc')
@@ -105,24 +102,23 @@ class WikiController extends Controller
                 } else {
                     $query->latest();
                 }
-                if(request()->has('stack')) {
-                    $query->where('stack', request()->stack);
-                }
             })
-            ->paginate(15);
+            ->paginate(12);
         return view('library', compact('wikis'));
     }
 
     public function searchAPI(Request $request) {
         $wiki = Wiki::select('title', 'id')
             ->where('type', 'wiki')
-            ->where('title', 'LIKE', "%{$request->keyword}%")
+            ->where('title', 'like', "%{$request->keyword}%")
             ->where(function($query) {
-                if(request()->has('stack')) {
-                    $query->where('stack', request()->stack);
-                }
+                // if(request()->has('stack')) {
+                //     $query->whereHas('category', function(Builder $queryc){
+                //         $queryc->where('name', request()->stack);
+                //     });
+                // }
             })
-            ->limit(10)
+            ->limit(5)
             ->get();
         return response()->json([
             'data' => $wiki

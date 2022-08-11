@@ -19,78 +19,59 @@
     box-sizing: border-box;
 }
 
-.container{
+.be_container{
     width: 90%;
     margin: 0 auto;
 }
 
 a{
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 body{
-    position: relative;
-    font-family: 'Manrope';
+    font-family: 'Manrope' !important;
     font-style: normal;
     background-color: #FFF;
 }
 
 a:hover{
-    color: var(--highlight_color);
+    color: var(--highlight_color) !important;
 }
 
 button{
     cursor: pointer;
 }
 
-main{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 72px !important;
-}
 
-main .section{
-    margin-bottom: 88px;
-}
-
-main .section:last-child{
-    margin-bottom: 0;
-}
-
-.showcase{
-    margin-top: 156px;
-    margin-bottom: 56px;
-}
-
-/* HEADER AND FOOTER */
-
-/* HEADER */
- header{
+/*  HEADER  */
+header{
     min-height: 110px;
     width: 100vw;
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 999;
     background: #FFFFFF;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
  }
- 
- header #current_page_link a{
-    color: var(--highlight_color);
+
+header a{
+    color: #4F4F4F !important;
+    transition: 0.2s; 
+    font-weight: 700 !important;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+a.active{
+    color: var(--highlight_color) !important;
  }
 
  header a:hover:not(header .site_logo a:hover){
-    opacity: 0.6;
+    opacity: 0.6 !important;
  }
 
 
-
-header a{
-    color: #4F4F4F;
-    transition: 0.2s; 
-}
-
- header div[class=container]{
+ header div.be_container{
     height: 110px;
     display: flex;
     align-items: center;
@@ -121,6 +102,14 @@ header #nav_secondary{
     align-items: center;
     justify-content: center;
     gap: 70px;
+}
+
+header .nav_secondary{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-left: 112px;
 }
 
 header #nav_button{
@@ -155,13 +144,16 @@ header #nav_button:active{
     transform: scale(0.97);
 }
 
+.nav_secondary .icon:hover{
+    opacity: 0.6;
+}
+
 /* MENU BAR */
 
 .nav_container{
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 }
 
 #menu_button{
@@ -173,11 +165,18 @@ header #nav_button:active{
     display: none;
     justify-content: center;
     align-items: center;
+    background-color: #FFF;
+
+}
+
+#menu_button:hover{
+    transform: scale(1.05);
     background-color: #F0F0F0;
 }
 
 #menu_button:active{
     transform: scale(0.95);
+    background-color: #F0F0F0;
 }
 
 .nav_menu{
@@ -189,11 +188,10 @@ header #nav_button:active{
 }
 
 .side_menu {
-    height: 100%;
+    height: 100% !important;
     width: 0;
-    opacity: 0;
     position: fixed;
-    z-index: 1;
+    z-index: 9999;
     top: 0;
     right: 0;
     font-weight: 700;
@@ -201,25 +199,24 @@ header #nav_button:active{
     line-height: 28px;
     color: rgba(31, 31, 31, 0.6);
     padding-top: 83px;
-    padding-left: 32px;
     gap: 16px;
     background-color: #FFF;
-    overflow: hidden;
-    box-shadow: 0px 0px 100px 100vmax  rgba(0, 0, 0, 0.2) ; 
+    overflow-x: hidden;
+    overflow-y: auto;
     transition: 0.3s;
   }
   
-.side_menu .menu_item{
+.menu_links{
+    margin-left: 32px;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 18.25px;
-    min-height: 28px;
-    min-width: 78px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 0;
 }
 
-.menu_item:last-of-type{
-    gap: 20.5px;
+.menu_links li{
+    padding-left: 18.25px;
 }
 
 .side_menu button{
@@ -253,21 +250,29 @@ header #nav_button:active{
 .side_menu button:active{
     background-color: var(--button_active_color);
     transform: scale(0.97);
+    font-weight: 700 !important;
+    font-size: 18px;
+    line-height: 28px;
 }
   
 .side_menu a{
     color: rgba(31, 31, 31, 0.6);
     transition: 0.2s;
+    font-weight: 700 !important;
+    font-size: 18px;
+    position: relative;
+    top: -2.5px;
   }
 
-  .side_menu a:hover {
-    color: var(--highlight_color);
+.side_menu a:hover {
+    color: var(--sidebar_color);
     opacity: 0.8;
   }
   
   .side_menu a:active{
-    color: var(--button_active_color);
+    color: var(--search_box_color);
   }
+
   .side_menu .closebtn {
     position: absolute;
     top: 33.5px;
@@ -276,7 +281,7 @@ header #nav_button:active{
     color: #000;
   }
 
-  .side_menu a[class=closebtn]:active {
+  .side_menu a.closebtn:active {
     animation-name: closebtn_active;
     animation-duration: 0.85s;
   }
@@ -298,12 +303,14 @@ header #nav_button:active{
     display: flex;
     align-items: center;
     gap: 6.25px;
-    width: 231px;
+    max-width: 231px;
     height: 44px;
-    border: none;  
-    background: rgba(240, 240, 240, 0.8);
+    border: 1px solid #284E6B;    
+    background: transparent;
     border-radius: 4px;
     margin-bottom: 32px;
+    margin-right: 20px;
+    transition: 20ms ease-out ;
 
 
 }
@@ -352,7 +359,7 @@ header #nav_button:active{
 }
 
 .menu_search:focus-within{
-    border: 1px solid var(--search_box_color);
+    border: 2px solid var(--search_box_color);
     
 }
 
@@ -378,7 +385,9 @@ header #nav_button:active{
     animation: hover_menu ease-in-out 0.3s;
     animation-fill-mode: forwards;
     transform-origin: 100% 0%;
+    transition: 0.3s;
 }
+
 
 .hover_menu .hover_menu_item{
     display: flex;
@@ -433,7 +442,103 @@ header #nav_button:active{
 }
 
 
-/* FOOTER */
+
+
+
+
+/* MEDIA QUERIES */
+
+@media screen and  (max-width:1000px){
+    #menu_button{
+        display: flex;
+    }
+
+    .nav_menu{
+        display: none;
+    }
+
+    header nav, header #nav_secondary{
+        display: none;
+    }
+
+    header .nav_secondary{
+        margin-left: 0;
+    }
+   
+}
+
+
+@media screen and (max-width:600px) {
+
+    main#hp.be_container{
+        margin-top: 55px;
+     }
+    
+    .site_logo{
+        order: 2;
+        
+    }
+    header div.be_container{
+        justify-content:flex-start;
+        gap: 87.23px;
+     }
+
+     .side_menu{
+        position: fixed;
+        top: 0;
+        left: 0;
+     }
+
+     @keyframes closebtn_active {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(-360deg);
+        }
+      }
+
+     header{
+        position: static;
+        box-shadow: none;
+     }
+
+     .showcase{
+        margin-top: 55px;
+     }
+}
+
+
+@media screen and (max-width:500px){
+    header div.be_container{
+        justify-content:flex-start;
+        gap: 37px;
+     }
+} 
+
+@media screen and (max-width:400px){
+    header div.be_container{
+        justify-content:flex-start;
+        gap: 50px;
+     }
+
+     header .site_logo{
+        width: 140px;
+     }
+} 
+@media screen and (max-width:300px){
+    header div.be_container{
+        justify-content:flex-start;
+        gap: 15px;
+     }
+
+     header .site_logo{
+        width: 120px;
+     }
+
+} 
+
+/** Footer **/
 
 footer{
     background-color: #F0F0F0;
@@ -500,7 +605,7 @@ footer a:hover{
 
 .footer_newsletter #site_logo{
     align-self: flex-end;
-    margin-bottom: 26px;
+    margin: 0 15px 26px 5px;
     max-height: 43px;
     max-width: 175px;
 }
@@ -554,10 +659,11 @@ footer a:hover{
     gap: 10px;
     width: 97px;
     height: 44px;
-    background:rgba(255, 146, 67, 0.9);;
-    border-radius: 0px 4px 4px 0px;
+    background-color: var(--button_hover_color);
     border: none;
     outline: none;
+    box-shadow: 0px 2px 10px 2px rgba(31, 31, 31, 0.1);
+    border-radius: 0px 4px 4px 0px;
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 500;
@@ -566,13 +672,17 @@ footer a:hover{
     display: flex;
     align-items: center;
     color: var(--text_color);
+    cursor: not-allowed;
 }
 
-#news_form #subscribe_button:hover{
-    background-color: var(--button_hover_color);
+#news_form #subscribe_button.active{
+    background-color: rgba(255, 146, 67, 0.9);
     border: 1px solid rgba(255, 146, 67, 0.85);
-    box-shadow: 0px 2px 10px 2px rgba(31, 31, 31, 0.1);
     transform: scale(1.02);
+    cursor: default;
+}
+#news_form #subscribe_button.active:hover{
+    background-color: var(--button_hover_color);
 }
 
 #news_form #subscribe_button:active{
@@ -618,19 +728,6 @@ footer hr{
     color: #181818;
 }
 
-
-
-
-@media screen and  (max-width:1000px){
-    #menu_button{
-        display: flex;
-    }
-
-    .nav_menu{
-        display: none;
-    }
-   
-}
 
 @media screen and (max-width:1200px) {
     .footer_content{
@@ -769,46 +866,3 @@ footer hr{
         line-height: 16px;
     }
 }
-
-@media screen and (max-width:600px) {
-    
-    .site_logo{
-        order: 2;
-        
-    }
-    header div[class=container]{
-        justify-content:flex-start;
-        gap: 87.23px;
-     }
-
-     .side_menu{
-        position: fixed;
-        top: 0;
-        left: 0;
-     }
-
-     @keyframes closebtn_active {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(-360deg);
-        }
-      }
-
-     header{
-        position: static;
-        box-shadow: none;
-     }
-
-     .showcase{
-        margin-top: 55px;
-     }
-}
-
-@media screen and (max-width:500px){
-    header div[class=container]{
-        justify-content:flex-start;
-        gap: 35px;
-     }
-} 

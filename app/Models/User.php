@@ -23,8 +23,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at',
         'password',
         'photo',
+        'role',
+        'website',
+        'github',
+        'twitter',
         'github_id',
-        'google_id'
+        'google_id',
+        'password_changed'
     ];
     protected $hidden = [
         'password',
@@ -38,9 +43,13 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'admin' => 'boolean'
+        'admin' => 'boolean',
+        'password_changed' => 'boolean'
     ];
 
+    public function file() {
+      return $this->hasMany(File::class);
+    }
     public function wiki() {
         return $this->hasMany(Wiki::class);
     }

@@ -15,8 +15,8 @@ class Wiki extends Model
     protected $fillable = [
         'user_id',
         'type',
-        'stack',
-        'file_dir',
+        'category_id',
+        'file_id',
         'title',
         'description',
         'content',
@@ -37,6 +37,9 @@ class Wiki extends Model
 
     public function user() {
         return $this->belongsTo(User::class);
+    }
+    public function category() {
+        return $this->belongsTo(Category::class);
     }
     public function comment() {
         return $this->hasMany(Comment::class);

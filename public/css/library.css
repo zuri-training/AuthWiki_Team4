@@ -1,7 +1,7 @@
 
 body{
     font-family: 'manrope', sans-serif;
-    background: url(../images/Background.svg);
+    background: url(../images/background.svg);
     overflow-x: hidden;
 }
 header{
@@ -19,7 +19,7 @@ header{
 }
 .input-box button{
     border: none;
-    background-color: var(--button_color);
+    background-color: var(--button_hover_color);
     color: var(--text_color);
     font-size: 16px;
     font-weight: 500;
@@ -43,7 +43,7 @@ header{
   background: url(../images/search_icon.svg) no-repeat;
 }
 .input-box button:hover{
-  background-color: var(--button_hover_color);
+  background-color: var(--button_color);
   border: 1px solid rgba(255, 146, 67, 0.85);
   box-shadow: 0px 2px 10px 2px rgba(31, 31, 31, 0.1);
   transform: scale(1.02);
@@ -99,16 +99,18 @@ header{
 
   }
   .card-body {
-    padding: 1rem 0rem;
-    height: 258px;
+    padding: 0;
+    height: 240px;
     overflow: hidden;
   }
   .card-title{
     font-size: 24px;
     color: #143A56;
     line-height: 34px;
+    height: 34px;
   }
   .card-text{
+    height: 198px;
     font-size: 14px;
   }
   .card-footer{
@@ -117,22 +119,50 @@ header{
     display: flex;
     width: 100% !important;
     padding: 0;
+    position: relative;
+    top: 20px;
     justify-content: space-between;
   }
- .card-footer .download span {
-    font-size: 12px;
+  .back-stars i, .front-stars i {
+    font-size: 18px;
+    height: 18px !important;
+    padding: 0 10px;
+  }
+ .card-footer span {
+    font-size: 18px;
     color:#011320;
-    margin: 0 5px;
+    padding: 0 5px;
+    vertical-align: middle;
   }
 
   @media only screen and (max-width: 768px) {
     .card {
       padding: 20px 11px;
     }
+    .card-body {
+      height: 236px;
+    }
+    .card-footer {
+      top: 10px;
+    }
+    .back-stars i, .front-stars i {
+      font-size: 12px;
+      height: 12px !important;
+      padding: 0;
+    }
+    .card-footer span {
+      font-size: 12px;
+      padding: 0 3px;
+    }
+  }
+  @media only screen and (min-width: 768px) {
+    .card-text {
+      line-height: 25px;
+      word-spacing: 1px;
+    }
   }
 /* hover effect trial */
   .card:hover, .card:focus{
-    border: 2px rgb(70, 91, 126) solid;
     box-shadow: 0 5px 10px 2px rgba(31,31,31,.25);
     transform: scale(1.05);
   }

@@ -19,8 +19,8 @@ class wikiFactory extends Factory
         return [
             'user_id' => 1, //rand(1, 10),
             'type' => 'wiki',
-            'stack' => 'javascript',
-            'file_dir' => '',
+            'category_id' => rand(1, 5),
+            'file_id' => null,
             'title' => fake()->realTextBetween(10, 25, 1),
             'description' => fake()->text(),
             'content' => fake()->realText()

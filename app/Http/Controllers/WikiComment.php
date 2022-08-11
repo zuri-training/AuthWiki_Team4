@@ -17,14 +17,10 @@ class WikiComment extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'verified'])->except('show');
+        $this->middleware('auth');
+        $this->middleware('verified')->only(['store', 'update']);
     }
-    public function show(Wiki $wiki) {
-        $comment = Comment::where('wiki_id', $wiki->id)
-            ->paginate(15);
-        return view('wiki.comments', compact('comments'));
-    }
-    public function create(Request $request, Wiki $wiki) {
+    public function store(Request $request, Wiki $wiki) {
         $request->validate([
             'comment' => 'required|string|max:500'
         ]);
@@ -35,7 +31,7 @@ class WikiComment extends Controller
         ]);
         return back();
     }
-    public function edit(Request $request, Comment $comment) {
+    public function update(Request $request, Comment $comment) {
         $request->validate([
             'comment' => 'required|string|max:500'
         ]);

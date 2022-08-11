@@ -1,4 +1,4 @@
-@extends('layouts.general')
+@extends('layouts.master')
 
 @section('title', 'Authwiki | Documetation')
 
@@ -8,7 +8,7 @@
 
 @section('content')
     <!-- HEADER & SEARCH -->
-    <div class="container showcase">
+    <div class="be_container showcase">
         <div class="page_header">
             <h1>WELCOME  TO AUTHWIKI DOCUMENTATION</h1>
             <p>Explore our guides and articles on how to use the codes.</p>
@@ -22,30 +22,30 @@
         </div>
     </div>
     
-    <main class="container">
+    <main class="be_container">
         <aside>
             <div class="side-bar">
                 <div class="side-bar-body">
                     <div class="side-bar-content">
-                        <a href="#library_description"><p>Library description</p></a>
+                        <a data-target="library_description"><p>Library description</p></a>
                     </div>
                     <div class="side-bar-content">
-                        <a href="#authentication"><p>Authentication</p></a>
+                        <a data-target="authentication"><p>Authentication</p></a>
                     </div>
                     <div class="side-bar-content">
-                        <a href="#features"><p>Features</p></a>
+                        <a data-target="features"><p>Features</p></a>
                     </div>
                     <div class="side-bar-content">
-                        <a href="#usage"><p>Usage</p></a>
+                        <a data-target="usage"><p>Usage</p></a>
                     </div>
                     <div class="side-bar-content">
-                        <a href="#glossary"><p>Glossary</p></a>
+                        <a data-target="glossary"><p>Glossary</p></a>
                     </div>
                     <div class="side-bar-content">
-                        <a href="#faqs"><p>FAQ</p></a>
+                        <a data-target="faqs"><p>FAQ</p></a>
                     </div>
                     <div class="side-bar-content">
-                        <a href="#feedback"><p>Feedback</p></a>
+                        <a data-target="feedback"><p>Feedback</p></a>
                     </div>
                 </div>
                 
@@ -61,9 +61,8 @@
         </aside>
 
         <article>
-            <a id="library_description"></a>
             <!-- LIBRARY DESCRIPTION -->
-            <section class="section">
+            <section class="section" id="library_description">
                 <div class="section-header">
                     <h1>Library Description</h1>
                 </div>
@@ -74,10 +73,8 @@
                     </p>
                 </div>
             </section>
-
-            <a id="authentication"></a>
             <!-- AUTHENTICATION -->
-            <section class="section">
+            <section class="section" id="authentication">
                 <div class="section-header">
                     <h1>Authentication</h1>
                 </div>
@@ -96,10 +93,8 @@
                     </p>
                 </div>
             </section>
-
-            <a id="features"></a>
             <!-- FEATURES -->
-            <section class="section">
+            <section class="section" id="features">
                 <div class="section-header">
                     <h1>Features</h1>
                 </div>
@@ -120,10 +115,8 @@
                     </p>
                 </div>
             </section>
-
-            <a id="usage"></a>
             <!-- USAGE -->
-            <section class="section">
+            <section class="section" id="usage">
                 <div class="section-header">
                     <h1>Usage</h1>
                 </div>
@@ -142,10 +135,8 @@
                     </p>
                 </div>
             </section>
-
             <!-- GLOSSARY-->
-            <a id="glossary"></a>
-            <section class="section">
+            <section class="section" id="glossary">
                 <div class="section-header">
                     <h1>Glossary</h1>
                 </div>
@@ -191,13 +182,6 @@
                     </p>
                 </div>
                 <div class="section-content">
-                    <p class="head">Blog</p>
-                    <p>
-                        a regularly updated website or web page, typically one run by an individual or small group, that is written in an informal or conversational style.
-                        The blog keeps you updated about Authwiki.
-                    </p>
-                </div>
-                <div class="section-content">
                     <p class="head">Client</p>
                     <p>
                         A Web client typically refers to the Web browser in the user's machine or mobile device. An Authwiki User.
@@ -209,13 +193,10 @@
                         A keyed cryptographic checksum based on an approved security function
                     </p>
                 </div> 
-                
                 <!-- OTHER GLOSSARY CONTENTS GO HERE -->
             </section>
-
-            <a id="faqs"></a>
             <!-- FAQs -->
-            <section class="section">
+            <section class="section" id="faqs">
                 <div class="section-header">
                     <h1>FAQs</h1>
                 </div>
@@ -272,10 +253,8 @@
                     <br>   
                 </div>
             </section>
-
-            <a  id="feedback"></a>
             <!-- FEEDBACK -->
-            <section class="section">
+            <section class="section" id="feedback">
                 <div class="section-header">
                     <h1>Feedback</h1>
                 </div>
