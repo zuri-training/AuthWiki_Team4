@@ -103,7 +103,7 @@ textarea, input{
 }
 
 textarea:focus-within, input:focus-within{
-    border: 1px solid var(--search_box_color);
+    border: 2px solid var(--search_box_color);
 }
 
 button{
