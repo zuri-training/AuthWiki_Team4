@@ -109,6 +109,7 @@ main[class=container]{
     gap: 24px;
     max-width: 513px;
     margin-right: 150px;
+    text-align: justify;
 }
 
 .mission_statement h3{

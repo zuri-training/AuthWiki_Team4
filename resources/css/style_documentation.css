@@ -35,6 +35,7 @@ body{
     font-style: normal;
     background-color: #FFF;
     overflow-x: hidden;
+    text-align: justify !important;
     
 }
 

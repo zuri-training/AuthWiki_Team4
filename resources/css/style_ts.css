@@ -11,6 +11,7 @@
 }
 body {
     background-color: #ffffff;
+    text-align: justify !important;
 }
 .container {
     width: 90%;
