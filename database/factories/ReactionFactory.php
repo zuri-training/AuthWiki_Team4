@@ -20,7 +20,7 @@ class reactionFactory extends Factory
             'user_id' => 11, //rand(1, 10),
             'wiki_id' => rand(1, 10),
             // 'comment_id' => rand(1, 10),
-            'rating' => rand(1, 5)
+            'rating' => 0 //rand(1, 5)
         ];
     }
 }

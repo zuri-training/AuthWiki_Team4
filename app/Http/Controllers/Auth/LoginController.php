@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\{
     Http\Controllers\Controller,
     Providers\RouteServiceProvider,
-    Models\Github,
-    Models\Google,
     Models\User
 };
 use Illuminate\{
@@ -84,11 +82,12 @@ class LoginController extends Controller
             ],
             [
                 'name' => $provider->getName(),
-                'user_name' => Str::words($provider->getNickname(), 1, '').'#'.Str::random(8),
+                'user_name' => Str::words($provider->getNickname(), 1, '').'_'.Str::random(8),
                 'photo' => $provider->getAvatar(),
                 'password' => Str::random(8),
                 'github_id' => $provider->getId(),
-                'email_verified_at' => now()
+                'email_verified_at' => now(),
+                'password_changed' => 0
             ]
         );
         if($user->github_id == null) {
@@ -108,11 +107,12 @@ class LoginController extends Controller
             ],
             [
                 'name' => $provider->getName(),
-                'user_name' => Str::words($provider->getNickname(), 1, '').'#'.Str::random(8),
+                'user_name' => Str::words($provider->getNickname(), 1, '').'_'.Str::random(8),
                 'photo' => $provider->getAvatar(),
                 'password' => Str::random(8),
                 'google_id' => $provider->getId(),
-                'email_verified_at' => now()
+                'email_verified_at' => now(),
+                'password_changed' => 0
             ]
         );
         if($user->google_id == null) {

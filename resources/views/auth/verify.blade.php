@@ -4,31 +4,15 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="{{ asset('images/logo.svg') }}" type="image/x-icon"/>
         <title>Verification</title>
         <link rel="stylesheet" href="{{ asset('css/verification.css') }}" />
-        <link
-            rel="shortcut icon"
-            href="{{ asset('images/logo.svg') }}"
-            type="image/x-icon"
-        />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
-        />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
-        />
     </head>
     <body>
         <div class="alpha">
             <main>
                 <div>
-                    <img
-                        src="{{ asset('images/envelope.svg') }}"
-                        alt="envelope"
-                        class="img"
-                    />
+                    <img src="{{ asset('images/envelope.svg') }}" alt="envelope" class="img" />
                 </div>
 
                 <h4>Email Verification</h4>
@@ -54,30 +38,19 @@
                 <div class="div1">
                     <div>
                         <button class="social">
-                            <img
-                                src="{{ asset('images/twitter.svg') }}"
-                                alt="twitter"
-                            />
+                            <img src="{{ asset('images/twitter.svg') }}" alt="twitter"/>
                         </button>
                     </div>
 
                     <div>
                         <button class="social">
-                            <img
-                                src="{{ asset('images/slack.svg') }}"
-                                alt="slack"
-                                class="icon"
-                            />
+                            <img src="{{ asset('images/slack.svg') }}" alt="slack" class="icon"/>
                         </button>
                     </div>
 
                     <div>
                         <button class="social">
-                            <img
-                                src="{{ asset('images/gmail.svg') }}"
-                                alt="gmail"
-                                class="icon"
-                            />
+                            <img src="{{ asset('images/gmail.svg') }}" alt="gmail" class="icon" />
                         </button>
                     </div>
                 </div>

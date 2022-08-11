@@ -17,11 +17,12 @@ class wikiFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 11, //rand(1, 10),
-            'type' => 'forum',
-            'stack' => 'PHP',
-            'file_dir' => '',
+            'user_id' => 1, //rand(1, 10),
+            'type' => 'wiki',
+            'category_id' => rand(1, 5),
+            'file_id' => null,
             'title' => fake()->realTextBetween(10, 25, 1),
+            'description' => fake()->text(),
             'content' => fake()->realText()
         ];
     }

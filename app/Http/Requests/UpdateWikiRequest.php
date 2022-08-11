@@ -26,7 +26,8 @@ class UpdateWikiRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => 'required|string|max:2000000000'
+            'description' => 'required|string|between:10,250',
+            'content' => 'required|string|between:50,2000000000'
         ];
     }
 }

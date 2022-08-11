@@ -12,7 +12,7 @@ use App\Http\Requests\{
     UpdateWikiRequest
 };
 use Illuminate\{
-    Database\Eloquent\SoftDeletes,
+    Database\Eloquent\Builder,
     Support\Facades\Auth,
     Http\Request,
     Support\Facades\Validator
@@ -20,12 +20,12 @@ use Illuminate\{
 
 class WikiController extends Controller
 {
-    use SoftDeletes;
 
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'indexID', 'show', 'search', 'searchAPI']);
-        $this->middleware('verified')->except('rating');
+        $this->middleware('auth')->only('rating');
+        $this->middleware('verified')->except(['index', 'indexID', 'show', 'search', 'searchAPI']);
+        $this->middleware('isAdmin')->only(['create', 'store', 'edit', 'update']);
     }
 
     public function index()
@@ -47,7 +47,7 @@ class WikiController extends Controller
             'user_id' => Auth::id(),
             'type' => 'wiki',
             'stack' => $request->stack,
-            'file_dir' => $request->file_dir,
+            'file_id' => $request->file_id,
             'title' => $request->title,
             'content' => $request->content
         ]);
@@ -76,13 +76,7 @@ class WikiController extends Controller
 
     public function destroy(Wiki $wiki)
     {
-        $wiki->softDelete();
-        return redirect(route('user.wiki'));
-    }
-
-    public function destroyPerm(Wiki $wiki)
-    {
-        $wiki->forceDelete();
+        $wiki->delete();
         return redirect(route('user.wiki'));
     }
 
@@ -96,53 +90,47 @@ class WikiController extends Controller
     }
 
     public function search(Request $request) {
-        $request->validate([
-            'keyword' => 'required|string|between:3,25',
-            'stack' => 'string|max:10'
-        ]);
-        $keyword = $request->input('keyword');
-        $wiki = Wiki::where('type', 'wiki')
-            ->where('title', 'LIKE', "%{$keyword}%")
+        $wikis = Wiki::where('type', 'wiki')
             ->where(function($query) {
-                if(request()->has('stack')) {
-                    $query->where('stack', request()->input('stack'));
+                // if(request()->has('stack')) {
+                //     $query->category()->has('name', request()->stack);
+                // }
+                if(request()->has('keyword')) {
+                    $query->where('title', 'LIKE', '%'.request()->keyword.'%')
+                        ->orderBy('downloads', 'desc')
+                        ->latest('updated_at');
+                } else {
+                    $query->latest();
                 }
             })
-            ->paginate(15)
-            ->get();
-        return view('wiki.search', compact('wiki'));
+            ->paginate(12);
+        return view('library', compact('wikis'));
     }
 
     public function searchAPI(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'keyword' => 'required|string|between:3,25',
-            'stack' => 'string|max:10'
-        ]);
-        if($validator->fails()) {
-            return response()->json([
-                'status' => false
-            ]);
-        }
-        $wiki = Wiki::select('title')
+        $wiki = Wiki::select('title', 'id')
             ->where('type', 'wiki')
-            ->where('title', 'LIKE', "%{$request->keyword}%")
+            ->where('title', 'like', "%{$request->keyword}%")
             ->where(function($query) {
-                if(request()->has('stack')) {
-                    $query->where('stack', request()->input('stack'));
-                }
+                // if(request()->has('stack')) {
+                //     $query->whereHas('category', function(Builder $queryc){
+                //         $queryc->where('name', request()->stack);
+                //     });
+                // }
             })
-            ->limit(10)
+            ->limit(5)
             ->get();
         return response()->json([
             'data' => $wiki
         ]);
     }
-    public function rating(Request $request, Wiki $wiki)
+    public function rating(Request $request, $id)
     {
+        $wiki = Wiki::find($id);
         $validator = Validator::make($request->all(), [
             'rating' => 'required|numeric|between:0,5'
         ]);
-        if($validator->fails()) {
+        if($validator->fails() || !$wiki) {
             return response()->json([
                 'status' => false
             ]);
