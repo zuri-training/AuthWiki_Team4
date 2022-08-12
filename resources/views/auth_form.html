@@ -102,9 +102,22 @@
     </div>
 
 
-    <main class="container wrapper">
+    <main class="container wrapper" onpointerover="disableInputAndTextFields()">
         <h1 id="create_header">Create Authentication Code</h1>
-        <!-- FORM -->
+        <!-- UPLOAD FORM -->
+        <form action="" class="auth_create_form" id="upload_form" method="">
+            <h3 id="info_text">Upload the code's file to proceed</h3>
+            <!-- ZIP FILE -->
+            <div class="create_form_fields">
+                <label for="file">Downloadable File</label>
+                <input type="file" name="downloadable-file" placeholder="Upload Zip" id="file">
+                <button id="upload_btn" type="submit">Upload</button>
+            </div>
+        </form>
+        <hr>
+
+
+        <!--DETAIL FORM -->
         <form action="" class="auth_create_form" oninput="enableAndDisableCreateButton()">
             <!-- TITLE -->
             <div class="create_form_fields">
@@ -178,13 +191,6 @@
                     </div>
 
                 </div>
-            </div>
-            <hr>
-
-            <!-- ZIP FILE -->
-            <div class="create_form_fields">
-                <label for="file">Downloadable File</label>
-                <input type="file" name="downloadable-file" placeholder="Upload Zip" id="file">
             </div>
             <button disabled="true" style="pointer-events: none;" type="submit" id="create_btn">Create</button>
         </form>
