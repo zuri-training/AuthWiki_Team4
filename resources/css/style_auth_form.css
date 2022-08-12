@@ -86,7 +86,7 @@ textarea{
     
 }
 
-textarea, input{
+textarea, input:not([type="file"]){
     border: 1px solid #D0D0D0;
     outline: none !important;
     padding: 10px 20px;
@@ -102,7 +102,22 @@ textarea, input{
     color: #1F1F1F;
 }
 
-textarea:focus-within, input:focus-within{
+input[type="file"]{
+    border: none;
+    outline: none !important;
+    padding: 10px 20px;
+    border-radius: 4px;
+    width: 80%;
+    background-color: #F2F2F2;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #1F1F1F;
+}
+
+textarea:focus-within, input:focus-within:not([type="file"]){
     border: 2px solid var(--search_box_color);
 }
 
