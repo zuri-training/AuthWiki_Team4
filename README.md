@@ -64,3 +64,18 @@ __Click on the 'code' button and copy the url of the repository. On your local m
 
 ##### *Similar functionalities are provided by 'Github Desktop' and 'VSCode'*
 ##### *Reach out to the team-lead @Elsam20 if there is any issue*
+
+### Installation
+  - Clone ```git clone https://github.com/zuri-training/AuthWiki_Team4.git```
+  - Install dependencies ```composer install```
+  - Create *.env* file. Copy contents from **.env.example** into **.env** **(If .env file does not exist after installing dependencies)**
+  - Generate APP_KEY ```php artisan key:generate```
+  - Create database
+  - Update .env file
+  - Import table ```php artisan migrate```
+  - Done? Go live! ```php artisan serve```
+
+### Requirements
+  - PHP (>= v8.0.2 recommended) 
+  - Composer
+  - MySQL or any database (update DB_CONNECTION in .env)
