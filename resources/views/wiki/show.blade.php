@@ -74,7 +74,7 @@
     </main>
     @php
     $suggests = \App\Models\Wiki::where(['type' => 'wiki', 'category_id' => $wiki->category_id])->inRandomOrder()->limit(3)->get();
-    $coms = $wiki->comment()->orderBy('vote', 'desc')->latest()->paginate(10);
+    $coms = $wiki->comment()->orderBy('vote', 'desc')->latest('created_at')->paginate(10);
     @endphp
     <section class="be_container" style="padding-top: 20px;">
         <h2 class="suggestion-text">Suggested Download</h2>
