@@ -18,11 +18,11 @@ class WikiComment extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('verified')->only(['store', 'update']);
+        $this->middleware('verified')->only('update');
     }
     public function store(Request $request, Wiki $wiki) {
         $request->validate([
-            'comment' => 'required|string|max:500'
+            'comment' => 'required|string|max:5120'
         ]);
         Comment::create([
             'wiki_id' => $wiki->id,
@@ -33,7 +33,7 @@ class WikiComment extends Controller
     }
     public function update(Request $request, Comment $comment) {
         $request->validate([
-            'comment' => 'required|string|max:500'
+            'comment' => 'required|string|max:5120'
         ]);
         $comment->update([
             'comment' => $request->comment
@@ -43,15 +43,18 @@ class WikiComment extends Controller
 
     public function vote(Request $request, $id)
     {
-        $comment = Comment::find($id);
-        $validator = Validator::make($request->all(), [
+        $comment = Comment::findOrFail($id);
+        $request->validate([
             'vote' => 'required|in:up,down'
         ]);
-        if($validator->fails() || !$comment) {
-            return response()->json([
-                'status' => false
-            ]);
-        }
+        // $validator = Validator::make($request->all(), [
+        //     'vote' => 'required|in:up,down'
+        // ]);
+        // if($validator->fails() || !$comment) {
+        //     return response()->json([
+        //         'status' => false
+        //     ]);
+        // }
         $vote = Reaction::where([
             'wiki_id' => $comment->wiki->id,
             'user_id' => Auth::id(),
@@ -68,10 +71,10 @@ class WikiComment extends Controller
             $vote->delete();
             $comment->decrement('vote');
         }
-        return response()->json([
-            'status' => true,
-            'votes' => $comment->vote
-        ]);
+        // return response()->json([
+        //     'status' => true,
+        //     'votes' => $comment->vote
+        // ]);
         return back();
     }
 }

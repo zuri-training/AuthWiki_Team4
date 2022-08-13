@@ -1,65 +1,72 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>New Password</title>
+        <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/reset.css') }}" />
+        <link
+            rel="shortcut icon"
+            href="{{ asset('images/logo.svg') }}"
+            type="image/x-icon"
+        />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+        />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+        />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <main>
+                <div>
+                    <img
+                        src="../images/Auth wiki logo 1.svg"
+                        alt="Auth_wiki"
+                        class="img"
+                    />
+                    <p>You are one step away from your new password, recover your password now.</p>
+                </div>
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="footer">
 
-                <div class="card-body">
+                </div>
+                <div class="form-group">
                     <form method="POST" action="{{ route('password.update') }}">
                         @csrf
-
                         <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="field">
+                            <input type="email" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus id="user_email" placeholder="Enter your email">
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="field">
+                            <input type="password" name="password" required autocomplete="new-password" id="pwd" placeholder="Password">
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
+                        <div class="field">
+                            <input type="password" name="password_confirmation" required autocomplete="new-password" id="pwd" placeholder="Re-type Password">
                         </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
+                        <button class="change" type="submit">Reset Password</button>
+                        <div class="link">
+                            <a href="{{ route('login') }}"> Login</a>
                         </div>
                     </form>
                 </div>
-            </div>
+            </main>
         </div>
-    </div>
-</div>
-@endsection
+         <script src="{{ asset('js/jquery-3.6.0.min.js') }}"> </script>
+        <script src="{{ asset('js/toastr.min.js') }}"> </script>
+        <script type="text/javascript">
+        @if($errors->any())
+
+        @foreach($errors->all() as $message)
+        toastr.error('{{ $message }}');
+        @endforeach
+
+        @endif
+    </body>
+</html>

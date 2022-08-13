@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Authwiki')
+@section('title', 'Auth-wiki')
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/landing.css') }}">
@@ -64,7 +64,7 @@
         </div>
                 <div class="daily-selections"> 
                     @foreach($suggests as $sug)
-                    <div id="pick-one">
+                    <div id="pick-one" data-href="{{ route('library.show', ['id' => $sug->id]) }}">
                         <img src="{{ url($sug->category->icon) }}">
                         <div id="options">
                             <p id="title">{{ $sug->title }}</p>        

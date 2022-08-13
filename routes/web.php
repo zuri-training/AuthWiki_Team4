@@ -25,18 +25,22 @@ use App\Http\Controllers\{
 
 Auth::routes(['verify' => true]);
 Route::controller(LoginController::class)->group(function(){
-    Route::get('/google-auth/callback', 'googleLogin');
-    Route::get('/google-auth/redirect', 'redirectGoogle')->name('login.google');
-    Route::get('/github-auth/callback', 'gitHubLogin');
-    Route::get('/github-auth/redirect', 'redirectGithub')->name('login.github');
+    Route::get('google-auth/callback', 'googleLogin');
+    Route::get('google-auth/redirect', 'redirectGoogle')->name('login.google');
+    Route::get('github-auth/callback', 'gitHubLogin');
+    Route::get('github-auth/redirect', 'redirectGithub')->name('login.github');
 });
 Route::controller(WikiController::class)->prefix('library')->group(function(){
     Route::get('', 'search')->name('page.library');
     Route::post('', 'searchAPI')->name('search.library');
-    Route::post('{id}/rating', 'rating');
+    Route::get('publish', 'create')->name('library.create');
+    Route::post('publish', 'store')->name('library.publish');
+    Route::get('{id}', 'show')->name('library.show');
+    Route::post('{id}/rating', 'rating')->name('library.rate');
 });
-Route::controller(WikiComment::class)->prefix('comment')->group(function(){
-    Route::post('{id}/voting', 'vote');
+Route::controller(WikiComment::class)->group(function(){
+    Route::post('library/{wiki}/comment', 'store')->name('library.comment');
+    Route::get('comment/{id}/voting', 'vote')->name('comment.vote');
 });
 Route::controller(UserController::class)->group(function(){
     Route::post('newsletter', 'subscribe')->name('newsletter.subscribe');
@@ -63,7 +67,7 @@ Route::controller(UserController::class)->group(function(){
     Route::post('terms_of_service', 'tos')->name('settings.tos');
 });
 
-Route::get('/', function () {
+Route::get('', function () {
     if(Auth::check()) {
         return view('home');
     } else {
@@ -71,14 +75,14 @@ Route::get('/', function () {
     }
 })->name('index');
 
-Route::get('/documentation', function(){
+Route::get('documentation', function(){
     return view('documentation');
 })->name('page.documentation');
-Route::get('/about', function(){
+Route::get('about', function(){
     return view('about');
 })->name('page.about');
 
 
 
-Route::get('/file', [FileController::class, 'create']);
-Route::post('/file', [FileController::class, 'store'])->name('file.upload');
+Route::get('file', [FileController::class, 'create']);
+Route::post('file', [FileController::class, 'store'])->name('file.upload');

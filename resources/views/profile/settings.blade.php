@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Authwiki | Settings')
+@section('title', 'Auth-wiki | Settings')
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/settings.css') }}">

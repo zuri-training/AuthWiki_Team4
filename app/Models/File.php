@@ -17,4 +17,7 @@ class File extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+    public function wiki() {
+        return $this->belongsTo(Wiki::class);
+    }
 }

@@ -11,6 +11,7 @@ use Illuminate\{
     Support\Str,
     Support\Arr,
     Support\Facades\Validator,
+    Support\Facades\Storage,
     Validation\Rules\Password
 };
 use Illuminate\Support\Facades\Auth;
@@ -78,8 +79,8 @@ class UserController extends Controller
         if($request->file()) {
             $id = Auth::id();
             $file = $request->file('avatar')->storeAs(
-                "uploads/{$id}",
-                'avatar',
+                "user_$id",
+                'avatar.'.$request->file('avatar')->getClientOriginalExtension(),
                 'public'
             );            
             User::find($id)->update([
@@ -99,28 +100,11 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $this->unSubscribe($user->email);
+        Storage::disk('public')->deleteDirectory("user_{$user->id}");
         User::find($user->id)->delete();
         return redirect()
             ->to(route('index'))
             ->with('warning', 'Goodbye!');
-    }
-    public function uploadZip(Request $request){
-        $request->validate([
-          'file' => 'required|mimes:zip|max:5120'
-        ]);
-        if($request->file()) {
-            $id = Auth::id();
-            $fileName = $request->file->hashName(). '.' .$request->file->extension();
-            $filePath = $request->file('file')->storeAs("uploads/{$id}/", $fileName, 'public');
-            File::create([
-            'user_id' => $id,
-            'name' => $fileName,
-            'file_dir' => '/storage/' . $filePath
-            ]);
-            return back()
-            ->with('success','File has been uploaded.')
-            ->with('file', $fileName);
-        }
     }
     public function showAll()
     {

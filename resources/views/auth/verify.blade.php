@@ -12,7 +12,7 @@
         <div class="alpha">
             <main>
                 <div>
-                    <img src="{{ asset('images/envelope.svg') }}" alt="envelope" class="img" />
+                    <a href="{{ route('index') }}"><img src="{{ asset('images/envelope.svg') }}" alt="envelope" class="img" /></a>
                 </div>
 
                 <h4>Email Verification</h4>
@@ -20,7 +20,7 @@
                 <hr />
 
                 <p class="p1">
-                    In order to start using Authwiki, you need to confirm your
+                    In order to start using Auth-wiki, you need to confirm your
                     email address.
                 </p>
 

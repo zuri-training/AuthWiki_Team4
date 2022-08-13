@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Authwiki | Documetation')
+@section('title', 'Auth-wiki | Documetation')
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/documentation.css') }}">
@@ -10,7 +10,7 @@
     <!-- HEADER & SEARCH -->
     <div class="be_container showcase">
         <div class="page_header">
-            <h1>WELCOME  TO AUTHWIKI DOCUMENTATION</h1>
+            <h1>WELCOME TO AUTHWIKI DOCUMENTATION</h1>
             <p>Explore our guides and articles on how to use the codes.</p>
         </div>
         <div class="search_bar" >
@@ -50,7 +50,7 @@
                 </div>
                 
                 <div class="side-bar-text">
-                    <p>Authwiki: experience a library of Auth codes. Download in seconds</p>
+                    <p>Auth-wiki: experience a library of Auth codes. Download in seconds</p>
                     @guest
                     <div>
                         <a href="{{ route('register') }}"> Sign Up Now!</a>
@@ -68,7 +68,7 @@
                 </div>
                 <div class="section-content">
                     <p>
-                        Building of Authentication codes might be a long process for developers . Authwiki takes that away by providing already built authentication codes, 
+                        Building of Authentication codes might be a long process for developers . Auth-wiki takes that away by providing already built authentication codes, 
                         all you need to do is create an account and get on to download the secure codes of your preference.    
                     </p>
                 </div>
@@ -89,7 +89,7 @@
                         <br>
                         <br>
                         This document describes how to perfrom the server flow for authenticating the user. The implicit flow is significally more complicated because of security risks in handling and using tokens on the client side. If you need to impliment an implicit flow, we highly
-                        recommend using Authwiki.    
+                        recommend using Auth-wiki.    
                     </p>
                 </div>
             </section>
@@ -100,7 +100,7 @@
                 </div>
                 <div class="section-content">
                     <p>
-                        Authwiki handles protocol level details for you and stays up to date with latest security standards.
+                        Auth-wiki handles protocol level details for you and stays up to date with latest security standards.
                         <br>
                         <br>
                         <strong>Unauthenticated Users :</strong>
@@ -122,15 +122,15 @@
                 </div>
                 <div class="section-content">
                     <p>
-                        To use Authwiki authentication library, the user must first Sign Up or Log In, if the user already has an account then he'd have full access.
-                         An unauthorized user is welcomed with a brief information showing the various programming languages on Authwiki.
+                        To use Auth-wiki authentication library, the user must first Sign Up or Log In, if the user already has an account then he'd have full access.
+                         An unauthorized user is welcomed with a brief information showing the various programming languages on Auth-wiki.
                         <br>
                         <br>
                         <strong>Are you a user?</strong><br>
                         you can sign up with your Github account or using your Google account and receive a confirmation email right after.
                         <br>
                         <br>
-                        Welcome, you are now an authorized Authwiki user. Browse through the library page for authentication codes in different programming languages (well categorized)  pick a code
+                        Welcome, you are now an authorized Auth-wiki user. Browse through the library page for authentication codes in different programming languages (well categorized)  pick a code
                         of your choice by using the search bar. Lastly, you can like, comment or download the document.  
                     </p>
                 </div>
@@ -150,7 +150,7 @@
                 <div class="section-content">
                     <p class="head">Application</p>
                     <p>
-                        Your software that relies on Authwiki for authentication and identity management. Auth0 supports single-page, regular web, native, and machine-to-machine applications.
+                        Your software that relies on Auth-wiki for authentication and identity management. Auth0 supports single-page, regular web, native, and machine-to-machine applications.
                     </p>
                 </div>
                 <div class="section-content">
@@ -170,7 +170,7 @@
                     </p>
                 </div>
                 <div class="section-content">
-                    <p class="head">Authwiki</p>
+                    <p class="head">Auth-wiki</p>
                     <p>
                         Your go-to authentication codes platform.
                     </p>
@@ -184,7 +184,7 @@
                 <div class="section-content">
                     <p class="head">Client</p>
                     <p>
-                        A Web client typically refers to the Web browser in the user's machine or mobile device. An Authwiki User.
+                        A Web client typically refers to the Web browser in the user's machine or mobile device. An Auth-wiki User.
                     </p>
                 </div>
                 <div class="section-content">
@@ -203,16 +203,16 @@
                 <div class="section-content-faq">
                     <p class="faq" >
                         <strong>How can I Create an account?</strong><br>
-                        You can create an account on Authwiki either by signing up with your Gmail or Google account. You can also use the Github toggle to conveniently sign up as a Programmer.
+                        You can create an account on Auth-wiki either by signing up with your Gmail or Google account. You can also use the Github toggle to conveniently sign up as a Programmer.
                     </p>
                     <br>
                     <p class="faq">
                         <strong>How can I Log In?</strong><br>
-                        You can Log In on Authwiki either by signing up with your Gmail or Google account. You can also use the Github toggle to conveniently sign up as a Programmer.
+                        You can Log In on Auth-wiki either by signing up with your Gmail or Google account. You can also use the Github toggle to conveniently sign up as a Programmer.
                     </p>
                     <br>
                     <p class="faq">
-                        <strong>Forgot your Authwiki login Password?</strong><br>
+                        <strong>Forgot your Auth-wiki login Password?</strong><br>
                         Click on 'Forgot Password' on the login page. Follow all necessary steps after to reset your password.
                     </p>
                     <br>
@@ -233,7 +233,7 @@
                     <br>
                     <p class="faq">
                         <strong>Need the latest update?</strong><br>
-                        Subscribe to our newsletter to get the most recent feeds and news about Authwiki.
+                        Subscribe to our newsletter to get the most recent feeds and news about Auth-wiki.
                     </p>
                     <br>
                     <p class="faq">
@@ -260,7 +260,7 @@
                 </div>
                 <div class="section-content">
                     <p>
-                        Feedback is very welcome on Authwiki. we need to know your thoughts and ideas on how to make this
+                        Feedback is very welcome on Auth-wiki. we need to know your thoughts and ideas on how to make this
                         project better. so do leave comments in the comment section or send an email to team4@authwiki.net
                     </p>
                 </div>

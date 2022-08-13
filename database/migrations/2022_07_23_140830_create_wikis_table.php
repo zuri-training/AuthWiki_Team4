@@ -22,12 +22,15 @@ return new class extends Migration
             $table->foreignId('category_id')->references('id')->on('categories')->cascadeOnDelete();
             $table->foreignId('file_id')->nullable()->references('id')->on('files')->nullOnDelete();
             $table->string('title');
-            $table->string('description');
-            $table->longText('content');
+            $table->text('overview');
+            $table->text('requirements');
+            $table->text('snippets');
+            $table->text('examples');
+            $table->text('links');
             $table->integer('views')->default(0);
-            $table->dateTime('viewed_at')->nullable();
+            $table->timestamp('viewed_at')->nullable();
             $table->integer('downloads')->default(0);
-            $table->dateTime('downloaded_at')->nullable();
+            $table->timestamp('downloaded_at')->nullable();
             $table->timestamps();
         });
     }

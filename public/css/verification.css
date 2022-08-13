@@ -6,7 +6,7 @@
 }
 
 body {
-    background-image: url(../images/Background.svg);
+    background: url(../images/background.svg) no-repeat center;
     padding-top: 3%;
 }
 
