@@ -26,11 +26,11 @@
         <div class="container">
             <main>
                 <div>
-                    <img
-                        src="../images/Auth wiki logo 1.svg"
+                    <a href="{{ route('index') }}"><img
+                        src="{{ asset('images/logo-title.svg') }}"
                         alt="Auth_wiki"
                         class="img"
-                    />
+                    /></a>
                     <p>You are one step away from your new password, recover your password now.</p>
                 </div>
 

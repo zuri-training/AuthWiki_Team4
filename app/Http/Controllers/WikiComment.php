@@ -61,7 +61,7 @@ class WikiComment extends Controller
             'comment_id' => $comment->id
         ]);
         if($request->vote == 'up' && $vote->doesntExist()) {
-            $vote = Reaction::create([
+            Reaction::create([
                 'wiki_id' => $comment->wiki->id,
                 'user_id' => Auth::id(),
                 'comment_id' => $comment->id
