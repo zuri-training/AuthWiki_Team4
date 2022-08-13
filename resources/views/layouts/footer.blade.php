@@ -34,7 +34,7 @@
                             <input id="email_field" type="email" name="email" placeholder="Enter email address">
                             <button id="subscribe_button" type="submit" disabled>Subscribe</button>
                         </form>
-                    </div>  
+                    </div>
                 </div>
             </div>
             <hr>
@@ -71,7 +71,7 @@
             //         document.getElementById(targetId).scrollIntoView();
             //         break;
             //         }
-            //     }  
+            //     }
             // }
             $('form#news_form input[type=email]').on('keyup', function(){
                 let regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -129,7 +129,7 @@
                         url: $(this).data('action'),
                         method: 'POST',
                         success: function() {
-                            // window.location = $(this).data('href');
+                            window.location = $(this).data('href');
                         }
                     });
                 } else {
