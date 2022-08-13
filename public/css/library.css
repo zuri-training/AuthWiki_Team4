@@ -126,11 +126,6 @@ header{
     top: 20px;
     justify-content: space-between;
   }
-  .back-stars i, .front-stars i {
-    font-size: 18px;
-    height: 18px !important;
-    padding: 0 10px;
-  }
  .card-footer span {
     font-size: 18px;
     color:#011320;
@@ -147,11 +142,6 @@ header{
     }
     .card-footer {
       top: 10px;
-    }
-    .back-stars i, .front-stars i {
-      font-size: 12px;
-      height: 12px !important;
-      padding: 0;
     }
     .card-footer span {
       font-size: 12px;

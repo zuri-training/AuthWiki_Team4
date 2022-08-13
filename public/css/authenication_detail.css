@@ -132,15 +132,11 @@ h3 {
 
 .back-stars i, .front-stars i {
     font-size: 34px;
-    height: 34px !important;
-    padding: 0 18px;
 }
 
 @media only screen and (max-width: 768px) {
     .back-stars i, .front-stars i {
         font-size: 25px;
-        height: 25px !important;
-        padding: 0 15px;
     }
     .download-btn {
         margin-right: 51px;

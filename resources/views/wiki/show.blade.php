@@ -74,7 +74,7 @@
     </main>
     @php
     $suggests = \App\Models\Wiki::where(['type' => 'wiki', 'category_id' => $wiki->category_id])->inRandomOrder()->limit(3)->get();
-    $coms = $wiki->comment()->orderBy('vote', 'desc')->latest('created_at')->paginate(10);
+    $coms = $wiki->comment()->orderBy('vote', 'desc')->latest()->paginate(10);
     @endphp
     <section class="be_container" style="padding-top: 20px;">
         <h2 class="suggestion-text">Suggested Download</h2>
@@ -152,34 +152,39 @@
 @push('js')
     @auth
     <script type="text/javascript">
-        let width = {{ $wiki->stars }}, rated = false;
-        $('[data-wiki]').mousemove(function(e){
-            $('.front-stars').width(((e.pageX - $(this).position().left)/($(this).width()) * 100)+'%');
-        });
-        $('[data-wiki]').mouseleave(function(){
-            if(!rated) {
-                $('.front-stars').width(width+'%');
+        $(document).ready(function(){
+            let percentRating = {{ $wiki->stars }}, isClickedRating = false;
+            function calcPosition(mouseObj) {
+                var i = $('.star-rating i').index(mouseObj) + 1;
+                return i > 5 ? (i - 5) : i;
             }
-        });
-        $('[data-wiki]').click(function(e){
-            if($(e.target).hasClass('fa')) {
-                rated = true;
-                rating = Math.round((((e.pageX - $(this).position().left) / $(this).width()) * 100) / 20);
+            $('.star-rating i').mousemove(function(){
+                $('.front-stars').width((calcPosition(this) * 20)+'%');
+            });
+            $('[data-wiki]').mouseleave(function(){
+                if(!isClickedRating) {
+                    $('.front-stars').width(percentRating+'%');
+                }
+            });
+            $('.star-rating i').click(function(){
+                isClickedRating = true;
                 $.ajax({
                     url: '{{ route('library.rate', ['id' => $wiki->id]) }}',
                     method: 'POST',
                     data: {
-                        rating: rating
-                    },
-                    success: function(data) {
-                        if(data.status === true) {
-                            width = data.rating;
-                            $('.front-stars').parent().width(data.rating +'%');
-                            toastr.info('Thank you for your feedback');
-                        }
+                        rating: calcPosition(this)
+                    }
+                }).done(function(data) {
+                    if(data.status === true) {
+                        percentRating = data.rating;
+                        $('.front-stars').width(data.rating +'%');
+                        toastr.info('Thank you for your feedback');
+                    } else {
+                        isClickedRating = false;
+                        $('.front-stars').width(percentRating+'%');
                     }
                 });
-            }
+            });
         });
     </script>
     @endauth
