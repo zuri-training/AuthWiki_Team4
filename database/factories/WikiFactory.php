@@ -22,8 +22,11 @@ class wikiFactory extends Factory
             'category_id' => rand(1, 5),
             'file_id' => null,
             'title' => fake()->realTextBetween(10, 25, 1),
-            'description' => fake()->text(),
-            'content' => fake()->realText()
+            'overview' => fake()->text(),
+            'requirements' => fake()->text(),
+            'snippets' => fake()->realText(1000, 5),
+            'examples' => fake()->text(),
+            'links' => fake()->text()   
         ];
     }
 }

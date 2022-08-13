@@ -100,7 +100,7 @@
         <ul class='menu_links'>
             <li style="list-style-image: url('{{ asset('images/home.svg') }}')"><a href="{{ route('index') }}">Home</a></li>
             <li style="list-style-image: url('{{ asset('images/docs.svg') }}')"><a href="{{ route('page.documentation') }}">Doc</a></li>
-            <li style="list-style-image: url('{{ asset('images/resources.svg') }}')"><a href="{{ route('page.about') }}">About</a></li>
+            <li style="list-style-image: url('{{ asset('images/about.svg') }}')"><a href="{{ route('page.about') }}">About</a></li>
             <li style="list-style-image: url('{{ asset('images/library.svg') }}')"><a href="{{ route('page.library') }}">Library</a></li>
             @auth
             <li style="list-style-image: url('{{ asset('images/profile.svg') }}')"><a href="{{ route('user.profile') }}">Profile</a></li>

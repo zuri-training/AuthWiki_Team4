@@ -27,11 +27,14 @@ class StoreWikiRequest extends FormRequest
         return [
             'user_id' => 'required|numeric|exists:users,id',
             'type' => 'required|string|in:wiki,blog,forum',
-            'stack' => 'required|string|in:javascript,python,django',
-            'file_dir' => 'string|nullable',
-            'title' => 'required|string|between:10,150',
-            'description' => 'required|string|between:10,250',
-            'content' => 'required|string|between:50,2000000000'
+            'category_id' => 'required|string|exists:categories,id',
+            'file_id' => 'sometimes|string|exists:files,id',
+            'title' => 'required|string|between:10,250',
+            'overview' => 'required|string|between:64,5120',
+            'requirements' => 'required|string|between:32,5120',
+            'snippets' => 'required|string|max:5120',
+            'examples' => 'required|string|max:10240',
+            'links' => 'required|string|max:5120',
         ];
     }
 }

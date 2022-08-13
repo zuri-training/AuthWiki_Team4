@@ -227,10 +227,11 @@ main .section:last-child{
     font-weight: 500;
     font-size: 20px;
     line-height: 30px;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.01em;
     color: var(--text_color);
     padding: 5px 0; 
     position: relative;
+    hyphens: auto;
 }
 
 .section-header{

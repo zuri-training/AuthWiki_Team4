@@ -18,8 +18,11 @@ class Wiki extends Model
         'category_id',
         'file_id',
         'title',
-        'description',
-        'content',
+        'overview',
+        'requirements',
+        'snippets',
+        'examples',
+        'links',
         'views',
         'viewed_at',
         'downloads',
@@ -37,6 +40,9 @@ class Wiki extends Model
 
     public function user() {
         return $this->belongsTo(User::class);
+    }
+    public function file() {
+        return $this->hasOne(File::class);
     }
     public function category() {
         return $this->belongsTo(Category::class);

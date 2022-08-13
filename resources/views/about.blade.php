@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Authwiki | About')
+@section('title', 'Auth-wiki | About')
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/about.css') }}">
@@ -153,7 +153,7 @@
                 </div>
 
                 <div class="team_member">
-                    <img src="{{ asset('images/team/member19.svg') }}" alt="Emmy">
+                    <img src="{{ asset('images/team/member19.png') }}" alt="Emmy">
                     <h6>Emmy</h6>
                     <p>Developer</p>
                 </div>

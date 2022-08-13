@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Authwiki')
+@section('title', 'Auth-wiki')
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
@@ -32,11 +32,6 @@
         <div class="site_actions_sub">
             <div class="sub1">
                 <div class="sub1_item">
-                    <img src="{{ asset('images/user2.svg') }}" alt="user icon">
-                    <h3>Sign up</h3>
-                    <p>Create and verify your free  account on Auth-wiki to begin your auth codes journey</p>
-                </div>
-                <div class="sub1_item">
                     <div id="lib">
                         <img src="{{ asset('images/lib1.svg') }}" alt="library">
                         <img src="{{ asset('images/lib2.svg') }}" alt="">
@@ -45,19 +40,17 @@
                     <p>Browse through Auth-wiki's library for auth codes of your choice.</p>
                 </div>
                 <div class="sub1_item">
+                    <img src="{{ asset('images/community.svg') }}" alt="community">
+                    <h3>Join community</h3>
+                    <p>There's already a community of developers ready to make your journey on Auth-wiki smooth</p>
+                </div>
+                <div class="sub1_item">
                     <img src="{{ asset('images/download3.svg') }}" alt="download">
                     <h3>Download codes</h3>
                     <p>Easily download the authentication codes of your choice with no stress.</p>
                 </div>
             </div>
-
-            <div class="sub2">
-                <img src="{{ asset('images/community.svg') }}" alt="community">
-                <h3>Join community</h3>
-                <p>There's already a community of developers ready to make your journey on Auth-wiki smooth</p>
-            </div>
         </div>
-        <button data-href="{{ route('register') }}">Get started for free</button>
     </section>
     
     <!-- ARTICLE -->
@@ -79,7 +72,7 @@
             <h3><li>Detailed Guide</li></h3>
             <p>
                 The website contains a detailed or at least near detailed guide on the requirements for specific authentication systems and how to use them to aid easy implementation. 
-                Authwiki is envisioned to be an inclusive and exhaustive library. So, no programming language or framework is left out, allowing it to feed a vast community of developers.
+                Auth-wiki is envisioned to be an inclusive and exhaustive library. So, no programming language or framework is left out, allowing it to feed a vast community of developers.
             </p>
         </section>
 

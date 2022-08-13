@@ -62,7 +62,7 @@
                             Website
                         </div>
                         <div class="col-8 be-overflow" id="y">
-                            <a href="{{ url($user->website) }}" target="_blank" data-content="{{ $user->website }}">{{ $user->website }}</a>
+                            <a href="{{ url((string)$user->website) }}" target="_blank" data-content="{{ $user->website }}">{{ $user->website }}</a>
                         </div>
                     </div>
                     <div class="row py-1 profile-links">
