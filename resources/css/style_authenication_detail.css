@@ -1,12 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=DM+Sans');
+@import url('https://fonts.googleapis.com/css?family=Manrope');
+
+:root{
+    --highlight_color : #FF9243;
+    --text_color : #1f1f1f;
+    --header_color : #143A56;
+    --sub-header_color : #284E6B;
+    --sidebar_color : #284E6B;
+    --search_box_color : #3C627E;
+    --button_active_color :  #FFD791;
+    --button_color : #FF9243;
+    --button_hover_color : rgba(255, 215, 145, 0.5);
+    scroll-behavior: smooth;
+  }
+
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    
 }
 
-main{
-    /* margin-left: 72px;
-    margin-right: 80px; */
+body{
+    font-family: 'Manrope';
+    overflow-x: hidden;
+}
+
+a{
+    text-decoration: none;
+}
+
+button{
+    cursor: pointer;
+}
+
+code{
+    background-color: hsla(0, 0%, 70%, 0.25);
+    border-radius: 4px;
+    padding: 0 5px;
+}
+
+.container {
     width: 90%;
     margin: 0 auto;
 }
@@ -14,14 +48,20 @@ main{
 /* --- Welcome Section --- */
 .welcome{
     text-align: center;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    align-content: center;
     justify-content: center;
+    gap: 64px 0;
+    padding: 0 140px;
+    margin-bottom: 98px;
+    margin-top: 158px;
 }
+
+
 
 /* Page Name */
 .page-name{
-    margin-top: 48px;
     font-family: 'DM Sans';
     font-style: normal;
     font-weight: 700;
@@ -32,19 +72,16 @@ main{
 
 /* Welcome Picture */
 .dp{
+    width: 100%;
     max-width: 941px;
     max-height: 520px;
-    width: 100%;
-    height: auto;
-    margin-top: 64px;
     border-radius: 4px;
+
 }
 
 /* Name of Code */
 .heading{
-    left: 80px;
-    padding-top: 98px;
-    padding-bottom: 35px;
+    margin-bottom: 35px;
     font-family: 'DM Sans';
     font-style: normal;
     font-weight: 700;
@@ -54,9 +91,13 @@ main{
 }
 
 /* Name of Sections */
+
+section{
+    margin-bottom: 42px;
+}
+
 h3 {
-    padding-top: 42px;
-    padding-bottom: 22px;
+    margin-bottom: 22px;
     font-family: 'DM Sans';
     font-style: normal;
     font-weight: 400;
@@ -66,12 +107,15 @@ h3 {
 }
 
 /* Detail of sections */
-.body-text, p{
+.body-text{
     text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
     font-family: 'Manrope';
     font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
+    font-weight: 500;
+    font-size: 20px;
     line-height: 40px;
     color: #1F1F1F;
 }
@@ -82,30 +126,22 @@ h3 {
 }
 
 ol{
-    padding: 55px;
+    padding: 0 57px;
 }
 
 li{
-    max-width: 1133px;
-    height: 46px;
     font-family: 'Manrope';
     font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
+    font-weight: 500;
+    font-size: 20px;
     line-height: 46px;
-        /* identical to box height, or 192% */
     color: #1F1F1F;
 }
 
-p {
-    padding-bottom: 12px;
-}
 
-button {
+
+.btn-group button {
     padding: 16px 24px;
-    margin-top: 44px;
-    width: 192px;
-    height: 56px;
     background-color: #FFB37C;
     border: none;
     border-radius: 4px;
@@ -116,21 +152,55 @@ button {
     line-height: 24px;
     color: #1f1f1f;
     cursor: pointer;
+    transition: all 30ms ease-out;
 }
 
-a {
-    text-decoration: none;
+.btn-group button:hover{
+    background-color: rgba(255, 215, 145, 0.5) !important;
+    box-shadow: 0px 2px 10px 2px rgba(31, 31, 31, 0.1);
+  }
+
+.btn-group button:active{
+    background-color: #faab73;
+    transform: scale(0.97);
+  }
+
+li a {
     color: #1f1f1f;
-    font-size: 20px;
-    line-height: 24px;
+    font-weight: 700;
+}
+
+li a:hover {
+    color: steelblue;
 }
 
 .download-btn{
-    margin-right: 104.49px;
+    min-width: 166.51px ;
 }
 
 .btn-group{
     margin-bottom: 60px;
+    display: flex;
+    gap: 32px 104.49px; 
+    margin-top: 56px;
+    flex-wrap: wrap;
+}
+
+.like_btns{
+    display: flex;
+    gap:16px 32px;
+}
+
+.like_btn{
+    display: flex;
+    align-items: center;
+    gap: 0 16px;
+}
+
+.like_btn button{
+    width: 150px;
+    height: 56px;
+    padding: 10px 24px;
 }
 
 .count a {
@@ -139,6 +209,677 @@ a {
     line-height: 20px;
     font-weight: 700px;
     font-style: normal;
-    margin-left: 16px;
-    margin-right: 32px;
+}
+
+
+@media screen and (max-width: 900px) {
+    .welcome{
+        padding: 0 100px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .welcome{
+        padding: 0 50px;
+    }
+    
+    ol{
+        padding: 0 25px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .like_btn button{
+        width: 100px;
+        height: 56px;
+    }
+
+
+    .page-name, .heading{
+        font-size: 24px;
+        line-height: 34px;
+    }
+
+    .welcome{
+        padding: 0 20px;
+        margin-bottom: 73.82px ;
+        gap: 56px 0;
+        margin-top: 48px;
+    }
+
+    .heading{
+        margin-bottom: 8px;
+    }
+
+    h3{
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 28px;
+        margin-bottom: 16px;
+    }
+
+    .body-text, p{
+        font-size: 14px;
+        line-height: 24px;
+        letter-spacing: 0.1em;
+    }
+
+    section{
+        margin-bottom: 32px;
+    }
+
+    li{
+        font-size: 14px;
+        line-height: 24px;
+    }
+}
+
+
+@media screen and (max-width:480px){
+    .code iframe{
+        overflow: visible !important;
+    }
+}
+
+@media screen and (max-width:380px){
+    .like_btns{
+        flex-direction: column;
+    }
+    
+}
+
+
+/* COMMENT SECTION STYLING AND QUERIES */
+
+.comment-section a{
+    text-decoration: none;
+    color: var(--text_color);
+}
+
+.comment-section a:hover{
+  color: var(--highlight_color);
+}
+
+button{
+    cursor: pointer;
+  }
+
+#comments{
+    margin-bottom: 72px;
+    text-align: center;
+  }
+  
+  .suggestion-text {
+    margin-bottom: 32px;
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 54px;
+    /* identical to box height, or 123% */
+    color: var(--header_color);
+  }
+  
+  .section-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 100px;
+    /* gap: 40px; */
+    margin-bottom: 32px;
+    /* border: 3px solid red; */
+  }
+  
+  .icon-image {
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  .sub-section-title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+  
+    color: var(--text_color);
+  }
+  .card-section-card-1 {
+    /* background-color: gray; */
+    background: #d9d9d9;
+    border-radius: 8px;
+    width: 300px;
+    height: 400px;
+    position: relative;
+    transition: transform ease-out 200ms;
+  }
+  
+.card-section, .sub-section{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  
+}
+
+.card-section img{
+  width: 100%;
+  height: 100%;
+  filter: contrast(105%) brightness(105%) saturate(1.05);
+}
+  
+  .card-section-card-1:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 3px 5px 2px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-section-card-1:active {
+    opacity: 0.85;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  
+  
+ 
+  .sub-section {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+    color: #808080;
+  }
+  
+  .card-view {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 72px;
+    padding: 6px 20px 10px 20px;
+    background: linear-gradient(180deg, #FCFCFC 0%, #FCFCFC 100%);
+    border-bottom: 2px solid #DCDCDC;
+    border-radius: 4px;
+  }
+
+  .card-base{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .card-view-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap : 0 5px;
+  }
+  .card-view-paragraph {
+    font-weight: 500;
+    font-size: 10px;
+    /* line-height: 24px;   */
+    color: var(--text_color);
+  }
+  
+  #load_btn {
+    padding: 16px 24px;
+    background: #FFB37C;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #1f1f1f;
+    cursor: pointer;
+    transition: all ease-out 30ms;
+  }
+
+#load_btn:hover{
+    background-color: rgba(255, 215, 145, 0.5) !important;
+    box-shadow: 0px 2px 10px 2px rgba(31, 31, 31, 0.1);
+  }
+
+#load_btn:active{
+    background-color: #faab73;
+    transform: scale(0.97);
+  }
+  
+  /* a {
+    text-decoration: none;
+    color: #1f1f1f;
+    font-size: 20px;
+    line-height: 24px;
+  } */
+
+
+  /* LEAVE COMMENT SECTION  */
+
+
+  main {
+    margin-top: 64px;
+  }
+
+  .comment-container-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: justify;
+  }
+  .comment-container-heading h2 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 34px;
+    color: var(--header_color);
+    margin-bottom: 32px;
+  }
+  
+  .comment-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 16px;
+  }
+  
+  .comment-container-paragraph {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--text_color);
+    align-self: flex-start;
+  }
+
+  .comment-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 40px;
+    margin-bottom: 88px;
+    padding: 16px 0 0 16px;
+  }
+  
+  .comment-form textarea{
+    resize: none !important;
+    outline: none !important;
+    max-width: 958px;
+    width: 100%;
+    height: 238px;
+    margin-bottom: 32px;
+    background: rgba(240, 240, 240, 0.7);
+    border: 0.5px solid rgba(128, 128, 128, 0.6);
+    border-radius: 4px;
+    display: flex;
+    align-items: flex-start !important;
+    padding: 16px 20px;
+    gap: 10px;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 18px;
+    line-height: 24px;
+    color: #1f1f1f;
+    text-align: justify;
+  }
+
+  .comment-form textarea::placeholder{
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 16px;
+    color: #808080;
+  }
+
+  .comment-form textarea:focus-within{
+    border: 1px solid var(--sub-header_color);
+  }
+
+  article[class=comment-section]{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+  }
+
+  .previous-comments-wrapper{
+    margin-left: 66px;
+    min-width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32.33px;
+  }
+  
+  #post-button {
+    background: rgba(255, 179, 124, 0.39);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 24px;
+    gap: 10px;
+    border: none;
+    outline: none !important;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: rgba(31, 31, 31, 0.19);
+    transition: all ease-out 30ms;
+  }
+
+  #post-button:hover{
+    background-color: rgba(255, 215, 145, 0.5) !important;
+    box-shadow: 0px 2px 10px 2px rgba(31, 31, 31, 0.1);
+  }
+
+  #post-button:active{
+    background-color: #faab73;
+    transform: scale(0.97);
+  }
+  /* Article section */
+  
+  article h1 {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 34px;
+    color: var(--header_color);
+    margin-bottom: 32px;
+  }
+  
+  
+  .previous-comments {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .previous-comments i{
+    width: 40px;
+    height: 40px;
+  }
+  
+  .previous-comments-name {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .previous-comments-paragraph-name {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 18px;
+    color:var(--text_color);
+  
+  }
+
+  .previous-comments-paragraph-name span {
+    margin-left: 8px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--text_color);
+  }
+  
+  .previous-comments-paragraph {
+    margin-top: 5px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--text_color);
+    text-align: justify;
+  }
+  
+  .fa-solid, .fa-circle-user{
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+    color: rgba(208, 208, 208, 1);
+  }
+
+  .reply-button {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    margin-top: 19.67px;
+  }
+  
+  .reply-button-like {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  
+
+  @media screen and (max-width: 1300px) {
+    
+    .section-container{
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px 0 ;
+    }
+
+
+}
+  
+
+@media screen and (max-width: 900px){
+
+  .previous-comments-wrapper{
+    margin-left: 0px;
+  }
+
+  .comment-form{
+    margin-left: 0px;
+    align-items: flex-start;
+  }
+
+  .comment-form textarea{
+    height: 157px;
+  }
+}
+
+
+
+@media screen and (max-width: 600px) {
+
+  .section-container{
+    padding: 0;
+  }
+
+  #comments{
+    margin-bottom: 87px;
+  }
+    
+  .suggestion-text{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 34px;
+  }
+  .card-section-card-1{
+    width: 169px;
+    height: 225px;
+  }
+
+  .card-view{
+    height: 40.5px;
+    padding: 3.38px 11px 5.15px 11px;
+    gap: 4.02px;
+  }
+
+  .sub-section-title{
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 9.01333px;
+    line-height: 14px;
+  }
+
+  .card-section-card-1{
+    transition: transform ease-out 0ms;
+  }
+
+  .card-section-card-1:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .card-section-card-1:active {
+    transform: scale(0.97);
+    opacity: 0.85;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+
+  .card-view-details {
+    gap: 3.28px;
+  }
+
+  .card-view-details img{
+    width: 8px;
+    height: 5px;
+  }
+
+  .card-base{
+    justify-content: space-between;
+  }
+
+  .card-view-paragraph{
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 5.63333px;
+    line-height: 14px;
+  }
+
+  #load_btn{
+    padding: 10px 24px;
+    gap: 10px;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .comment-section h1{
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 28px;
+    margin-bottom: 16px;
+  }
+
+  .comment-container-heading h2{
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .comment-container-heading p{
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .comment-form textarea::placeholder{
+    font-size: 14px;
+  }
+
+  .comment-form textarea{
+    font-weight: 100;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  #post-button{
+    padding: 10px 24px;
+    gap: 10px;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  main{
+    margin-top: 82px;
+  }
+
+  .comment-form textarea{
+    margin-bottom: 24px;
+  }
+
+  .comment-form{
+    margin-bottom: 32px;
+  }
+
+  .previous-comments i {
+    width: 40px;
+    height: 40px;
+  }
+
+  .previous-comments-wrapper{
+    gap: 25px 0;
+  }
+
+  .previous-comments-paragraph-name{
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .previous-comments-paragraph-name span{
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .previous-comments-paragraph{
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .reply-button p{
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
 }
