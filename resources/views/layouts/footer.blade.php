@@ -14,8 +14,8 @@
                         <p>Product</p>
                         <a href="{{ route('page.documentation') }}">Docs</a>
                         <a href="{{ route('page.library') }}">Library</a>
-                        <a href="{{ route('page.library') }}?stack=js">MSAL (Javascript)</a>
-                        <a href="{{ route('page.library') }}?stack=react">React auths</a>
+                        <a href="{{ route('page.library') }}?stack=javascript">Javascript</a>
+                        <a href="{{ route('page.library') }}?stack=django">Django (Python)</a>
                         <a href="{{ route('page.library') }}?stack=python">Python auths</a>
                     </div>
                     <div class="footer_links">

@@ -8,7 +8,6 @@ use App\Http\Controllers\{
     WikiController,
     WikiComment,
     UserController,
-    PageController,
     Auth\LoginController,
     FileController
 };
@@ -81,8 +80,3 @@ Route::get('documentation', function(){
 Route::get('about', function(){
     return view('about');
 })->name('page.about');
-
-
-
-Route::get('file', [FileController::class, 'create']);
-Route::post('file', [FileController::class, 'store'])->name('file.upload');

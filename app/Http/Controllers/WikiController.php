@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\{
+    Category,
     Wiki,
     Reaction,
     User,
@@ -19,6 +20,7 @@ use Illuminate\{
     Http\Request,
     Support\Facades\Validator
 };
+use App\Helper\Helper;
 
 class WikiController extends Controller
 {
@@ -42,33 +44,20 @@ class WikiController extends Controller
     {
         return view('wiki.create');
     }
-    public function _filter($text, $deep = false) {
-        if($deep) {
-            return strip_tags($text);
-        }
-        $tags = 'a|b|i|u|h|ul|ol|li|strong|code|pre';
-        return preg_replace(
-            "/<({$tags}) [^>]*>/", "<$1>",
-            strip_tags(
-                $text,
-                explode('|', $tags)
-            )
-        );
-    }
-    public function store(StorewikiRequest $request)
+    public function store(StoreWikiRequest $request)
     {
         $wiki = Wiki::create([
             'user_id' => Auth::id(),
             'type' => 'wiki',
             'stack' => $request->stack,
             'file_id' => $request->file_id,
-            'title' => $this->_filter($request->title),
+            'title' => $request->title,
             'category_id' => $request->category_id,
-            'overview' => $this->_filter($request->overview, true),
-            'requirements' => $this->_filter($request->requirements),
-            'snippets' => $this->_filter($request->snippets, true),
-            'examples' => $this->_filter($request->examples),
-            'links' => $request->links    
+            'overview' => $request->overview,
+            'requirements' => $request->requirements,
+            'snippets' => $request->snippets,
+            'examples' => $request->examples,
+            'links' => $request->links
         ]);
         return redirect(route('library.show', ['id' => $wiki->id]));
     }
@@ -88,7 +77,7 @@ class WikiController extends Controller
             ]);
             return back()
                 ->with('success','File has been uploaded.')
-                ->with('file', $dir);
+                ->with('file_id', $dir->id);
         }
     }
 
@@ -105,12 +94,12 @@ class WikiController extends Controller
         return view('wiki.edit', compact('wiki'));
     }
 
-    public function update(UpdatewikiRequest $request, $id)
+    public function update(UpdateWikiRequest $request, $id)
     {
         $wiki = Wiki::findOrFail($id)->update([
             'content' => $request->content
         ]);
-        return redirect(route('wiki.show', compact('wiki')));
+        return redirect(route('wiki.show', compact('id')));
     }
 
     public function destroy(Wiki $wiki)
@@ -128,35 +117,42 @@ class WikiController extends Controller
     }
 
     public function search(Request $request) {
+        $keyword = $request->input('keyword');
+        $stack = $request->input('stack');
         $wikis = Wiki::where('type', 'wiki')
-            ->where(function($query) {
-                // if(request()->has('stack')) {
-                //     $query->category()->has('name', request()->stack);
-                // }
-                if(request()->has('keyword')) {
-                    $query->where(DB::raw('lower(title)'), 'like', '%'.request()->keyword.'%')
-                        ->orderBy('downloads', 'desc')
-                        ->latest('updated_at');
-                } else {
-                    $query->latest();
+            ->when($stack, function($query, $stack) {
+                $category = Category::where('name', $stack)->first();
+                if($category) {
+                    $query->where('category_id', $category->id);
                 }
+            })
+            ->when($keyword, function($query, $keyword){
+                $query->where(DB::raw('lower(title)'), 'like', "%{$keyword}%")
+                ->orderBy('downloads', 'desc')
+                ->latest('updated_at');
+            }, function($query){
+                $query->latest();
             })
             ->paginate(12);
         return view('wiki.library', compact('wikis'));
     }
 
     public function searchAPI(Request $request) {
-        $keyword = strtolower($request->keyword);
+        $keyword = $request->input('keyword');
+        $stack = $request->input('stack');
         $wiki = Wiki::select('title', 'id')
             ->where('type', 'wiki')
-            ->where(DB::raw('lower(title)'), 'like', "%{$keyword}%")
-            ->where(function($query) {
-                // if(request()->has('stack')) {
-                //     $query->whereHas('category', function(Builder $queryc){
-                //         $queryc->where('name', request()->stack);
-                //     });
-                // }
+            ->when($stack, function($query, $stack) {
+                $category = Category::where('name', $stack)->first();
+                if($category) {
+                    $query->where('category_id', $category->id);
+                }
             })
+            ->when($keyword, function($query, $keyword){
+                $query->where(DB::raw('lower(title)'), 'like', "%{$keyword}%");
+            })
+            ->orderBy('downloads', 'desc')
+            ->latest('updated_at')
             ->limit(5)
             ->get();
         return response()->json([

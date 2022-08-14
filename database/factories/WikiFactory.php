@@ -19,14 +19,14 @@ class wikiFactory extends Factory
         return [
             'user_id' => 1, //rand(1, 10),
             'type' => 'wiki',
-            'category_id' => rand(1, 5),
+            'category_id' => rand(1, 10),
             'file_id' => null,
             'title' => fake()->realTextBetween(10, 25, 1),
             'overview' => fake()->text(),
             'requirements' => fake()->text(),
-            'snippets' => fake()->realText(1000, 5),
-            'examples' => fake()->text(),
-            'links' => fake()->text()   
+            'snippets' => '',
+            'examples' => fake()->randomHtml(),
+            'links' => ''
         ];
     }
 }
