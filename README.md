@@ -12,7 +12,7 @@
 ##
 ##
 # <a name='description'></a>Description
-__Auth-Wiki is a library of code to be used for authentication.  This platform aims to provide a quick solution for ingenious developers who want to  build systems that handle various types of authentication outside those bundled with their code stack. Developers who are also looking to implement additional levels or options of authentication with the existing authentication system provided by their code stacks can also seek resources from our platform.__
+__Auth-Wiki is a library of code to be used for authentication.  This platform aims to provide a quick solution for ingenious developers who want to  build systems that handle various types of authentication outside those bundled with their code stack. Developers who are also looking to implement additional levels or options of authentication with the existing authentication system provided by their code stacks can also seek resources from this platform.__
 
 __Details about our project work can be found [here](https://docs.google.com/document/d/1yPG9bqNuddG00Du0-APeh92CwtxtiZn0-qrY121pl5o/view)__
 
@@ -38,7 +38,7 @@ __Figma and FigJam were used for Auth-wiki's Project Design.__
 
 ### Backend Development
 
-__Auth-wiki uses PHP(Laravel) as its server-side language.__
+__Auth-wiki uses PHP(Laravel) as its server-side language. Auth-Wiki uses a MySQL database for data storage.__
 
 ### Frontend Development
 
@@ -171,4 +171,5 @@ __Click on the 'code' button and copy the url of the repository. On your local m
 
 #
 
+## This project was commissioned by [I4GxZURI](https://twitter.com/theZuriTeam)
 ![zuri](https://user-images.githubusercontent.com/105179638/184534874-882fe036-b19b-4621-87cf-11a410c410a3.png)
