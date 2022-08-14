@@ -1,5 +1,109 @@
-# AuthWiki_Team4
-**An authentication code library for different code stacks**
+# ![Auth wiki logo 1](https://user-images.githubusercontent.com/105179638/184534169-7d9727f6-7d37-4dec-a4a6-e50c5f484474.svg)
+
+### *An authentication code library for different code stacks*
+
+# Table of Contents
+  - ### __[Project Description](https://github.com/zuri-training/AuthWiki_Team4/edit/main/README.md#description)__
+  - ### __[Project Architecture & Technologies Used](https://github.com/zuri-training/AuthWiki_Team4/edit/main/README.md#project-architecture-and-technologies-used)__
+  - ### __[Requirements](https://github.com/zuri-training/AuthWiki_Team4/edit/main/README.md#requirements-1)__
+  - ### __[Installation Guide](https://github.com/zuri-training/AuthWiki_Team4/edit/main/README.md#installation)__
+  - ### __[Our Team](https://github.com/zuri-training/AuthWiki_Team4/edit/main/README.md#our-team-1)__
+  - ### __[Detailed Guide for Team members](https://github.com/zuri-training/AuthWiki_Team4/edit/main/README.md#guide-for-team-members)__
+##
+##
+# Description
+__Auth-Wiki is a library of code to be used for authentication.  This platform aims to provide a quick solution for ingenious developers who want to  build systems that handle various types of authentication outside those bundled with their code stack. Developers who are also looking to implement additional levels or options of authentication with the existing authentication system provided by their code stacks can also seek resources from our platform.__
+
+__Details about our project work can be found [here](https://docs.google.com/document/d/1yPG9bqNuddG00Du0-APeh92CwtxtiZn0-qrY121pl5o/view)__
+
+#### [Project Documentation including notes from standup and resources](https://docs.google.com/document/d/1X-SHoJ1QcvhTgucR6HrT88YFgwt8MsZyYGmQ92ARJuU/edit?usp=sharing)
+
+#### [Project design](https://www.figma.com/file/UzdIIpsX43I1ZgMETPwLgQ/Authentication-Library?node-id=0%3A1) and [Fig jam](https://www.figma.com/file/9kLl8kgQRbPErF38VCEsxq/AUTHWIKI-USER-RESEARCH)
+
+#### [Our Research Plan](https://docs.google.com/document/d/1Q2lQj8QQGvwjD67EV_FNtfGBfMK58ppoG-AoSU3l2EA/edit?usp=sharing)
+
+##
+##
+
+# Project Architecture and Technologies Used
+
+### Project Architecture
+
+  __Auth-wiki is a monolithic web application built using Laravel, a PHP framework which provides elegant syntax and a robust database functionalities for building large scale web applications. All templates designed by the frontend will be converted to "blade" templates to be used in the application. Authentication code for diverse languages and frameworks will be made available for download and a succinct description of each code will be provided. Users will also be able to rate code based on their level of satistifaction, this should also help future user browse through code samples easily.__
+
+
+### Design
+
+__Figma and FigJam were used for Auth-wiki's Project Design.__
+
+### Backend Development
+
+__Auth-wiki uses PHP(Laravel) as its server-side language.__
+
+### Frontend Development
+
+__All templates for Auth-wiki's pages were written in HTML5 and styled using CSS3 and Bootstrap CSS framework. Also, Sweet Toast is used to handle some notifications, toasts and modals.__ 
+
+##
+##
+
+# Requirements
+  - PHP (>= v8.0.2 recommended) 
+  - Composer
+  - MySQL or any database (update DB_CONNECTION in .env)
+  
+##
+##
+
+# Installation
+  - Clone ```git clone https://github.com/zuri-training/AuthWiki_Team4.git```
+  - Install dependencies ```composer install```
+  - Create *.env* file. Copy contents from **.env.example** into **.env** **(If .env file does not exist after installing dependencies)**
+  - Generate APP_KEY ```php artisan key:generate```
+  - Create database
+  - Update .env file
+  - Import table ```php artisan migrate```
+  - Done? Go live! ```php artisan serve```
+  
+##
+##
+  
+# Our Team
+  
+### Our Design Team
+- [Yewande Fajem](https://github.com/yewandefajem)
+- [Chijoke Emechebe](https://github.com/Samandcode)
+- [Beckley Olugbile](https://github.com/SimplyBeck)
+- [Adesina Sheyi](https://github.com/sheyimax)
+- [Osiobe Mirabel](https://github.com/MirabelOsiobe)
+- [Oluwasijibomi Olaifa](https://github.com/therealsiji)
+- [Bello Aminat](https://github.com/Meenahbel)
+- [Abayol Peter](https://github.com/Abayolpeter) - *Design team lead*
+- [Oladapo Oluwadamilare](https://github.com/Dharmmy007)
+
+### Our Team of Developers
+- [Isaiah Samuel](https://github.com/ElSam20) - *Development team lead*
+- [Favour Fela-Steve](https://github.com/Emzard)
+- [Hammed Abdullah Ishola](https://github.com/theabdullahishola)
+- [Ojelabi Oluwapelumi Matthew](https://github.com/Oluwapemzy)
+- [Dahud Yusuf Ishola](https://github.com/yusfate4)
+- [Obi Chisom David](https://github.com/TheVoidThatConsumes)
+- [Ibezim Isaac Benjamin](https://github.com/IsaacBen01)
+- [Saheed Ibrahim](https://github.com/saheedibrahim)
+- [Inyeneobong Bassey](https://github.com/Inyeneobong)
+- [Victory Omowumi Balogun](https://github.com/Vicky-beep)
+- [Afolayan Daniel Toluwalase](https://github.com/ti-oluwa)
+- [Okoroafor Chigozie](https://github.com/chigozieokoroafor)
+- [Oluwatuyi Segun](https://github.com/soluwatuyi)
+- [Onwughara Prisca](https://github.com/princessvincent)
+- [Chidera Anichebe](https://github.com/starlingvibes)
+
+### __*The project is to be deployed [here](https://authwiki.herokuapp.com/)*__
+
+##
+##
+
+# __Guide For Team Members__
 
 ### *For this project frontend developers will be pulling from the 'Frontend' branch and also making pull requests to the same branch. The backend developers will be working on the 'secondary' and 'intermediate' branches. All finalized changes will be merged with the main branch after proper screening.*
 
@@ -65,17 +169,6 @@ __Click on the 'code' button and copy the url of the repository. On your local m
 ##### *Similar functionalities are provided by 'Github Desktop' and 'VSCode'*
 ##### *Reach out to the team-lead @Elsam20 if there is any issue*
 
-### Installation
-  - Clone ```git clone https://github.com/zuri-training/AuthWiki_Team4.git```
-  - Install dependencies ```composer install```
-  - Create *.env* file. Copy contents from **.env.example** into **.env** **(If .env file does not exist after installing dependencies)**
-  - Generate APP_KEY ```php artisan key:generate```
-  - Create database
-  - Update .env file
-  - Import table ```php artisan migrate```
-  - Done? Go live! ```php artisan serve```
+#
 
-### Requirements
-  - PHP (>= v8.0.2 recommended) 
-  - Composer
-  - MySQL or any database (update DB_CONNECTION in .env)
+![zuri](https://user-images.githubusercontent.com/105179638/184534874-882fe036-b19b-4621-87cf-11a410c410a3.png)
