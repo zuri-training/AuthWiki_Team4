@@ -20,8 +20,3 @@
   position: absolute;
   transition: all 0.5s;
 }
-@media only screen and (max-width: 768px) {
-  .star-rating i {
-    font-size: 12px;
-  }
-}

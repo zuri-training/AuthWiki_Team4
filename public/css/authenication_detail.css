@@ -88,7 +88,7 @@ h3 {
 
 .download-btn {
     padding: 16px 24px;
-    margin-right: 104.49px;
+    margin-right: calc(5% + 17px);
     width: 192px;
     height: 56px;
     background-color: #FFB37C;
@@ -130,15 +130,12 @@ h3 {
     margin-right: 32px;
 }
 
-.back-stars i, .front-stars i {
-    font-size: 34px;
+.star-rating i {
+    font-size: 35px !important;
 }
 
-@media only screen and (max-width: 768px) {
-    .back-stars i, .front-stars i {
-        font-size: 25px;
-    }
-    .download-btn {
-        margin-right: 51px;
+@media only screen and (max-width: 408px) {
+    .star-rating i {
+        font-size: 25px !important;
     }
 }
