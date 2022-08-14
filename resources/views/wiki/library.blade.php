@@ -46,13 +46,13 @@
                     <div class="card-body be-break">
                         <h2 class="card-title be-overflow" id="xx">{{ $lib->title }}</h2>
                         <p class="card-text be-overflow" id="y">
-                            {{ $lib->overview }}
+                            {!! $lib->overview !!}
                         </p>
                     </div>
                     <div class="card-footer">
                         <div class="download">
                             <img src="{{ asset('images/download.svg') }}">
-                            <span>{{ number_format($lib->downloads) }}</span>
+                            <span>{{ Helper::shortNum($lib->downloads) }}</span>
                         </div>
                         <div class="star-rating" data-wiki="{{ $lib->id }}">
                             <div class="back-stars">
@@ -91,7 +91,7 @@
                         method: 'POST',
                         success: function(data) {
                             $.each(data.data, function(index, value) {
-                                $('.search_result').append('<p><a href="#">'+value.title+'</a></p>');
+                                $('.search_result').append('<a href="{{ route('index') }}/library/'+value.id+'"><p>'+value.title+'</p></a>');
                             });
                         },
                         beforeSend: function(){

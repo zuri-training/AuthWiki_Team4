@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\{
     Model
 };
 use Illuminate\Support\Facades\Auth;
+use App\Helper\Helper;
 
 class Comment extends Model
 {
@@ -22,6 +23,10 @@ class Comment extends Model
     protected $appends = [
         'voted'
     ];
+
+    public function setCommentAttribute($value) {
+        $this->attributes['comment'] = Helper::filterText($value);
+    }
 
     public function user() {
         return $this->belongsToThrough(User::class, Wiki::class);

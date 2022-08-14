@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\{
     Factories\HasFactory,
     Model
 };
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\{
+    Facades\Auth,
+    Str
+};
+use App\Helper\Helper;
 
 class Wiki extends Model
 {
@@ -37,6 +41,28 @@ class Wiki extends Model
         'viewed_at' => 'datetime',
         'downloaded_at' => 'datetime'
     ];
+
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = Helper::filterText($value, true);
+    }
+    public function setOverviewAttribute($value)
+    {
+        $this->attributes['overview'] = Helper::filterText($value);
+    }
+    public function setRequirementsAttribute($value)
+    {
+        $this->attributes['requirements'] = Helper::filterText($value);
+    }
+    public function setSnippetsAttribute($value) {
+        $this->attributes['snippets'] = Helper::filterText($value, true);
+    }
+    public function setExamplesAttribute($value) {
+        $this->attributes['examples'] = Helper::filterText($value);
+    }
+    public function setLinksAttribute($value) {
+        $this->attributes['links'] = Helper::filterText($value, true);
+    }
 
     public function user() {
         return $this->belongsTo(User::class);

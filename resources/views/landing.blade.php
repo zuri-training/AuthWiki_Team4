@@ -69,8 +69,8 @@
                         <div id="options">
                             <p id="title">{{ $sug->title }}</p>        
                                 <p id="panel">
-                                    <img src="{{ asset('images/view.svg') }}"/> {{ $sug->views }} views    
-                                    <img src="{{ asset('images/download.svg') }}"/> {{ $sug->downloads }} Downloads
+                                    <img src="{{ asset('images/view.svg') }}"/> {{ Helper::shortNum($sug->views) }} views    
+                                    <img src="{{ asset('images/download.svg') }}"/> {{ Helper::shortNum($sug->downloads) }} Downloads
                                 </p>
                         </div>
                     </div>
