@@ -1,17 +1,16 @@
 .front-stars, .back-stars, .star-rating {
-    display: flex;
-  }
+  display: flex;
+}
   
 .star-rating {
   align-items: center;
-  font-size: 12px;
   justify-content: center;
 }
 
 .star-rating i {
-  width: 11.04px;
-  height: 10.5px;
+  font-size: 18px;
 }
+
 .back-stars {
   position: relative;
 }

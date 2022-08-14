@@ -9,6 +9,7 @@ use App\Models\{
 };
 use Illuminate\{
     Support\Facades\Auth,
+    Support\Facades\DB,
     Http\Request,
     Support\Facades\Validator
 };
@@ -20,6 +21,16 @@ class WikiComment extends Controller
         $this->middleware('auth');
         $this->middleware('verified')->only('update');
     }
+    public function _filter($text) {
+        $tags = 'b|i|u|code|pre';
+        return preg_replace(
+            "/<({$tags}) [^>]*>/", "<$1>",
+            strip_tags(
+                $text,
+                explode('|', $tags)
+            )
+        );
+    }
     public function store(Request $request, Wiki $wiki) {
         $request->validate([
             'comment' => 'required|string|max:5120'
@@ -27,7 +38,7 @@ class WikiComment extends Controller
         Comment::create([
             'wiki_id' => $wiki->id,
             'user_id' => Auth::id(),
-            'comment' => $request->comment
+            'comment' => $this->_filter($request->comment)
         ]);
         return back();
     }
@@ -36,25 +47,25 @@ class WikiComment extends Controller
             'comment' => 'required|string|max:5120'
         ]);
         $comment->update([
-            'comment' => $request->comment
+            'comment' => $this->_filter($request->comment)
         ]);
         return back();
     }
 
     public function vote(Request $request, $id)
     {
-        $comment = Comment::findOrFail($id);
-        $request->validate([
-            'vote' => 'required|in:up,down'
-        ]);
-        // $validator = Validator::make($request->all(), [
+        $comment = Comment::find($id);
+        // $request->validate([
         //     'vote' => 'required|in:up,down'
         // ]);
-        // if($validator->fails() || !$comment) {
-        //     return response()->json([
-        //         'status' => false
-        //     ]);
-        // }
+        $validator = Validator::make($request->all(), [
+            'vote' => 'required|in:up,down'
+        ]);
+        if($validator->fails() || !$comment) {
+            return response()->json([
+                'status' => false
+            ]);
+        }
         $vote = Reaction::where([
             'wiki_id' => $comment->wiki->id,
             'user_id' => Auth::id(),
@@ -71,10 +82,10 @@ class WikiComment extends Controller
             $vote->delete();
             $comment->decrement('vote');
         }
-        // return response()->json([
-        //     'status' => true,
-        //     'votes' => $comment->vote
-        // ]);
-        return back();
+        return response()->json([
+            'status' => true,
+            'votes' => $comment->vote
+        ]);
+        // return back();
     }
 }
