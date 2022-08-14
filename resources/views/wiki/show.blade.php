@@ -73,7 +73,7 @@
         </div>
     </main>
     @php
-    $suggests = \App\Models\Wiki::where(['type' => 'wiki', 'category_id' => $wiki->category_id])->inRandomOrder()->limit(3)->get();
+    $suggests = \App\Models\Wiki::where(['type' => 'wiki', 'category_id' => $wiki->category_id])->where('id', '<>', $wiki->id)->inRandomOrder()->limit(3)->get();
     $coms = $wiki->comment()->orderBy('vote', 'desc')->latest()->paginate(10);
     @endphp
     <section class="be_container" style="padding-top: 20px;">
@@ -93,12 +93,12 @@
               <div class="card-base">
                 <div class="card-view-details">
                   <img src="{{ asset('images/view.svg') }}"/>
-                  <p class="card-view-paragraph">{{ $sug->views }} views</p>
+                  <p class="card-view-paragraph">{{ Helper::shortNum($sug->views) }} Views</p>
                 </div>
     
                 <div class="card-view-details">
                   <img src="{{ asset('images/download.svg') }}"/>
-                  <p class="card-view-paragraph"> {{ $sug->downloads }} Downloads</p>
+                  <p class="card-view-paragraph"> {{ Helper::shortNum($sug->downloads) }} Downloads</p>
                 </div>
               </div>
             </div>
@@ -128,17 +128,17 @@
                     <img src="{{ url($com->user->photo) }}" class="be-avatar" width="50px" height="50px">
                     <div class="previous-comments-name">
                     <p class="previous-comments-paragraph-name">
-                        {{ $com->user->name }} <span> {{ $com->created_at }}</span>
+                        {{ $com->user->name }} <span> {{ Helper::timeAgo($com->created_at) }}</span>
                     </p>
                     <p class="previous-comments-paragraph">
-                        {{ $com->comment }}
+                        {!! $com->comment !!}
                     </p>
                     <div class="reply-button">
                         <p data-target="comment" data-value="{{ $com->user->user_name }}">Reply</p>
                         <div class="reply-button-like">
                             <a href="javascript:void(0);" data-vote="up" data-comment="{{ $com->id }}"><img class="reply-icon" src="{{ asset('images/like.png') }}" alt="like-button"></a>
                             <a href="javascript:void(0);" data-vote="down" data-comment="{{ $com->id }}"><img class="reply-icon-1" src="{{ asset('images/dislike.png') }}" alt="dislike button"></a>
-                            <span>{{ $com->vote }}</span>
+                            <span>{{ Helper::shortNum($com->vote) }}</span>
                         </div>
                     </div>
                     </div>
