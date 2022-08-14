@@ -229,6 +229,29 @@ button{
     width: inherit;
 }
 
+#categories{
+    background-color: #f4f4f4;
+    outline: none;
+    border: #808080 2px solid;
+    border-radius: 4px;
+    min-width: 200px;
+    height: auto;
+    color: #1F1F1F;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    padding: 10px;
+    
+}
+
+#categories option{
+    font-weight: 700;
+}
+
+
+
 #create_btn {
     background: rgba(255, 179, 124, 0.39);
     border-radius: 4px;
@@ -338,6 +361,17 @@ button{
         font-weight: 200;
         font-size: 18px;
     }
+
+    #categories{
+        font-size: 14px;
+        line-height: 20px;
+        padding: 5px;
+    }
+
+    #categories option{
+        font-weight: 500;
+    }
+    
 
     #create_btn{
         font-size: 18px;
