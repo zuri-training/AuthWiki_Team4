@@ -5,7 +5,7 @@
 # Table of Contents
   - ### __[Project Description](#description)__
   - ### __[Project Architecture & Technologies Used](#architecture)__
-  - ### __[Requirements](#requirements)__
+  - ### __[Requirements](#requirement)__
   - ### __[Installation Guide](#installation)__
   - ### __[Our Team](#team)__
   - ### __[Detailed Guide for Team members](#guide)__
@@ -47,7 +47,7 @@ __All templates for Auth-wiki's pages were written in HTML5 and styled using CSS
 ##
 ##
 
-# <a name='requirements'></a>Requirements
+# <a name='requirement'></a>Requirements
   - PHP (>= v8.0.2 recommended) 
   - Composer
   - MySQL or any database (update DB_CONNECTION in .env)
