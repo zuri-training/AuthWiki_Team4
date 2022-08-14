@@ -3,15 +3,15 @@
 ### *An authentication code library for different code stacks*
 
 # Table of Contents
-  - ### __[Project Description](https://github.com/zuri-training/AuthWiki_Team4/edit/main/README.md#description)__
-  - ### __[Project Architecture & Technologies Used](https://github.com/zuri-training/AuthWiki_Team4/edit/main/README.md#project-architecture-and-technologies-used)__
-  - ### __[Requirements](https://github.com/zuri-training/AuthWiki_Team4/edit/main/README.md#requirements-1)__
-  - ### __[Installation Guide](https://github.com/zuri-training/AuthWiki_Team4/edit/main/README.md#installation)__
-  - ### __[Our Team](https://github.com/zuri-training/AuthWiki_Team4/edit/main/README.md#our-team-1)__
-  - ### __[Detailed Guide for Team members](https://github.com/zuri-training/AuthWiki_Team4/edit/main/README.md#guide-for-team-members)__
+  - ### __[Project Description](#description)__
+  - ### __[Project Architecture & Technologies Used](#architecture)__
+  - ### __[Requirements](#requirements)__
+  - ### __[Installation Guide](#installation)__
+  - ### __[Our Team](#team)__
+  - ### __[Detailed Guide for Team members](#guide)__
 ##
 ##
-# Description
+# <a name='description'></a>Description
 __Auth-Wiki is a library of code to be used for authentication.  This platform aims to provide a quick solution for ingenious developers who want to  build systems that handle various types of authentication outside those bundled with their code stack. Developers who are also looking to implement additional levels or options of authentication with the existing authentication system provided by their code stacks can also seek resources from our platform.__
 
 __Details about our project work can be found [here](https://docs.google.com/document/d/1yPG9bqNuddG00Du0-APeh92CwtxtiZn0-qrY121pl5o/view)__
@@ -25,7 +25,7 @@ __Details about our project work can be found [here](https://docs.google.com/doc
 ##
 ##
 
-# Project Architecture and Technologies Used
+# <a name='architecture'></a>Project Architecture and Technologies Used
 
 ### Project Architecture
 
@@ -47,7 +47,7 @@ __All templates for Auth-wiki's pages were written in HTML5 and styled using CSS
 ##
 ##
 
-# Requirements
+# <a name='requirements'></a>Requirements
   - PHP (>= v8.0.2 recommended) 
   - Composer
   - MySQL or any database (update DB_CONNECTION in .env)
@@ -55,7 +55,7 @@ __All templates for Auth-wiki's pages were written in HTML5 and styled using CSS
 ##
 ##
 
-# Installation
+# <a name='installation'></a>Installation
   - Clone ```git clone https://github.com/zuri-training/AuthWiki_Team4.git```
   - Install dependencies ```composer install```
   - Create *.env* file. Copy contents from **.env.example** into **.env** **(If .env file does not exist after installing dependencies)**
@@ -68,7 +68,7 @@ __All templates for Auth-wiki's pages were written in HTML5 and styled using CSS
 ##
 ##
   
-# Our Team
+# <a name='team'></a>Our Team
   
 ### Our Design Team
 - [Yewande Fajem](https://github.com/yewandefajem)
@@ -103,7 +103,7 @@ __All templates for Auth-wiki's pages were written in HTML5 and styled using CSS
 ##
 ##
 
-# __Guide For Team Members__
+# <a name='guide'></a>__Guide For Team Members__
 
 ### *For this project frontend developers will be pulling from the 'Frontend' branch and also making pull requests to the same branch. The backend developers will be working on the 'secondary' and 'intermediate' branches. All finalized changes will be merged with the main branch after proper screening.*
 
