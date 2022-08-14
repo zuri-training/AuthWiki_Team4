@@ -136,9 +136,9 @@
                     <div class="reply-button">
                         <p data-target="comment" data-value="{{ $com->user->user_name }}">Reply</p>
                         <div class="reply-button-like">
-                            <a href="{{ route('comment.vote', ['id' => $com->id]) }}?vote=up"><img class="reply-icon" src="{{ asset('images/like.png') }}" alt="like-button"></a>
-                            <a href="{{ route('comment.vote', ['id' => $com->id]) }}?vote=down"><img class="reply-icon-1" src="{{ asset('images/dislike.png') }}" alt="dislike button"></a>
-                            {{ $com->vote }}
+                            <a href="javascript:void(0);" data-vote="up" data-comment="{{ $com->id }}"><img class="reply-icon" src="{{ asset('images/like.png') }}" alt="like-button"></a>
+                            <a href="javascript:void(0);" data-vote="down" data-comment="{{ $com->id }}"><img class="reply-icon-1" src="{{ asset('images/dislike.png') }}" alt="dislike button"></a>
+                            <span>{{ $com->vote }}</span>
                         </div>
                     </div>
                     </div>
@@ -182,6 +182,20 @@
                     } else {
                         isClickedRating = false;
                         $('.front-stars').width(percentRating+'%');
+                    }
+                });
+            });
+            $('[data-vote]').click(function(){
+                var i = $(this).siblings('span');
+                $.ajax({
+                    url: '{{ route('index') }}/comment/'+$(this).data('comment')+'/voting',
+                    method: 'POST',
+                    data: {
+                        vote: $(this).data('vote')
+                    }
+                }).done(function(data) {
+                    if(data.status === true) {
+                        $(i).html(data.votes);
                     }
                 });
             });

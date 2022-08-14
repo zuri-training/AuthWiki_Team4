@@ -40,7 +40,7 @@ Route::controller(WikiController::class)->prefix('library')->group(function(){
 });
 Route::controller(WikiComment::class)->group(function(){
     Route::post('library/{wiki}/comment', 'store')->name('library.comment');
-    Route::get('comment/{id}/voting', 'vote')->name('comment.vote');
+    Route::post('comment/{id}/voting', 'vote')->name('comment.vote');
 });
 Route::controller(UserController::class)->group(function(){
     Route::post('newsletter', 'subscribe')->name('newsletter.subscribe');
