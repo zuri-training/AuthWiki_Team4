@@ -22,18 +22,20 @@ function disableInputAndTextFields(){
     var input = [document.getElementsByTagName('input'), document.getElementsByTagName("textarea")];
     var upload = document.getElementById('file');
     var infoText = document.getElementById('info_text');
-    var upload_form = document.getElementById("upload_form")
+    var select = document.getElementById("categories")
     if (window.document.readyState === "complete" && upload.value == ''){
         infoText.style.display = "flex";
+        select.disabled = true;
         for (var i = 0; i < input.length; i++){
             for(var x = 0; x < input[i].length; x++){
-                if (input[i][x].type != "file" ){
+                if (input[i][x].id != "file" ){
                     input[i][x].disabled = true;
                 };
             };
         };
     }else{
         infoText.style.display = "none";
+        select.disabled = false;
         for (var i = 0; i < input.length; i++){
             for(var x = 0; x < input[i].length; x++){
                 input[i][x].disabled = false;

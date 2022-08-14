@@ -136,7 +136,7 @@
             <!-- PACKAGES -->
             <div class="create_form_fields">
                 <label for="requirements">Packages & Dependencies</label>
-                <textarea name="description" placeholder="Requirements" id="Fill in the requirements"></textarea>
+                <textarea name="description" placeholder="Fill in the requirements" id="requirements"></textarea>
             </div>
 
             <hr>
@@ -192,6 +192,29 @@
 
                 </div>
             </div>
+
+            <hr>
+            <!-- IMAGE -->
+            <div class="create_form_fields">
+                <label for="image">Image</label>
+                <input name="image" type="file" id="image"></input>
+            </div>
+
+            <hr>
+            <!-- CATEGORIES -->
+            <div class="create_form_fields">
+                <label for="categories">Category</label>
+                <select name="categories" type="file" id="categories">
+                    <option value="none">Select Category</option>
+                    <option value="Javascript">Javascript</option>
+                    <option value="Java">Java</option>
+                    <option value="Python">Python</option>
+                    <option value="PHP">PHP</option>
+                    <option value="Ruby">Ruby</option>
+                    <option value="C++">C++</option>
+                </select>
+            </div>
+
             <button disabled="true" style="pointer-events: none;" type="submit" id="create_btn">Create</button>
         </form>
     </main>
