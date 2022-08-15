@@ -57,7 +57,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Wiki::class);
     }
     public function comment() {
-        return $this->hasManyThrough(Comment::class, Wiki::class);
+        return $this->hasMany(Comment::class);
     }
 
     public function setNameAttribute($value)

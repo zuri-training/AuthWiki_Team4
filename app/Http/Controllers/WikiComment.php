@@ -41,7 +41,7 @@ class WikiComment extends Controller
     }
     public function update(UpdateWikiCommentRequest $request, Comment $comment) {
         $comment->update([
-            'comment' => $this->_filter($request->comment)
+            'comment' => $request->comment
         ]);
         return back();
     }

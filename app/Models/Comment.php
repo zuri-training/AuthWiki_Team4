@@ -11,7 +11,6 @@ use Illuminate\{
 class Comment extends Model
 {
     use HasFactory;
-    use \Znck\Eloquent\Traits\BelongsToThrough;
 
     protected $fillable = [
         'user_id',
@@ -34,6 +33,6 @@ class Comment extends Model
         return $this->hasMany(Log::class);
     }
     public function user() {
-        return $this->belongsToThrough(User::class, Wiki::class);
+        return $this->belongsTo(User::class);
     }
 }
