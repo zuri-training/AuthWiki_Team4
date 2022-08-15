@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\{
-    Factories\HasFactory,
-    Model
-};
-use Illuminate\Support\Facades\Auth;
 use App\Helper\Helper;
+use Illuminate\{
+    Database\Eloquent\Factories\HasFactory,
+    Database\Eloquent\Model
+};
 
 class Comment extends Model
 {
@@ -20,25 +19,21 @@ class Comment extends Model
         'comment',
         'vote'
     ];
-    protected $appends = [
-        'voted'
-    ];
 
     public function setCommentAttribute($value) {
         $this->attributes['comment'] = Helper::filterText($value);
     }
 
-    public function user() {
-        return $this->belongsToThrough(User::class, Wiki::class);
+    public function reaction() {
+        return $this->hasMany(Reaction::class);
     }
     public function wiki() {
         return $this->belongsTo(Wiki::class);
     }
-    public function reaction() {
-        return $this->hasMany(Reaction::class);
+    public function log() {
+        return $this->hasMany(Log::class);
     }
-    public function getVotedAttribute()
-    {
-        return $this->reaction()->where(['user_id' => Auth::id()])->exists();
+    public function user() {
+        return $this->belongsToThrough(User::class, Wiki::class);
     }
 }

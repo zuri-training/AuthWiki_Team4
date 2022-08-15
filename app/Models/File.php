@@ -2,16 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\{
+    Factories\HasFactory,
+    Model
+};
 
 class File extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
     protected $fillable = [
         'user_id',
+        'wiki_id',
         'name',
-        'file_dir'
+        'path'
     ];
 
     public function user() {
@@ -19,5 +24,8 @@ class File extends Model
     }
     public function wiki() {
         return $this->belongsTo(Wiki::class);
+    }
+    public function log() {
+        return $this->hasMany(Log::class);
     }
 }

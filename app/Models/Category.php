@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\{
+    Database\Eloquent\Factories\HasFactory,
+    Database\Eloquent\Model,
+    Support\Str
+};
 
 class Category extends Model
 {
@@ -17,11 +20,19 @@ class Category extends Model
         'description'
     ];
 
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = Str::ucfirst($value);
+    }
+    public function setTypeAttribute($value)
+    {
+        $this->attributes['type'] = Str::lower($value);
+    }
+
     public function wiki() {
         return $this->hasMany(Wiki::class);
     }
     public function glosary() {
         return $this->hasMany(Glossary::class);
     }
-
 }

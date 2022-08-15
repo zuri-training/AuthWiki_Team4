@@ -20,13 +20,11 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->enum('type', ['wiki', 'blog', 'forum']);
             $table->foreignId('category_id')->references('id')->on('categories')->cascadeOnDelete();
-            $table->foreignId('file_id')->nullable()->references('id')->on('files')->nullOnDelete();
             $table->string('title');
             $table->text('overview');
             $table->text('requirements');
             $table->text('snippets');
             $table->text('examples');
-            $table->text('links');
             $table->integer('views')->default(0);
             $table->timestamp('viewed_at')->nullable();
             $table->integer('downloads')->default(0);

@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\{
+    Database\Migrations\Migration,
+    Database\Schema\Blueprint,
+    Support\Facades\Schema
+};
 
 return new class extends Migration
 {
@@ -15,10 +17,9 @@ return new class extends Migration
     {
         Schema::create('glossaries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('type')->references('id')->on('categories')->cascadeOnDelete();
+            $table->foreignId('category_id')->references('id')->on('categories')->cascadeOnDelete();
             $table->string('title');
             $table->text('content');
-            $table->timestamps();
         });
     }
 

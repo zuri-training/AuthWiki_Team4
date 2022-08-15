@@ -7,20 +7,20 @@ use App\Models\{
     Wiki,
     Reaction,
     User,
-    File
+    File,
+    Log
 };
 use App\Http\Requests\{
     StoreWikiRequest,
     UpdateWikiRequest
 };
 use Illuminate\{
-    Database\Eloquent\Builder,
     Support\Facades\Auth,
     Support\Facades\DB,
     Http\Request,
-    Support\Facades\Validator
+    Support\Facades\Validator,
+    Support\Facades\Storage
 };
-use App\Helper\Helper;
 
 class WikiController extends Controller
 {
@@ -28,8 +28,8 @@ class WikiController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->only('rating');
-        $this->middleware('verified')->except(['index', 'indexID', 'show', 'search', 'searchAPI']);
-        $this->middleware('isAdmin')->only(['create', 'store', 'edit', 'update']);
+        $this->middleware('verified')->only(['indexID', 'uploadZip', 'edit', 'update']);
+        $this->middleware('isAdmin')->only(['create', 'store']);
     }
 
     public function index()
@@ -48,16 +48,16 @@ class WikiController extends Controller
     {
         $wiki = Wiki::create([
             'user_id' => Auth::id(),
-            'type' => 'wiki',
-            'stack' => $request->stack,
-            'file_id' => $request->file_id,
+            'type' => $request->type,
+            'category_id' => $request->category,
             'title' => $request->title,
-            'category_id' => $request->category_id,
             'overview' => $request->overview,
             'requirements' => $request->requirements,
             'snippets' => $request->snippets,
-            'examples' => $request->examples,
-            'links' => $request->links
+            'examples' => $request->examples
+        ]);
+        File::find($request->file)->update([
+            'wiki_id' => $wiki->id
         ]);
         return redirect(route('library.show', ['id' => $wiki->id]));
     }
@@ -73,19 +73,43 @@ class WikiController extends Controller
             $dir = File::create([
                 'user_id' => $id,
                 'name' => $name,
-                'file_dir' => '/storage/' . $path
+                'path' => $path
             ]);
-            return back()
-                ->with('success','File has been uploaded.')
-                ->with('file_id', $dir->id);
+            return redirect()
+                ->to(route('library.create').'?file='.$dir->id)
+                ->with('success','File uploaded.');
         }
     }
-
+    public function downloadZip($id){
+        $wiki = Wiki::find($id);
+        $file = File::where('wiki_id', $wiki->id);
+        if($wiki && $file->exists()) {
+            $get = $file->first();
+            $wiki->increment('downloads');
+            $wiki->touch('downloaded_at');
+            Log::updateOrCreate([
+                'user_id' => Auth::id()
+            ],
+            [
+                'file_id' => $get->id
+            ]);
+            return Storage::disk('public')->download($get->path, $get->name);
+        }
+        return redirect(route('page.library'))->with('error', 'No file associated with the request');
+    }
     public function show($id)
     {
         $wiki = Wiki::findOrFail($id);
         $wiki->increment('views');
         $wiki->touch('viewed_at');
+        if(Auth::check()) {
+            Log::updateOrCreate([
+                'user_id' => Auth::id()
+            ],
+            [
+                'wiki_id' => $wiki->id
+            ]);
+        }
         return view('wiki.show', compact('wiki'));
     }
 
@@ -97,7 +121,10 @@ class WikiController extends Controller
     public function update(UpdateWikiRequest $request, $id)
     {
         $wiki = Wiki::findOrFail($id)->update([
-            'content' => $request->content
+            'overview' => $request->overview,
+            'requirements' => $request->requirements,
+            'snippets' => $request->snippets,
+            'examples' => $request->examples
         ]);
         return redirect(route('wiki.show', compact('id')));
     }
@@ -124,6 +151,8 @@ class WikiController extends Controller
                 $category = Category::where('name', $stack)->first();
                 if($category) {
                     $query->where('category_id', $category->id);
+                } else {
+                    $query->where('category_id', null);
                 }
             })
             ->when($keyword, function($query, $keyword){

@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\{
     Wiki,
     Comment,
-    Reaction
+    Reaction,
+    Log
+};
+use App\Http\Requests\{
+    StoreWikiCommentRequest,
+    UpdateWikiCommentRequest
 };
 use Illuminate\{
     Support\Facades\Auth,
-    Support\Facades\DB,
     Http\Request,
     Support\Facades\Validator
 };
@@ -21,31 +25,21 @@ class WikiComment extends Controller
         $this->middleware('auth');
         $this->middleware('verified')->only('update');
     }
-    public function _filter($text) {
-        $tags = 'b|i|u|code|pre';
-        return preg_replace(
-            "/<({$tags}) [^>]*>/", "<$1>",
-            strip_tags(
-                $text,
-                explode('|', $tags)
-            )
-        );
-    }
-    public function store(Request $request, Wiki $wiki) {
-        $request->validate([
-            'comment' => 'required|string|max:5120'
-        ]);
-        Comment::create([
+    public function store(StoreWikiCommentRequest $request, Wiki $wiki) {
+        $comment = Comment::create([
             'wiki_id' => $wiki->id,
             'user_id' => Auth::id(),
-            'comment' => $this->_filter($request->comment)
+            'comment' => $request->comment
+        ]);
+        Log::updateOrCreate([
+            'user_id' => Auth::id()
+        ],
+        [
+            'comment_id' => $comment->id
         ]);
         return back();
     }
-    public function update(Request $request, Comment $comment) {
-        $request->validate([
-            'comment' => 'required|string|max:5120'
-        ]);
+    public function update(UpdateWikiCommentRequest $request, Comment $comment) {
         $comment->update([
             'comment' => $this->_filter($request->comment)
         ]);
@@ -55,9 +49,6 @@ class WikiComment extends Controller
     public function vote(Request $request, $id)
     {
         $comment = Comment::find($id);
-        // $request->validate([
-        //     'vote' => 'required|in:up,down'
-        // ]);
         $validator = Validator::make($request->all(), [
             'vote' => 'required|in:up,down'
         ]);
@@ -86,6 +77,5 @@ class WikiComment extends Controller
             'status' => true,
             'votes' => $comment->vote
         ]);
-        // return back();
     }
 }

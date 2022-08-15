@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 class Helper
 {
     public static function filterText($text, $deep = false, $tags = '') {
-        $tags = Str::finish($tags, '|') . 'a|b|i|u|ul|ol|li|code|pre';
+        $tags = Str::finish($tags, '|') . 'b|i|u|ul|ol|li|code|pre';
         if($deep) {
             return strip_tags($text);
         }

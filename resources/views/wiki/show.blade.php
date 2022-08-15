@@ -16,13 +16,13 @@
         <section class="overview">
             <h3>Overview</h3>
             <p class="body-text">
-                {{ $wiki->overview }}
+                {!! $wiki->overview !!}
             </p>
         </section>
         <section class="requirement">
             <h3>Packages/dependencies</h3>
             <p class="body-text">
-                {{ $wiki->requirements }}
+                {!! $wiki->requirements !!}
             </p>
         </section>
         @if(Str::length($wiki->snippets) > 0)
@@ -47,12 +47,12 @@
                 using the library:
             </p>
             <p class="body-text">
-                {{ $wiki->examples }}
+                {!! $wiki->examples !!}
             </p>
         </section>
         @endif
         <div class="btn-group">
-            <button class="download-btn"><a href="#">Download  <img src="{{ asset('images/download.svg') }}" alt=""></a></button>
+            <button class="download-btn"><a href="{{ route('library.download', ['id' => $wiki->id])}}">Download  <img src="{{ asset('images/download.svg') }}" alt=""></a></button>
             <div class="star-rating" data-wiki="{{ $wiki->id }}">
                 <div class="back-stars">
                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -77,6 +77,7 @@
     $coms = $wiki->comment()->orderBy('vote', 'desc')->latest()->paginate(10);
     @endphp
     <section class="be_container" style="padding-top: 20px;">
+        @if(count($suggests) > 0)
         <h2 class="suggestion-text">Suggested Download</h2>
         <div class="section-container">
           @foreach($suggests as $sug)
@@ -105,6 +106,7 @@
           </div>
           @endforeach
         </div>
+        @endif
         @auth
         <main>
             <div class="comment-container-heading">
@@ -128,7 +130,7 @@
                     <img src="{{ url($com->user->photo) }}" class="be-avatar" width="50px" height="50px">
                     <div class="previous-comments-name">
                     <p class="previous-comments-paragraph-name">
-                        {{ $com->user->name }} <span> {{ Helper::timeAgo($com->created_at) }}</span>
+                        <a href="{{ route('index').'/user/'.$com->user->user_name }}">{{ $com->user->name }}</a> <span> {{ Helper::timeAgo($com->created_at) }}</span>
                     </p>
                     <p class="previous-comments-paragraph">
                         {!! $com->comment !!}
@@ -152,16 +154,16 @@
 @push('js')
     @auth
     <script type="text/javascript">
+        let percentRating = {{ $wiki->stars }}, isClickedRating = false;
         $(document).ready(function(){
-            let percentRating = {{ $wiki->stars }}, isClickedRating = false;
             function calcPosition(mouseObj) {
                 var i = $('.star-rating i').index(mouseObj) + 1;
                 return i > 5 ? (i - 5) : i;
             }
-            $('.star-rating i').mousemove(function(){
+            $('.star-rating i').hover(function(){
+                isClickedRating = false;
                 $('.front-stars').width((calcPosition(this) * 20)+'%');
-            });
-            $('[data-wiki]').mouseleave(function(){
+            }, function(){
                 if(!isClickedRating) {
                     $('.front-stars').width(percentRating+'%');
                 }
@@ -180,7 +182,6 @@
                         $('.front-stars').width(data.rating +'%');
                         toastr.info('Thank you for your feedback');
                     } else {
-                        isClickedRating = false;
                         $('.front-stars').width(percentRating+'%');
                     }
                 });

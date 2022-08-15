@@ -37,8 +37,8 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
     protected $appends = [
         'libraries',
-        'blogs',
-        'forums',
+        // 'blogs',
+        // 'forums',
         'contributions'
     ];
     protected $casts = [
@@ -47,6 +47,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'password_changed' => 'boolean'
     ];
 
+    public function log() {
+        return $this->hasOne(Log::class);
+    }
     public function file() {
       return $this->hasMany(File::class);
     }
@@ -78,14 +81,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->wiki()->where('type', 'wiki')->count();
     }
-    public function getBlogsAttribute()
-    {
-        return $this->wiki()->where('type', 'blog')->count();
-    }
-    public function getForumsAttribute()
-    {
-        return $this->wiki()->where('type', 'forum')->count();
-    }
+    // public function getBlogsAttribute()
+    // {
+    //     return $this->wiki()->where('type', 'blog')->count();
+    // }
+    // public function getForumsAttribute()
+    // {
+    //     return $this->wiki()->where('type', 'forum')->count();
+    // }
     public function getContributionsAttribute()
     {
         return $this->comment()->count();

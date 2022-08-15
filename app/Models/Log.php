@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\{
     Model
 };
 
-class Reaction extends Model
+class Log extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,7 @@ class Reaction extends Model
         'user_id',
         'wiki_id',
         'comment_id',
-        'rating'
+        'file_id'
     ];
 
     public function wiki() {
@@ -24,5 +24,11 @@ class Reaction extends Model
     }
     public function comment() {
         return $this->belongsTo(Comment::class);
+    }
+    public function file() {
+        return $this->belongsTo(File::class);
+    }
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 }

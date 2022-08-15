@@ -20,13 +20,11 @@ class wikiFactory extends Factory
             'user_id' => 1, //rand(1, 10),
             'type' => 'wiki',
             'category_id' => rand(1, 10),
-            'file_id' => null,
             'title' => fake()->realTextBetween(10, 25, 1),
-            'overview' => fake()->text(),
+            'overview' => fake()->randomHtml(5, 10),
             'requirements' => fake()->text(),
             'snippets' => '',
-            'examples' => fake()->randomHtml(),
-            'links' => ''
+            'examples' => fake()->randomHtml()
         ];
     }
 }
