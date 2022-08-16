@@ -22,9 +22,7 @@ return new class extends Migration
             $table->foreignId('category_id')->references('id')->on('categories')->cascadeOnDelete();
             $table->string('title');
             $table->text('overview');
-            $table->text('requirements');
-            $table->text('snippets');
-            $table->text('examples');
+            $table->longText('contents');
             $table->integer('views')->default(0);
             $table->timestamp('viewed_at')->nullable();
             $table->integer('downloads')->default(0);

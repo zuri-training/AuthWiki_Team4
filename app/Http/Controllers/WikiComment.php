@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Models\{
     Wiki,
     Comment,
@@ -13,9 +14,10 @@ use App\Http\Requests\{
     UpdateWikiCommentRequest
 };
 use Illuminate\{
-    Support\Facades\Auth,
     Http\Request,
-    Support\Facades\Validator
+    Support\Facades\Validator,
+    Support\Facades\Auth,
+    Support\Facades\DB
 };
 
 class WikiComment extends Controller
@@ -50,32 +52,34 @@ class WikiComment extends Controller
     {
         $comment = Comment::find($id);
         $validator = Validator::make($request->all(), [
-            'vote' => 'required|in:up,down'
+            'vote' => 'required|string|in:up,down'
         ]);
         if($validator->fails() || !$comment) {
             return response()->json([
                 'status' => false
             ]);
         }
-        $vote = Reaction::where([
-            'wiki_id' => $comment->wiki->id,
-            'user_id' => Auth::id(),
-            'comment_id' => $comment->id
-        ]);
-        if($request->vote == 'up' && $vote->doesntExist()) {
-            Reaction::create([
-                'wiki_id' => $comment->wiki->id,
+        Reaction::updateOrCreate(
+            [
                 'user_id' => Auth::id(),
+                'wiki_id' => $comment->wiki->id,
                 'comment_id' => $comment->id
-            ]);
-            $comment->increment('vote');
-        } elseif($request->vote == 'down' && $vote->exists()) {
-            $vote->delete();
-            $comment->decrement('vote');
-        }
+            ],
+            [
+                'rating' => $request->vote == 'up' ? DB::raw('rating+1') : DB::raw('rating-1')
+            ]
+        );
+        $vote = Reaction::where([
+            'user_id' => Auth::id(),
+            'wiki_id' => $comment->wiki->id,
+            'comment_id' => $comment->id
+        ])->first();
+        $vote->update([
+            'rating' => $vote->rating > 1 ? '1' : ($vote->rating < -1 ? '-1' : $vote->rating) 
+        ]);
         return response()->json([
             'status' => true,
-            'votes' => $comment->vote
+            'votes' => Helper::shortNum($comment->reaction()->where('wiki_id', $comment->wiki->id)->sum('rating'))
         ]);
     }
 }

@@ -27,7 +27,7 @@ class WikiController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->only('rating');
+        $this->middleware('auth')->only(['rating', 'downloadZip']);
         $this->middleware('verified')->only(['indexID', 'uploadZip', 'edit', 'update']);
         $this->middleware('isAdmin')->only(['create', 'store']);
     }
@@ -52,9 +52,7 @@ class WikiController extends Controller
             'category_id' => $request->category,
             'title' => $request->title,
             'overview' => $request->overview,
-            'requirements' => $request->requirements,
-            'snippets' => $request->snippets,
-            'examples' => $request->examples
+            'contents' => $request->contents
         ]);
         File::find($request->file)->update([
             'wiki_id' => $wiki->id
@@ -122,9 +120,7 @@ class WikiController extends Controller
     {
         $wiki = Wiki::findOrFail($id)->update([
             'overview' => $request->overview,
-            'requirements' => $request->requirements,
-            'snippets' => $request->snippets,
-            'examples' => $request->examples
+            'contents' => $request->contents
         ]);
         return redirect(route('wiki.show', compact('id')));
     }
@@ -144,11 +140,11 @@ class WikiController extends Controller
     }
 
     public function search(Request $request) {
-        $keyword = $request->input('keyword');
-        $stack = $request->input('stack');
+        $keyword = strtolower($request->input('keyword'));
+        $stack = strtolower($request->input('stack'));
         $wikis = Wiki::where('type', 'wiki')
             ->when($stack, function($query, $stack) {
-                $category = Category::where('name', $stack)->first();
+                $category = Category::where(DB::raw('lower(name)'), $stack)->first();
                 if($category) {
                     $query->where('category_id', $category->id);
                 } else {
@@ -167,12 +163,12 @@ class WikiController extends Controller
     }
 
     public function searchAPI(Request $request) {
-        $keyword = $request->input('keyword');
-        $stack = $request->input('stack');
+        $keyword = strtolower($request->input('keyword'));
+        $stack = strtolower($request->input('stack'));
         $wiki = Wiki::select('title', 'id')
             ->where('type', 'wiki')
             ->when($stack, function($query, $stack) {
-                $category = Category::where('name', $stack)->first();
+                $category = Category::where(DB::raw('lower(name)'), $stack)->first();
                 if($category) {
                     $query->where('category_id', $category->id);
                 }

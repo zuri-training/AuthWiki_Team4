@@ -47,8 +47,21 @@
             </div>
         </div>
     </footer>
+    @if($errors->any())
+        @foreach($errors->all() as $message)
+            <x-alert type="error" text="{{ $message }}" no="{{ $loop->index }}"/>
+        @endforeach
+    @endif
+    @if(session('success'))
+        <x-alert type="success" text="{{ session('success') }}"/>
+    @endif
+    @if(session('error'))
+        <x-alert type="error" text="{{ session('error') }}"/>
+    @endif
+    @if(session('warning'))
+        <x-alert type="warning" text="{{ session('warning') }}"/>
+    @endif
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"> </script>
-    <script src="{{ asset('js/toastr.min.js') }}"> </script>
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -57,6 +70,13 @@
             cache: false
         });
         $(document).ready(function(){
+            @if($errors->any() || session('success') || session('warning') || session('error') || session('info'))
+            $('.be-toast').each(function(index) {
+                $(this).fadeOut(2500 * Math.pow((index + 2), 2), function(){
+                    $(this).remove();
+                });
+            });
+            @endif
             // function search() {
             //      var name = document.getElementById("searchForm").elements["searchItem"].value;
             //     var pattern = name.toLowerCase();
@@ -152,20 +172,6 @@
                     $(this).addClass("active");
                 }
             });
-            @if($errors->any())
-                @foreach($errors->all() as $message)
-                toastr.error('{{ $message }}');
-                @endforeach
-            @endif
-            @if(session('success'))
-            toastr.success('{{ session('success') }}');
-            @endif
-            @if(session('error'))
-            toastr.error('{{ session('error') }}');
-            @endif
-            @if(session('warning'))
-            toastr.warning('{{ session('warning') }}');
-            @endif
         });
     </script>
     @stack('js')

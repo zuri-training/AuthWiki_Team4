@@ -19,9 +19,7 @@ class Wiki extends Model
         'category_id',
         'title',
         'overview',
-        'requirements',
-        'snippets',
-        'examples',
+        'contents',
         'views',
         'viewed_at',
         'downloads',
@@ -44,15 +42,9 @@ class Wiki extends Model
     {
         $this->attributes['overview'] = Helper::filterText($value);
     }
-    public function setRequirementsAttribute($value)
+    public function setContentsAttribute($value)
     {
-        $this->attributes['requirements'] = Helper::filterText($value);
-    }
-    public function setSnippetsAttribute($value) {
-        $this->attributes['snippets'] = Helper::filterText($value, true);
-    }
-    public function setExamplesAttribute($value) {
-        $this->attributes['examples'] = Helper::filterText($value);
+        $this->attributes['contents'] = Helper::filterText($value);
     }
 
     public function file() {

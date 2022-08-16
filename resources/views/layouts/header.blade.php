@@ -7,44 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.svg') }}">
     <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/be-css.css') }}">
     <title>@yield('title', 'AuthWiki')</title>
     @stack('css')
-    <style type="text/css">
-        .d-flex {
-            display: flex;
-        }
-        .be-container {
-            margin-top: 156px;
-            margin-bottom: 56px;
-        }
-        .be-overflow {
-            overflow: hidden;
-        }
-        .be-overflow#xx:hover {
-            height: auto;
-            overflow: visible;
-        }
-        .be-overflow#x:hover {
-            overflow-x: scroll;
-            scrollbar-width: none;
-        }
-        .be-overflow#y:hover {
-            overflow-y: scroll;
-            scrollbar-width: none;
-        }
-        .be-break {
-            hyphens: auto
-        }
-        img.be-avatar {
-            border-radius: 50% !important;
-        }
-        @media screen and (max-width:600px) {
-            .be-container{
-                margin-top: 55px;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}" />
 </head>
 <body>
     <header>

@@ -28,11 +28,9 @@ class StoreWikiRequest extends FormRequest
             'type' => 'required|string|in:wiki,blog,forum',
             'file' => 'required_if:type,wiki|numeric|exists:files,id',
             'category' => 'required|string|exists:categories,id',
-            'title' => 'required|string|between:10,250',
-            'overview' => 'required|string|between:64,10240',
-            'requirements' => 'required|string|max:5120',
-            'snippets' => 'nullable|string|nullable|max:1024',
-            'examples' => 'nullable|string|max:5120'
+            'title' => 'required|string|max:250',
+            'overview' => 'required|string|max:1024',
+            'contents' => 'required|string|max:102400'
         ];
     }
 }

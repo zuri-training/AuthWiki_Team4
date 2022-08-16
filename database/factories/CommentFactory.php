@@ -17,7 +17,7 @@ class commentFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 1, //rand(1, 10),
+            'user_id' => 1,
             'wiki_id' => rand(1, 20),
             'comment' => fake()->randomHtml()
         ];

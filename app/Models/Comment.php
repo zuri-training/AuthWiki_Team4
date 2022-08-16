@@ -15,8 +15,7 @@ class Comment extends Model
     protected $fillable = [
         'user_id',
         'wiki_id',
-        'comment',
-        'vote'
+        'comment'
     ];
 
     public function setCommentAttribute($value) {

@@ -52,7 +52,7 @@ Route::controller(UserController::class)->group(function(){
     Route::get('newsletter', 'unsubscribe')->name('newsletter.unsubscribe');    
     Route::prefix('user')->group(function(){
         Route::get('{user:user_name}', 'showUserProfile');
-        Route::post('{user:user_name}/crown', 'toggleCrown');
+        Route::get('{user:user_name}/crown', 'toggleCrown');
     });
     Route::get('profile', 'showProfile')->name('user.profile');
     Route::post('profile', 'updateProfile')->name('user.update');

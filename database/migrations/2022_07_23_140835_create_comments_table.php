@@ -20,7 +20,6 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->references('id')->on('users')->nullOnDelete();
             $table->foreignId('wiki_id')->references('id')->on('wikis')->cascadeOnDelete();
             $table->longText('comment');
-            $table->integer('vote')->default(0);
             $table->timestamps();
         });
     }

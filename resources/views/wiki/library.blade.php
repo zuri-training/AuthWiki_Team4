@@ -10,8 +10,7 @@
 @endpush
 
 @push('js')
-    <script src="{{ asset('js/popper.min.js') }}"> </script>    
-    <script src="{{ asset('js/bootstrap.min.js') }}"> </script>    
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"> </script>    
 @endpush
 
 @section('content')

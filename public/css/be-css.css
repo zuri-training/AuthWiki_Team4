@@ -1,0 +1,79 @@
+.be-toast {
+    padding: 1rem !important;
+    position: fixed;
+    right: 0;
+    top: 0;
+    max-width: 100%;
+    pointer-events: none;
+    width: max-content;
+    z-index: 999999;
+}
+.be-toast-div {
+	width: 350px;
+	max-width: 100%;
+	font-size: .875rem;
+	pointer-events: auto;
+	background-clip: padding-box;
+	border: 1px solid rgba(0,0,0,.1);
+	box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+	border-radius: .25rem;
+    border-left: 5px solid;
+}
+.be-toast-header {
+	display: flex;
+	align-items: center;
+	padding: .5rem .75rem;
+	color: #6c757d;
+	background-clip: padding-box;
+	border-top-left-radius: calc(.25rem - 1px);
+	border-top-right-radius: calc(.25rem - 1px);
+	background-color: rgba(255,255,255,1);
+}
+.be-toast-header img {
+    border-radius: 0.375rem !important;
+    margin-right: 10px;
+}
+.be-toast-header strong {
+    margin-right: auto;
+}
+.be-toast-body {
+	padding: .75rem;
+	word-wrap: break-word;
+	background-color: rgba(255,255,255,1);
+}
+.be-toast-body p {
+    margin-left: 30px;
+}
+.d-flex {
+    display: flex;
+}
+.be-container {
+    margin-top: 156px;
+    margin-bottom: 56px;
+}
+.be-overflow {
+    overflow: hidden;
+}
+.be-overflow#xx:hover {
+    height: auto;
+    overflow: visible;
+}
+.be-overflow#x:hover {
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+.be-overflow#y:hover {
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+.be-break {
+    hyphens: auto
+}
+img.be-avatar {
+    border-radius: 50% !important;
+}
+@media screen and (max-width:600px) {
+    .be-container{
+        margin-top: 55px;
+    }
+}

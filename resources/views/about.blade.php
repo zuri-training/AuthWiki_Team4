@@ -30,10 +30,10 @@
     
             <div class="section_images">
                 <div id="sec1">
-                    <img src="{{ asset('images/team/ms1.svg') }}" alt="">
-                    <img src="{{ asset('images/team/ms2.svg') }}" alt="">
+                    <img src="{{ asset('images/team/ms1.png') }}" alt="">
+                    <img src="{{ asset('images/team/ms2.png') }}" alt="">
                 </div>
-                <div id="sec2"><img src="{{ asset('images/team/ms3.svg') }}" alt=""></div>
+                <div id="sec2"><img src="{{ asset('images/team/ms3.png') }}" alt=""></div>
             </div>
         </section>
 
@@ -57,13 +57,13 @@
                 </div>
 
                 <div class="team_member">
-                    <img src="{{ asset('images/team/member3.svg') }}" alt="Victory">
+                    <img src="{{ asset('images/team/member3.png') }}" alt="Victory">
                     <h6>Victory</h6>
                     <p>Developer</p>
                 </div>
 
                 <div class="team_member">
-                    <img src="{{ asset('images/team/member4.svg') }}" alt="Beckley">
+                    <img src="{{ asset('images/team/member4.png') }}" alt="Beckley">
                     <h6>Beckley</h6>
                     <p>Designer</p>
                 </div>
@@ -81,13 +81,13 @@
                 </div>
 
                 <div class="team_member">
-                    <img src="{{ asset('images/team/member7.svg') }}" alt="Chijoke">
+                    <img src="{{ asset('images/team/member7.png') }}" alt="Chijoke">
                     <h6>Chijoke</h6>
                     <p>Designer</p>
                 </div>
 
                 <div class="team_member">
-                    <img src="{{ asset('images/team/member8.svg') }}" alt="Michael">
+                    <img src="{{ asset('images/team/member8.png') }}" alt="Michael">
                     <h6>Micheal</h6>
                     <p>Designer</p>
                 </div>
@@ -105,7 +105,7 @@
                 </div>
 
                 <div class="team_member">
-                    <img src="{{ asset('images/team/member11.svg') }}" alt="Favour">
+                    <img src="{{ asset('images/team/member11.png') }}" alt="Favour">
                     <h6>Favour</h6>
                     <p>Developer</p>
                 </div>
@@ -117,7 +117,7 @@
                 </div>
 
                 <div class="team_member">
-                    <img src="{{ asset('images/team/member13.svg') }}" alt="Oluwadamilare">
+                    <img src="{{ asset('images/team/member13.png') }}" alt="Oluwadamilare">
                     <h6>Oluwadamilare</h6>
                     <p>Designer</p>
                 </div>
@@ -129,7 +129,7 @@
                 </div>
 
                 <div class="team_member">
-                    <img src="{{ asset('images/team/member15.svg') }}" alt="Kachi">
+                    <img src="{{ asset('images/team/member15.png') }}" alt="Kachi">
                     <h6>Kachi</h6>
                     <p>Developer</p>
                 </div>
@@ -147,14 +147,14 @@
                 </div>
 
                 <div class="team_member">
-                    <img src="{{ asset('images/team/member18.svg') }}" alt="Ishola">
+                    <img src="{{ asset('images/team/member18.png') }}" alt="Ishola">
                     <h6>Ishola</h6>
                     <p>Developer</p>
                 </div>
 
                 <div class="team_member">
                     <img src="{{ asset('images/team/member19.png') }}" alt="Emmy">
-                    <h6>Emmy</h6>
+                    <h6>Isaac</h6>
                     <p>Developer</p>
                 </div>
 
@@ -183,7 +183,7 @@
             <h3>Meet The Team Leads</h3>
             <div class="team_leads">
                 <div class="team_lead">
-                    <img src="{{ asset('images/team/teamlead1.svg') }}" alt="Samuel">
+                    <img src="{{ asset('images/team/teamlead1.png') }}" alt="Samuel">
                     <h6>Samuel</h6>
                     <p>Developer</p>
                 </div>

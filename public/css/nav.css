@@ -95,6 +95,7 @@ header nav ul{
     height: auto;
     width: 100%;
     gap: 70px;
+    margin: 0;
 }
 
 header #nav_secondary{
@@ -129,6 +130,7 @@ header #nav_button{
     font-size: 20px;
     line-height: 24px;
     transition: all ease-out 50ms;
+    padding: 0 !important;
 }
 
 header #nav_button:hover{

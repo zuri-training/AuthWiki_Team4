@@ -90,28 +90,31 @@
         <section class="delete_section">
             <h1>Delete your profile</h1>
             <p>Deleting your information does not impact your Auth-wiki identity.</p>
-            <button id="delete_button" onclick="displayPopup('delete_confirm')">Delete</button>
+            <button id="delete_button" data-href="{{ route('user.settings') }}">Delete</button>
         </section>
     </main>
 
+    @if(session('profile'))
     <!-- PROFILE SAVED -->
-    <div class="profile_card1" id="popup_success" style="display: none;">
+    <div class="profile_card1" id="popup_success">
         <div>
             <img src="{{ asset('images/round_check.svg') }}" alt="check">
             <h1 >Profile saved successfully</h1>    
         </div>    
-        <button id="close_button" onclick="hidePopup('popup_success')">Close</button>
+        <button id="close_button">Close</button>
     </div>
-
+    @endif
+    @if(request()->query('delete', 'no') == 'yes')
     <!-- DELETE CONFIRMATION -->
-    <div class="profile_card" id="delete_confirm" style="display: none;">
+    <div class="profile_card" id="delete_confirm">
         <h1>Are you sure?</h1>
         <p>Deleting your profile cannot be undone.</p>
         <div class="buttons">
-            <button id="close_button" onclick="hidePopup('delete_confirm')">Close</button>
-            <a href="#"><button id="delete_button" onclick="hidePopup('delete_confirm')">Delete</button></a>
+            <button id="close_button">Close</button>
+            <a href="#"><button id="delete_button">Delete</button></a>
         </div>
     </div>
+    @endif
 @endsection
 @push('js')
     <script type="text/javascript">
@@ -125,5 +128,37 @@
     $('#save_button').click(function(){
         $('form#p_form').submit();
     });
+    @if(session('profile'))
+    $('body').css({
+        height: '100%',
+        overflow: 'hidden'
+    });
+    $('#popup_success').css({
+        display: 'flex'
+    });
+    $('#close_button').click(function(){
+        $('body').css({
+            height: 'auto',
+            overflow: 'auto'
+        });
+        $('#popup_success').remove();
+    });
+    @endif
+    @if(request()->query('delete', 'no') == 'yes')
+    $('body').css({
+        height: '100%',
+        overflow: 'hidden'
+    });
+    $('#delete_confirm').css({
+        display: 'flex'
+    });
+    $('#close_button').click(function(){
+        $('body').css({
+            height: 'auto',
+            overflow: 'auto'
+        });
+        $('#delete_confirm').remove();
+    });
+    @endif
     </script>
 @endpush

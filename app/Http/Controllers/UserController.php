@@ -48,7 +48,7 @@ class UserController extends Controller
             return back()->withErrors($validator);
         }
         User::find($user->id)->update($validator->validated());
-        return back();
+        return back(); //->with('profile', 'yes');
     }
     public function updatePassword(Request $request) {
         $user = Auth::user();
@@ -152,7 +152,7 @@ class UserController extends Controller
                 'admin' => $user->admin ? 0 : 1
             ]);
         }
-        return back();
+        return $user;
     }
     public function subscribe(Request $request)
     {

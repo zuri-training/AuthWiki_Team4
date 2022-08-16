@@ -9,7 +9,7 @@
 @section('content')
 <main class="container wrapper">
     <!-- IMAGE -->
-    <form action="{{ route('category.create') }}" method="POST" class="auth_create_form" id="upload_form">
+    <form action="{{ route('category.create') }}" method="POST" class="auth_create_form" id="upload_form" style="display: {{ request()->query('display', 'none') }};">
         @csrf
         <input type="hidden" name="type" value="wiki">
         <div class="create_form_fields">
@@ -22,7 +22,7 @@
             <button id="upload_btn" type="submit">Create category</button>
         </div>
     </form>
-    <hr>
+    <hr style="display: none;">
     <h1 id="create_header">Create Authentication Code</h1>
     <!-- UPLOAD FORM -->
     <form action="{{ route('library.upload') }}" class="auth_create_form" id="upload_form" method="POST" enctype="multipart/form-data">
@@ -71,22 +71,8 @@
         <hr>
         <!-- PACKAGES -->
         <div class="create_form_fields">
-            <label for="requirements">Packages & Dependencies</label>
-            <textarea name="requirements" placeholder="Fill in the requirements" id="requirements">{{ old('requirements') }}</textarea>
-        </div>
-
-        <hr>
-        <!-- CODE -->
-        <div class="create_form_fields">
-            <label for="code-snippets">Code Snippets</label>
-            <input type="url" name="snippets" placeholder="Enter code snippet's url" id="code-snippets" value="{{ old('snippets') }}">
-        </div>
-
-        <hr>
-        <!-- EXAMPLES -->
-        <div class="create_form_fields">
-            <label for="examples">Examples</label>
-            <textarea name="examples" placeholder="Examples go here" id="examples">{{ old('examples') }}</textarea>
+            <label for="requirements">Content</label>
+            <textarea name="contents" placeholder="Code details" id="contents">{{ old('contents') }}</textarea>
         </div>
 
         <button type="submit" id="create_btn">Create</button>
