@@ -10,8 +10,7 @@
 @endpush
 
 @push('js')
-    <script src="{{ asset('js/popper.min.js') }}"> </script>    
-    <script src="{{ asset('js/bootstrap.min.js') }}"> </script>    
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"> </script>    
 @endpush
 
 @section('content')
@@ -28,7 +27,7 @@
                         </div>
                     </div>
                 </form>
-                <p class="text-center">@if(request()->has('keyword') && count($wikis) > 0) {{ count($wikis). ' '. Str::plural('result', count($wikis)). ' found' }} @else Over 1000+ codes @endif</p>
+                <p class="text-center">@if((request()->has('keyword') || request()->has('stack')) && count($wikis) > 0) {{ Helper::shortNum(count($wikis)). ' '. Str::plural('result', count($wikis)). ' found' }} @else Over 1000+ codes @endif</p>
             </div>
         </div>
     </div>

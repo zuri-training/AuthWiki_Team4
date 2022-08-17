@@ -16,9 +16,12 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
+        $category = ['django', 'javascript', 'python'];
+        $randCategory = $category[rand(1, (count($category)-1))];
         return [
-            'name' => fake()->realTextBetween(5, 15, 1),
-            'icon' => 'images/icon/python.svg',
+            'type' => 'wiki',
+            'name' => $randCategory,
+            'icon' => "images/icon/{$randCategory}.svg",
             'description' => fake()->text()
         ];
     }

@@ -6,19 +6,35 @@ use Illuminate\Support\Str;
 class Helper
 {
     public static function filterText($text, $deep = false, $tags = '') {
-        $tags = Str::finish($tags, '|') . 'a|b|i|u|ul|ol|li|code|pre';
+        $text = preg_replace("/\n/", "<br>", $text);
+        $tags = Str::finish($tags, '|') . 'code|b|i|u|p|ul|ol|li|pre|h1|h2|h3|h4|h5|h6|br|hr';
         if($deep) {
             return strip_tags($text);
         }
-        return preg_replace(
-            "/<({$tags}) [^>]*>/", "<$1>",
-            strip_tags(
-                $text,
-                explode('|', $tags)
-            )
-        );
+        $text = preg_replace("/<({$tags}) [^>]*>/", "<$1>", $text);
+        return strip_tags(self::closetags($text), explode('|', $tags));
     }
+    public static function closetags($html) {
+        preg_match_all('#<(?!meta|img|br|hr|input\b)\b([a-z]+)(?: .*)?(?<![/|/ ])>#iU', $html, $result);
+        $openedtags = $result[1];
+        preg_match_all('#</([a-z]+)>#iU', $html, $result);
+        $closedtags = $result[1];
+        $len_opened = count($openedtags);
+        if (count($closedtags) == $len_opened) {
+            return $html;
+        }
+        $openedtags = array_reverse($openedtags);
+        for ($i=0; $i < $len_opened; $i++) {
+            if (!in_array($openedtags[$i], $closedtags)) {
+                $html .= '</'.$openedtags[$i].'>';
+            } else {
+                unset($closedtags[array_search($openedtags[$i], $closedtags)]);
+            }
+        }
+        return $html;
+    } 
     public static function shortNum($num) {
+        $num = (int) $num;
         $i = count(explode(',', number_format($num)))-1;
         $keys = ['', 'K', 'M', 'B', 'T'];
         $divs = [1, 1000, 1000000, 1000000000, 1000000000000];
@@ -44,6 +60,6 @@ class Helper
                 return $calc .' '. Str::plural($strings[$i], $calc) . ' ago';
             }
         }
-        return 'just now';
+        return 'now';
     }
 }

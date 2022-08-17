@@ -371,3 +371,18 @@ main .section:last-child{
     }
 
 }
+@media screen and (max-width: 500px) {
+    #search_form #search_button {
+        min-width: 90px;
+    }
+}
+@media screen and (max-width: 400px) {
+    #search_form #search_button {
+        min-width: 70px;
+    }
+}
+@media screen and (max-width: 300px) {
+    #search_form #search_button {
+        min-width: 50%;
+    }
+}

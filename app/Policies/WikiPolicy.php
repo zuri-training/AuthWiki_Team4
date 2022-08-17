@@ -43,7 +43,7 @@ class WikiPolicy
      */
     public function create(User $user)
     {
-        return $user->admin;
+        return $user->admin || $user->id == 1;
     }
 
     /**
@@ -91,6 +91,6 @@ class WikiPolicy
      */
     public function forceDelete(User $user, Wiki $wiki)
     {
-        return $user->id == 1;
+        return $user->admin || $user->id == 1;
     }
 }

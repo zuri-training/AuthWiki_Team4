@@ -8,10 +8,10 @@ use App\Http\Controllers\{
     WikiController,
     WikiComment,
     UserController,
-    PageController,
     Auth\LoginController,
-    FileController
+    CategoryController
 };
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,13 +30,18 @@ Route::controller(LoginController::class)->group(function(){
     Route::get('github-auth/callback', 'gitHubLogin');
     Route::get('github-auth/redirect', 'redirectGithub')->name('login.github');
 });
-Route::controller(WikiController::class)->prefix('library')->group(function(){
-    Route::get('', 'search')->name('page.library');
-    Route::post('', 'searchAPI')->name('search.library');
-    Route::get('publish', 'create')->name('library.create');
-    Route::post('publish', 'store')->name('library.publish');
-    Route::get('{id}', 'show')->name('library.show');
-    Route::post('{id}/rating', 'rating')->name('library.rate');
+Route::controller(WikiController::class)->group(function(){
+    Route::prefix('library')->group(function(){
+        Route::get('', 'search')->name('page.library');
+        Route::post('', 'searchAPI')->name('search.library');
+        Route::get('publish', 'create')->name('library.create');
+        Route::post('publish', 'store')->name('library.publish');
+        Route::put('publish', 'uploadZip')->name('library.upload');
+        Route::get('{id}', 'show')->name('library.show');
+        Route::post('{id}/rating', 'rating')->name('library.rate');
+    });
+    Route::get('download/{id}', 'download')->name('page.download');
+    Route::get('download/{id}/file', 'downloadZip')->name('library.download');
 });
 Route::controller(WikiComment::class)->group(function(){
     Route::post('library/{wiki}/comment', 'store')->name('library.comment');
@@ -45,22 +50,17 @@ Route::controller(WikiComment::class)->group(function(){
 Route::controller(UserController::class)->group(function(){
     Route::post('newsletter', 'subscribe')->name('newsletter.subscribe');
     Route::get('newsletter', 'unsubscribe')->name('newsletter.unsubscribe');    
-
     Route::prefix('user')->group(function(){
         Route::get('{user:user_name}', 'showUserProfile');
-        Route::post('{user:user_name}/crown', 'toggleCrown');
+        Route::get('{user:user_name}/crown', 'toggleCrown');
     });
-
     Route::get('profile', 'showProfile')->name('user.profile');
     Route::post('profile', 'updateProfile')->name('user.update');
     Route::patch('profile', 'updatePassword')->name('user.password');
     Route::delete('profile', 'deleteProfile')->name('user.delete');
-
     Route::get('profile/avatar', 'resetAvatar')->name('user.avatar.reset');
     Route::post('profile/avatar', 'changeAvatar')->name('user.avatar');
-
     Route::get('settings', 'settings')->name('user.settings');
-
     Route::get('terms_of_service', function(){
         return view('tos');
     })->name('page.tos');
@@ -74,7 +74,6 @@ Route::get('', function () {
         return view('landing');
     }
 })->name('index');
-
 Route::get('documentation', function(){
     return view('documentation');
 })->name('page.documentation');
@@ -82,7 +81,6 @@ Route::get('about', function(){
     return view('about');
 })->name('page.about');
 
-
-
-Route::get('file', [FileController::class, 'create']);
-Route::post('file', [FileController::class, 'store'])->name('file.upload');
+Route::controller(CategoryController::class)->prefix('category')->group(function(){
+    Route::post('create', 'create')->name('category.create');
+});

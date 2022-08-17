@@ -3,21 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\{
+    Category,
     Wiki,
     Reaction,
     User,
-    File
+    File,
+    Log
 };
 use App\Http\Requests\{
     StoreWikiRequest,
     UpdateWikiRequest
 };
 use Illuminate\{
-    Database\Eloquent\Builder,
     Support\Facades\Auth,
     Support\Facades\DB,
     Http\Request,
-    Support\Facades\Validator
+    Support\Facades\Validator,
+    Support\Facades\Storage
 };
 
 class WikiController extends Controller
@@ -25,9 +27,9 @@ class WikiController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->only('rating');
-        $this->middleware('verified')->except(['index', 'indexID', 'show', 'search', 'searchAPI']);
-        $this->middleware('isAdmin')->only(['create', 'store', 'edit', 'update']);
+        $this->middleware('auth')->only(['rating', 'downloadZip']);
+        $this->middleware('verified')->only(['indexID', 'uploadZip', 'edit', 'update']);
+        $this->middleware('isAdmin')->only(['create', 'store']);
     }
 
     public function index()
@@ -42,33 +44,18 @@ class WikiController extends Controller
     {
         return view('wiki.create');
     }
-    public function _filter($text, $deep = false) {
-        if($deep) {
-            return strip_tags($text);
-        }
-        $tags = 'a|b|i|u|h|ul|ol|li|strong|code|pre';
-        return preg_replace(
-            "/<({$tags}) [^>]*>/", "<$1>",
-            strip_tags(
-                $text,
-                explode('|', $tags)
-            )
-        );
-    }
-    public function store(StorewikiRequest $request)
+    public function store(StoreWikiRequest $request)
     {
         $wiki = Wiki::create([
             'user_id' => Auth::id(),
-            'type' => 'wiki',
-            'stack' => $request->stack,
-            'file_id' => $request->file_id,
-            'title' => $this->_filter($request->title),
-            'category_id' => $request->category_id,
-            'overview' => $this->_filter($request->overview, true),
-            'requirements' => $this->_filter($request->requirements),
-            'snippets' => $this->_filter($request->snippets, true),
-            'examples' => $this->_filter($request->examples),
-            'links' => $request->links    
+            'type' => $request->type,
+            'category_id' => $request->category,
+            'title' => $request->title,
+            'overview' => $request->overview,
+            'contents' => $request->contents
+        ]);
+        File::find($request->file)->update([
+            'wiki_id' => $wiki->id
         ]);
         return redirect(route('library.show', ['id' => $wiki->id]));
     }
@@ -84,19 +71,43 @@ class WikiController extends Controller
             $dir = File::create([
                 'user_id' => $id,
                 'name' => $name,
-                'file_dir' => '/storage/' . $path
+                'path' => $path
             ]);
-            return back()
-                ->with('success','File has been uploaded.')
-                ->with('file', $dir);
+            return redirect()
+                ->to(route('library.create').'?file='.$dir->id)
+                ->with('success','File uploaded.');
         }
     }
-
+    public function downloadZip($id){
+        $wiki = Wiki::find($id);
+        $file = File::where('wiki_id', $wiki->id);
+        if($wiki && $file->exists()) {
+            $get = $file->first();
+            $wiki->increment('downloads');
+            $wiki->touch('downloaded_at');
+            Log::updateOrCreate([
+                'user_id' => Auth::id()
+            ],
+            [
+                'file_id' => $get->id
+            ]);
+            return Storage::disk('public')->download($get->path, $get->name);
+        }
+        return redirect(route('page.library'))->with('error', 'No file associated with the request');
+    }
     public function show($id)
     {
         $wiki = Wiki::findOrFail($id);
         $wiki->increment('views');
         $wiki->touch('viewed_at');
+        if(Auth::check()) {
+            Log::updateOrCreate([
+                'user_id' => Auth::id()
+            ],
+            [
+                'wiki_id' => $wiki->id
+            ]);
+        }
         return view('wiki.show', compact('wiki'));
     }
 
@@ -105,12 +116,13 @@ class WikiController extends Controller
         return view('wiki.edit', compact('wiki'));
     }
 
-    public function update(UpdatewikiRequest $request, $id)
+    public function update(UpdateWikiRequest $request, $id)
     {
         $wiki = Wiki::findOrFail($id)->update([
-            'content' => $request->content
+            'overview' => $request->overview,
+            'contents' => $request->contents
         ]);
-        return redirect(route('wiki.show', compact('wiki')));
+        return redirect(route('wiki.show', compact('id')));
     }
 
     public function destroy(Wiki $wiki)
@@ -128,35 +140,44 @@ class WikiController extends Controller
     }
 
     public function search(Request $request) {
+        $keyword = strtolower($request->input('keyword'));
+        $stack = strtolower($request->input('stack'));
         $wikis = Wiki::where('type', 'wiki')
-            ->where(function($query) {
-                // if(request()->has('stack')) {
-                //     $query->category()->has('name', request()->stack);
-                // }
-                if(request()->has('keyword')) {
-                    $query->where(DB::raw('lower(title)'), 'like', '%'.request()->keyword.'%')
-                        ->orderBy('downloads', 'desc')
-                        ->latest('updated_at');
+            ->when($stack, function($query, $stack) {
+                $category = Category::where(DB::raw('lower(name)'), $stack)->first();
+                if($category) {
+                    $query->where('category_id', $category->id);
                 } else {
-                    $query->latest();
+                    $query->where('category_id', null);
                 }
+            })
+            ->when($keyword, function($query, $keyword){
+                $query->where(DB::raw('lower(title)'), 'like', "%{$keyword}%")
+                ->orderBy('downloads', 'desc')
+                ->latest('updated_at');
+            }, function($query){
+                $query->latest();
             })
             ->paginate(12);
         return view('wiki.library', compact('wikis'));
     }
 
     public function searchAPI(Request $request) {
-        $keyword = strtolower($request->keyword);
+        $keyword = strtolower($request->input('keyword'));
+        $stack = strtolower($request->input('stack'));
         $wiki = Wiki::select('title', 'id')
             ->where('type', 'wiki')
-            ->where(DB::raw('lower(title)'), 'like', "%{$keyword}%")
-            ->where(function($query) {
-                // if(request()->has('stack')) {
-                //     $query->whereHas('category', function(Builder $queryc){
-                //         $queryc->where('name', request()->stack);
-                //     });
-                // }
+            ->when($stack, function($query, $stack) {
+                $category = Category::where(DB::raw('lower(name)'), $stack)->first();
+                if($category) {
+                    $query->where('category_id', $category->id);
+                }
             })
+            ->when($keyword, function($query, $keyword){
+                $query->where(DB::raw('lower(title)'), 'like', "%{$keyword}%");
+            })
+            ->orderBy('downloads', 'desc')
+            ->latest('updated_at')
             ->limit(5)
             ->get();
         return response()->json([

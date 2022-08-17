@@ -12,10 +12,10 @@ use Illuminate\{
     Support\Arr,
     Support\Facades\Validator,
     Support\Facades\Storage,
-    Validation\Rules\Password
+    Validation\Rules\Password,
+    Support\Facades\Auth,
+    Support\Facades\Hash
 };
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Spatie\Newsletter\NewsletterFacade as Newsletter;
 
 class UserController extends Controller
@@ -48,7 +48,7 @@ class UserController extends Controller
             return back()->withErrors($validator);
         }
         User::find($user->id)->update($validator->validated());
-        return back();
+        return back(); //->with('profile', 'yes');
     }
     public function updatePassword(Request $request) {
         $user = Auth::user();
@@ -82,15 +82,29 @@ class UserController extends Controller
                 "user_$id",
                 'avatar.'.$request->file('avatar')->getClientOriginalExtension(),
                 'public'
-            );            
+            );
+            if($del = File::where(['user_id' => $id, 'name' => 'avatar'])->first()) {
+                Storage::disk('public')->delete($del->path);
+                $del->delete();
+            }            
+            $dir = File::create([
+                'user_id' => $id,
+                'name' => 'avatar',
+                'path' => $file
+            ]);
             User::find($id)->update([
-                'photo' => '/storage/'.$file
+                'photo' => 'storage/'.$dir->path
             ]);
             return back()->with('success','Avatar updated.');
         }
     }
     public function resetAvatar() {
-        User::find(Auth::id())
+        $id = Auth::id();
+        if($del = File::where(['user_id' => $id, 'name' => 'avatar'])->first()) {
+            Storage::disk('public')->delete($del->path);
+            $del->delete();
+        }            
+        User::find($id)
             ->update([
                 'photo' => 'images/team/default.png'
             ]);
@@ -138,28 +152,24 @@ class UserController extends Controller
                 'admin' => $user->admin ? 0 : 1
             ]);
         }
-        return back();
+        return $user;
     }
     public function subscribe(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'email' => 'required|string|email'
         ]);
-        if($validator->fails()) {
-            return back()->with('error', 'Invalid email address');
-        } else {
-            $email = Str::lower($request->email);
-            $user = User::where('email', $email);
-            $name = [];
-            if($user->exists()) {
-                $name = [
-                    'FNAME' => Str::words($user->first()->name, 1, '')
-                ];
-            }
-            if(!(Newsletter::hasMember($email) && Newsletter::isSubscribed($email))) {
-                Newsletter::subscribe($email, $name);
-                return back()->with('success', 'Subscribed');
-            }
+        $email = Str::lower($request->email);
+        $user = User::where('email', $email);
+        $name = [];
+        if($user->exists()) {
+            $name = [
+                'FNAME' => Str::words($user->first()->name, 1, '')
+            ];
+        }
+        if(!(Newsletter::hasMember($email) && Newsletter::isSubscribed($email))) {
+            Newsletter::subscribe($email, $name);
+            return back()->with('success', 'Subscribed');
         }
         return back()->with('warning', 'Subscribed');
     }

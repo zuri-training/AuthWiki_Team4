@@ -416,10 +416,6 @@ hr{
         margin-top: -150px;
     }
 
-    #save_button{
-        display: none;
-    }
-
     #pwd_button{
         align-self: center;
     }
@@ -438,7 +434,9 @@ hr{
     }
 
     .avatar_container{
-        gap: 0 22.7px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px 0;
     }
 
     .avatar_container img{
@@ -504,11 +502,3 @@ hr{
 
 }
 
-@media screen and (max-width:600px){
-    .avatar_container{
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 30px 0;
-    }
-
-}

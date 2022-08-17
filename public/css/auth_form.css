@@ -54,6 +54,7 @@ textarea, input:not([type="file"]){
 }
 
 input[type="file"]{
+    width: 20%;
     border: none;
     outline: none !important;
     padding: 10px 0;
@@ -63,6 +64,21 @@ input[type="file"]{
     font-size: 16px;
     line-height: 24px;
     color: #1F1F1F;
+}
+
+#info_text{
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    color: rgb(233, 113, 0);
+    text-align: left;
+    display: flex;
+    background-color: #F2F2F2;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 0px 2px rgba(31, 31, 31, 0.19)
 }
 
 textarea:focus-within, input:focus-within:not([type="file"]){
@@ -82,6 +98,15 @@ button{
     gap: 54px 0;
     width: 100%;
     padding: 50px 40px;
+}
+
+#upload_form{
+    padding-top: 20px !important;
+    padding-bottom: 0;
+}
+
+#upload_form input{
+    margin-bottom: 20px;
 }
 
 .create_form_fields{
@@ -155,7 +180,30 @@ button{
     width: inherit;
 }
 
-#create_btn{
+#categories{
+    background-color: #f4f4f4;
+    outline: none;
+    border: #808080 2px solid;
+    border-radius: 4px;
+    min-width: 200px;
+    height: auto;
+    color: #1F1F1F;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    padding: 10px;
+    
+}
+
+#categories option{
+    font-weight: 700;
+}
+
+
+
+#create_btn {
     background: rgba(255, 179, 124, 0.39);
     border-radius: 4px;
     display: flex;
@@ -175,12 +223,32 @@ button{
     transition: all ease-out 30ms;
 }
 
-#create_btn:hover{
+#upload_btn{
+    background: #FFB37C;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 10px;
+    border: none;
+    outline: none !important;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #1F1F1F;
+    transition: all ease-out 30ms;
+}
+
+#create_btn:hover, #upload_btn:hover{
     background-color: rgba(255, 215, 145, 0.5) !important;
     box-shadow: 0px 2px 10px 2px rgba(31, 31, 31, 0.1);
   }
 
-#create_btn:active{
+#create_btn:active, #upload_btn:active{
     background-color: #faab73;
     transform: scale(0.97);
 }
@@ -244,6 +312,17 @@ button{
         font-weight: 200;
         font-size: 18px;
     }
+
+    #categories{
+        font-size: 14px;
+        line-height: 20px;
+        padding: 5px;
+    }
+
+    #categories option{
+        font-weight: 500;
+    }
+    
 
     #create_btn{
         font-size: 18px;

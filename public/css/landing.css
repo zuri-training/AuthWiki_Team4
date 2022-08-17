@@ -203,6 +203,7 @@ word-spacing: 5px;
 #options{
     box-sizing: border-box;
     height: 72px;
+    overflow: hidden;
     background: linear-gradient(180deg, #FCFCFC 0%, #FCFCFC 100%);
     border-bottom: 2px solid #DCDCDC;
     border-radius: 0px 0px 8px 8px;

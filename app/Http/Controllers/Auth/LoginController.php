@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\{
     Http\Controllers\Controller,
     Providers\RouteServiceProvider,
-    Models\User
+    Models\User,
+    Models\File
 };
 use Illuminate\{
     Http\Request,

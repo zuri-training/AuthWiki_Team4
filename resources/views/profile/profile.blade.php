@@ -33,26 +33,24 @@
             </div>
             <div class="d-md-none my-3" role="separator"></div>
             <div class="mx-auto col-md-6 d-inline-flex flex-column align-items-start py-3 px-5 px-md-3 profile-section">
-                <h4>Published libraries</h4>
-                @if($user->libraries == 0)
-                    <p>You have not Published any library yet.</p>
+                <h4>Explored Documentation</h4>
+                @if($user->log && $user->log->wiki_id <> null)
+                    <p><a href="{{ route('library.show', ['id'=>$user->log->wiki->id]) }}">{{ $user->log->wiki->title }}</a></p>
                     @else
-                    <p>You have created {{ $user->libraries .' '. Str::plural('library', $user->libraries) }}.</p>
+                    <p>You have not explored any auth codes yet.</p>
                 @endif
-                <h4>Contributions</h4>
-                @if($user->contributions == 0)
-                    <p>
-                        You have not commented on any auth codes details.
-                    </p>
+                <h4>Downloaded auth codes sample</h4>
+                @if($user->log && $user->log->file_id <> null)
+                    <p><a href="{{ route('library.show', ['id'=>$user->log->file->wiki->id]) }}">{{ $user->log->file->name }}</a></p>
                     @else
-                    <p>
-                        You have contributed {{ $user->contributions .' '. Str::plural('times', $user->contributions).' in '. $user->comment()->groupBy('wiki_id')->count() .' '.Str::plural('library', $user->comment()->groupBy('wiki_id')->count()) }}.
-                    </p>
+                    <p>You have not downloaded any auth codes samples.</p>
                 @endif
-                <h4>Downloaded auth code samples</h4>
-                <p>
-                    You have not downloaded any auth codes samples.
-                </p>
+                <h4>Auth codes details you commented on</h4>
+                @if($user->log && $user->log->comment_id <> null)
+                    <p><a href="{{ route('library.show', ['id'=>$user->log->comment->wiki->id]) }}">{{ $user->log->comment->comment }}</a></p>
+                    @else
+                    <p>You have not commented on any auth codes details.</p>
+                @endif
             </div>
             <div class="col-12 my-3" role="separator"></div>
             <div class="mx-auto col-md-5 col-12 py-3 px-1 profile-section">

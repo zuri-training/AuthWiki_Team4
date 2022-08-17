@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreignId('wiki_id')->references('id')->on('wikis')->cascadeOnDelete();
             $table->foreignId('comment_id')->nullable()->references('id')->on('comments')->cascadeOnDelete();
-            $table->tinyInteger('rating')->default(0);
+            $table->bigInteger('rating')->default(0);
         });
     }
 

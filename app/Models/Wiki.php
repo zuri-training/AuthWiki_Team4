@@ -2,15 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\{
-    Factories\HasFactory,
-    Model
-};
-use Illuminate\Support\{
-    Facades\Auth,
-    Str
-};
 use App\Helper\Helper;
+
+use Illuminate\{
+    Database\Eloquent\Factories\HasFactory,
+    Database\Eloquent\Model
+};
 
 class Wiki extends Model
 {
@@ -20,13 +17,9 @@ class Wiki extends Model
         'user_id',
         'type',
         'category_id',
-        'file_id',
         'title',
         'overview',
-        'requirements',
-        'snippets',
-        'examples',
-        'links',
+        'contents',
         'views',
         'viewed_at',
         'downloads',
@@ -34,8 +27,7 @@ class Wiki extends Model
     ];
     protected $appends = [
         'comments',
-        'stars',
-        'stared'
+        'stars'
     ];
     protected $casts = [
         'viewed_at' => 'datetime',
@@ -50,35 +42,29 @@ class Wiki extends Model
     {
         $this->attributes['overview'] = Helper::filterText($value);
     }
-    public function setRequirementsAttribute($value)
+    public function setContentsAttribute($value)
     {
-        $this->attributes['requirements'] = Helper::filterText($value);
-    }
-    public function setSnippetsAttribute($value) {
-        $this->attributes['snippets'] = Helper::filterText($value, true);
-    }
-    public function setExamplesAttribute($value) {
-        $this->attributes['examples'] = Helper::filterText($value);
-    }
-    public function setLinksAttribute($value) {
-        $this->attributes['links'] = Helper::filterText($value, true);
+        $this->attributes['contents'] = Helper::filterText($value);
     }
 
-    public function user() {
-        return $this->belongsTo(User::class);
-    }
     public function file() {
         return $this->hasOne(File::class);
-    }
-    public function category() {
-        return $this->belongsTo(Category::class);
-    }
-    public function comment() {
-        return $this->hasMany(Comment::class);
     }
     public function reaction()
     {
         return $this->hasMany(Reaction::class);
+    }
+    public function comment() {
+        return $this->hasMany(Comment::class);
+    }
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+    public function log() {
+        return $this->hasMany(Log::class);
     }
 
     public function getCommentsAttribute() {
@@ -87,8 +73,5 @@ class Wiki extends Model
     public function getStarsAttribute()
     {
         return floor($this->reaction()->where('comment_id', null)->avg('rating') * 20);
-    }
-    public function getStaredAttribute() {
-        return $this->reaction()->where(['comment_id' => null, 'user_id' => Auth::id()])->exists();
     }
 }

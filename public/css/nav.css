@@ -95,6 +95,7 @@ header nav ul{
     height: auto;
     width: 100%;
     gap: 70px;
+    margin: 0;
 }
 
 header #nav_secondary{
@@ -129,6 +130,7 @@ header #nav_button{
     font-size: 20px;
     line-height: 24px;
     transition: all ease-out 50ms;
+    padding: 0 !important;
 }
 
 header #nav_button:hover{
@@ -367,16 +369,15 @@ header #nav_button:active{
 
 .hover_menu{
     position: fixed;
-    top: 120px;
-    right: 60px;
+    top: 115px;
+    right: 10px;
     display: none;
     flex-direction: column;
-    padding-top: 37px;
-    padding-left: 30px;
+    padding: 20px 25px;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 243px;
-    height: 205px;
+    width: 185px;
+    height: 170px;
     gap: 20px;
     background: #F0F0F0;
     border-radius: 8px;
