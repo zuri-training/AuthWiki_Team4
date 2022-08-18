@@ -57,7 +57,7 @@
         <a href="javascript:void(0)" class="closebtn">&times;</a>
         <div class="menu_search" >
             <img src="{{ asset('images/search_icon.svg') }}" alt="search icon" class="search_icon">
-            <form action="#" id="menu_search_form" method="POST">
+            <form action="{{ route('page.library') }}" id="menu_search_form" method="GET">
                 @csrf
                 <input id="search_field" type="text" name="keyword" placeholder="Search">
             </form>

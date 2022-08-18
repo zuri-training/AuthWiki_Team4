@@ -123,7 +123,7 @@
                 </div>
 
                 <div class="team_member">
-                    <img src="{{ asset('images/team/member14.svg') }}" alt="Oluwapelumi">
+                    <img src="{{ asset('images/team/member14.png') }}" alt="Oluwapelumi">
                     <h6>Oluwapelumi</h6>
                     <p>Devloper</p>
                 </div>

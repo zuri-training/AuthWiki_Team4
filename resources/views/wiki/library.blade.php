@@ -80,7 +80,7 @@
 @push('js')
     <script type="text/javascript">
         $(document).ready(function(){
-            $('[name=keyword]').on('keyup', function(){
+            $('.input-group [name=keyword]').on('keyup', function(){
                 if($(this).val().length > 0) {
                     $.ajax({
                         url: '{{ route('search.library') }}',

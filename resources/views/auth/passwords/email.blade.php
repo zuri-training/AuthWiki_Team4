@@ -8,14 +8,6 @@
         <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('css/reset_password.css') }}" />
         <link rel="shortcut icon" href="{{ asset('images/logo.svg') }}" type="image/x-icon"/>
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
-        />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
-        />
     </head>
     <body>
         <div class="container">
