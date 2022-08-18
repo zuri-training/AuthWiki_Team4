@@ -5,79 +5,8 @@
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/library-details.css') }}">
     <link rel="stylesheet" href="{{ asset('css/star-rating.css') }}">
-    <style type="text/css">
-    body {
-        font-family: 'Manrope';
-    }
-    .pagination {
-        padding-left: 2rem;
-    }
-    button{
-        border: none;
-        color: var(--text_color);
-        font-size: 16px !important;
-        font-weight: 500 !important;
-        border-radius: 4px;
-        padding: 0 15px;
-        gap: 10px;
-        height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 0 !important;
-    }
-    button:hover{
-    border: 1px solid rgba(255, 146, 67, 0.85);
-    box-shadow: 0px 2px 10px 2px rgba(31, 31, 31, 0.1);
-    transform: scale(1.02);
-    }
-    button#download {
-        background-color: var(--button_hover_color);
-        margin-right: calc(5% + 17px);
-    }
-    button#download:hover {
-        background-color: var(--button_color);
-    }
-    button#commentBtn {
-        background-color: var(--button_color);
-    }
-    button#commentBtn:hover {
-        background-color: var(--button_hover_color);
-    }
-    .star-rating i {
-        font-size: 35px !important;
-    }
-
-    @media only screen and (max-width: 408px) {
-        .star-rating i {
-            font-size: 25px !important;
-        }
-    }
-    h1, h2, h3, h4, h5, h6 {
-        font-family: 'DM Sans';
-        color: #143A56;
-    }
-    h2 {
-        padding-bottom: 15px;
-        font-weight: 500;
-    }
-    h1 {
-        padding-bottom: 20px;
-        font-weight: 700;
-    }
-    hr {
-        margin: 1.5px 0;
-    }
-    code, pre {
-        background-color: rgba(175,184,193,0.2);
-    }
-    code {
-        display: flex;
-        flex-direction: column;
-    }
-
-    </style>
 @endpush
 
 @section('content')
@@ -88,21 +17,24 @@
     <div class="container-fluid" style="margin-top: -40px;">
         <div class="mx-3 mx-md-4 pb-3">
             <div class="row be-break" id="main">
-                <div class="row">
+                <div class="row d-block">
                     <h1>
                         {{ $wiki->title }} ({{ $wiki->category->name }})
                     </h1>
                 </div>
-                <div class="row my-2">
-                    {!! $wiki->overview !!}
+                <div class="row my-2 d-block">
+                    {!! Helper::outputText($wiki->overview) !!}
                 </div>
-                <div class="row">
-                    {!! $wiki->contents !!}
+                <div class="row d-block">
+                    {!! Helper::outputText($wiki->contents) !!}
                 </div>
             </div>
-            <div class="row my-3">
-                <button class="w-auto" id="download" data-href="{{ route('library.download', ['id' => $wiki->id]) }}">Download</button>
-                <div class="star-rating w-auto" data-wiki="{{ $wiki->id }}">
+            <div class="row my-3 d-flex flex-row">
+                <button class="w-auto py-2" id="download" data-href="{{ route('library.download', ['id' => $wiki->id]) }}">Download</button>
+                @can('delete', $wiki)
+                    <button id="delete_button" class="w-auto py-2" data-href="{{ route('library.delete', ['wiki' => $wiki->id]) }}">Delete</button>
+                @endcan
+                <div class="star-rating w-auto py-2" data-wiki="{{ $wiki->id }}">
                     <div class="back-stars">
                         <i class="fa fa-star" aria-hidden="true"></i>
                         <i class="fa fa-star" aria-hidden="true"></i>
@@ -172,6 +104,30 @@
                             <h3 class="pb-2 mb-0" style="margin-left: -20px;">PREVIOUS COMMENTS</h3>
                             @endif
                             @foreach($coms as $com)
+                            @if($com->user_id == null)
+                            <div class="d-flex text-muted pt-3">
+                                <img src="{{ asset('images/team/default.png') }}" class="flex-shrink-0 me-2 rounded" width="32px" height="32px" role="img">
+                                <div class="pb-3 mb-0">
+                                    <div class="small">
+                                        <a style="color: var(--text_color);"><strong class="text-gray-dark">Deleted user</strong></a>
+                                        <span class="px-2">{{ Helper::timeAgo($com->created_at) }}</span>
+                                    </div>
+                                    <div class="be-break">
+                                        {!! Helper::outputText($com->comment) !!}
+                                    </div>
+                                    @auth
+                                    <div class="d-flex align-items-center">
+                                        <a data-target="comment" style="font-weight: bold;">Reply</a>
+                                        <div class="d-flex align-items-center mx-4" data-comment="{{ $com->id }}">
+                                            <img data-vote="up" src="{{ asset('images/like.png') }}" alt="like-button">
+                                            <img class="px-2" data-vote="down" src="{{ asset('images/dislike.png') }}" alt="dislike button">
+                                            <span>{{ Helper::shortNum($com->reaction()->where('wiki_id', $wiki->id)->sum('rating')) }}</span>
+                                        </div>                  
+                                    </div>
+                                    @endauth
+                                </div>
+                            </div>
+                            @else
                             <div class="d-flex text-muted pt-3">
                                 <img src="{{ url($com->user->photo) }}" class="flex-shrink-0 me-2 rounded" width="32px" height="32px" role="img">
                                 <div class="pb-3 mb-0">
@@ -179,9 +135,10 @@
                                         <a href="{{ route('index').'/user/'.$com->user->user_name }}" style="color: var(--text_color);"><strong class="text-gray-dark">{{ $com->user->name }}</strong></a>
                                         <span class="px-2">{{ Helper::timeAgo($com->created_at) }}</span>
                                     </div>
-                                    <div class="be-break">
-                                        {!! $com->comment !!}
+                                    <div class="be-break d-block">
+                                        {!! Helper::outputText($com->comment) !!}
                                     </div>
+                                    @auth
                                     <div class="d-flex align-items-center">
                                         <a data-target="comment" data-value="{{ $com->user->user_name }}" style="font-weight: bold;">Reply</a>
                                         <div class="d-flex align-items-center mx-4" data-comment="{{ $com->id }}">
@@ -190,8 +147,10 @@
                                             <span>{{ Helper::shortNum($com->reaction()->where('wiki_id', $wiki->id)->sum('rating')) }}</span>
                                         </div>                  
                                     </div>
+                                    @endauth
                                 </div>
                             </div>
+                            @endif
                             @endforeach
                         </div>
                     </div>
@@ -205,25 +164,40 @@
 @endsection
 @push('js')
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"> </script>    
-    <script src="{{ asset('js/clipboard.min.js') }}"> </script>    
     @auth
     <script type="text/javascript">
         let percentRating = {{ $wiki->stars }}, isClickedRating = false;
         $(document).ready(function(){
-            $('code').prepend($('<i class="fa fa-copy" data-clipboard-target="#foo"/>').css({
-                color: '#FF9243',
-                'font-size': 'large',
-                position: 'relative',
-                top: '5px',
-                right: '-5px',
-                'align-self': 'end',
-                padding: '5px'
-            }));
-            new ClipboardJS('.fa-copy', {
-                target: function(trigger) {
-                    return trigger.parentNode;
+            function clearSelection() {
+                if(window.getSelection) {
+                    if(window.getSelection().empty) {
+                        window.getSelection().empty();
+                    } else if(window.getSelection().removeAllRanges) {
+                        window.getSelection().removeAllRanges();
+                    }
+                } else if(document.selection) {
+                    document.selection.empty();
                 }
-            });
+            }
+            function copyToClipboard(node) {
+                clearSelection();
+                if(document.selection) {
+                    var range = document.body.createTextRange();
+                    range.moveToElementText(node);
+                    range.select().createTextRange();
+                    document.execCommand("copy");
+                    clearSelection();
+                } else if(window.getSelection) {
+                    var range = document.createRange();
+                    range.selectNode(node);
+                    window.getSelection().addRange(range);
+                    document.execCommand("copy");
+                    clearSelection();
+                }
+            }
+            $('code').prepend($('<i class="fa fa-copy" data-clipboard-target="#foo"/>').click(function(){
+                copyToClipboard(this.parentNode);
+            }));
             function calcPosition(mouseObj) {
                 var i = $('.star-rating i').index(mouseObj) + 1;
                 return i > 5 ? (i - 5) : i;

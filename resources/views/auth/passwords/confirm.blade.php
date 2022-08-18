@@ -12,15 +12,7 @@
             href="{{ asset('images/logo.svg') }}"
             type="image/x-icon"
         />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
-        />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
-        />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ asset('css/font-awesome-4.7.0/css/font-awesome.min.css') }}">
     </head>
     <body>
         <div class="container">

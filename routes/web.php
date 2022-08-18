@@ -38,6 +38,7 @@ Route::controller(WikiController::class)->group(function(){
         Route::post('publish', 'store')->name('library.publish');
         Route::put('publish', 'uploadZip')->name('library.upload');
         Route::get('{id}', 'show')->name('library.show');
+        Route::get('{wiki}/delete', 'destroy')->name('library.delete');
         Route::post('{id}/rating', 'rating')->name('library.rate');
     });
     Route::get('download/{id}', 'download')->name('page.download');
@@ -55,9 +56,9 @@ Route::controller(UserController::class)->group(function(){
         Route::get('{user:user_name}/crown', 'toggleCrown');
     });
     Route::get('profile', 'showProfile')->name('user.profile');
+    Route::get('profile/delete', 'deleteProfile')->name('user.delete');
     Route::post('profile', 'updateProfile')->name('user.update');
     Route::patch('profile', 'updatePassword')->name('user.password');
-    Route::delete('profile', 'deleteProfile')->name('user.delete');
     Route::get('profile/avatar', 'resetAvatar')->name('user.avatar.reset');
     Route::post('profile/avatar', 'changeAvatar')->name('user.avatar');
     Route::get('settings', 'settings')->name('user.settings');

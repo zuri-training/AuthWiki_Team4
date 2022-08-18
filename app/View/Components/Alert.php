@@ -18,7 +18,7 @@ class Alert extends Component
      */
     public function __construct($type, $text, $title="", $no=0)
     {
-        $types = ['error'=>'red', 'attention'=>'yellow', 'info'=>'grey', 'success'=>'green'];
+        $types = ['error'=>'red', 'warning'=>'yellow', 'info'=>'grey', 'success'=>'green'];
         $this->no = $no;
         $this->type = strtolower($type);
         $this->title = empty($title) ? ucfirst($type) : $title;

@@ -48,7 +48,7 @@ class UserController extends Controller
             return back()->withErrors($validator);
         }
         User::find($user->id)->update($validator->validated());
-        return back(); //->with('profile', 'yes');
+        return back()->with('profile', 'yes');
     }
     public function updatePassword(Request $request) {
         $user = Auth::user();
@@ -78,22 +78,19 @@ class UserController extends Controller
         ]);
         if($request->file()) {
             $id = Auth::id();
-            $file = $request->file('avatar')->storeAs(
+            $file = $request->file('avatar')->storePubliclyAs(
                 "user_$id",
                 'avatar.'.$request->file('avatar')->getClientOriginalExtension(),
                 'public'
             );
-            if($del = File::where(['user_id' => $id, 'name' => 'avatar'])->first()) {
-                Storage::disk('public')->delete($del->path);
-                $del->delete();
-            }            
-            $dir = File::create([
+            $dir = File::updateOrCreate([
                 'user_id' => $id,
-                'name' => 'avatar',
-                'path' => $file
+                'name' => 'avatar'
+            ], [
+                'path' => 'storage/'.$file
             ]);
             User::find($id)->update([
-                'photo' => 'storage/'.$dir->path
+                'photo' => $dir->path
             ]);
             return back()->with('success','Avatar updated.');
         }
@@ -113,7 +110,6 @@ class UserController extends Controller
     public function deleteProfile()
     {
         $user = Auth::user();
-        $this->unSubscribe($user->email);
         Storage::disk('public')->deleteDirectory("user_{$user->id}");
         User::find($user->id)->delete();
         return redirect()

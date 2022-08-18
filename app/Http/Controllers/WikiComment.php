@@ -48,6 +48,14 @@ class WikiComment extends Controller
         return back();
     }
 
+    public function destroy(Comment $comment) {
+        if(Auth::id() == $comment->user_id) {
+            $comment->delete();
+            return back();
+        }
+        abort(403);
+    }
+
     public function vote(Request $request, $id)
     {
         $comment = Comment::find($id);
@@ -66,17 +74,9 @@ class WikiComment extends Controller
                 'comment_id' => $comment->id
             ],
             [
-                'rating' => $request->vote == 'up' ? DB::raw('rating+1') : DB::raw('rating-1')
+                'rating' => $request->vote == 'up' ? '1' : '-1'
             ]
         );
-        $vote = Reaction::where([
-            'user_id' => Auth::id(),
-            'wiki_id' => $comment->wiki->id,
-            'comment_id' => $comment->id
-        ])->first();
-        $vote->update([
-            'rating' => $vote->rating > 1 ? '1' : ($vote->rating < -1 ? '-1' : $vote->rating) 
-        ]);
         return response()->json([
             'status' => true,
             'votes' => Helper::shortNum($comment->reaction()->where('wiki_id', $comment->wiki->id)->sum('rating'))

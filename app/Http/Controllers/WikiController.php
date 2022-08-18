@@ -17,6 +17,7 @@ use App\Http\Requests\{
 use Illuminate\{
     Support\Facades\Auth,
     Support\Facades\DB,
+    Support\Str,
     Http\Request,
     Support\Facades\Validator,
     Support\Facades\Storage
@@ -67,11 +68,11 @@ class WikiController extends Controller
             $id = Auth::id();
             $file = $request->file('file');
             $name = md5(time() .'_'. $file->getClientOriginalName()). '.' .$file->getClientOriginalExtension();
-            $path = $file->storeAs("user_{$id}", $name, 'public');
+            $path = $file->storePubliclyAs("user_{$id}", $name, 'public');
             $dir = File::create([
                 'user_id' => $id,
                 'name' => $name,
-                'path' => $path
+                'path' => 'storage/'.$path
             ]);
             return redirect()
                 ->to(route('library.create').'?file='.$dir->id)
@@ -83,15 +84,19 @@ class WikiController extends Controller
         $file = File::where('wiki_id', $wiki->id);
         if($wiki && $file->exists()) {
             $get = $file->first();
-            $wiki->increment('downloads');
-            $wiki->touch('downloaded_at');
-            Log::updateOrCreate([
-                'user_id' => Auth::id()
-            ],
-            [
-                'file_id' => $get->id
-            ]);
-            return Storage::disk('public')->download($get->path, $get->name);
+            if(file_exists($get->path)) {
+                $wiki->increment('downloads');
+                $wiki->touch('downloaded_at');
+                Log::updateOrCreate([
+                    'user_id' => Auth::id()
+                ],
+                [
+                    'file_id' => $get->id
+                ]);
+                return response()->download($get->path, $get->name);
+            } else {
+                return redirect(route('page.library'))->with('error', 'File error!');
+            }
         }
         return redirect(route('page.library'))->with('error', 'No file associated with the request');
     }
@@ -128,7 +133,7 @@ class WikiController extends Controller
     public function destroy(Wiki $wiki)
     {
         $wiki->delete();
-        return redirect(route('user.wiki'));
+        return redirect(route('page.library'));
     }
 
     public function indexID(User $user)
@@ -153,6 +158,7 @@ class WikiController extends Controller
             })
             ->when($keyword, function($query, $keyword){
                 $query->where(DB::raw('lower(title)'), 'like', "%{$keyword}%")
+                ->orWhere(DB::raw('lower(overview)'), 'like', "%{$keyword}%")
                 ->orderBy('downloads', 'desc')
                 ->latest('updated_at');
             }, function($query){
@@ -174,7 +180,8 @@ class WikiController extends Controller
                 }
             })
             ->when($keyword, function($query, $keyword){
-                $query->where(DB::raw('lower(title)'), 'like', "%{$keyword}%");
+                $query->where(DB::raw('lower(title)'), 'like', "%{$keyword}%")
+                ->orWhere(DB::raw('lower(overview)'), 'like', "%{$keyword}%");
             })
             ->orderBy('downloads', 'desc')
             ->latest('updated_at')

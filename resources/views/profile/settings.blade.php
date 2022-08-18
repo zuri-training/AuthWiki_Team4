@@ -90,7 +90,7 @@
         <section class="delete_section">
             <h1>Delete your profile</h1>
             <p>Deleting your information does not impact your Auth-wiki identity.</p>
-            <button id="delete_button" data-href="{{ route('user.settings') }}">Delete</button>
+            <button id="delete_button" data-href="{{ route('user.settings') }}?delete=yes">Delete</button>
         </section>
     </main>
 
@@ -111,7 +111,7 @@
         <p>Deleting your profile cannot be undone.</p>
         <div class="buttons">
             <button id="close_button">Close</button>
-            <a href="#"><button id="delete_button">Delete</button></a>
+            <button id="delete_button" data-href="{{ route('user.delete') }}">Delete</button>
         </div>
     </div>
     @endif
