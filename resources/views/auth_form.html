@@ -12,7 +12,7 @@
     <script src="../js/header.js"></script>
     <title>Code Creation</title>
 </head>
-<body onpointerenter="closeNavOnOutsideClick()" onclick="closeHoverMenuOnOutsideClick()">
+<body onpointerenter="closeNavOnOutsideClick()" onpointerover="resizeCard()" onresize="resizeCard()" onclick="closeHoverMenuOnOutsideClick()">
     <header>
         <div class="container">
             <div class="site_logo">
@@ -102,7 +102,7 @@
     </div>
 
 
-    <main class="container wrapper" onpointerover="disableInputAndTextFields()">
+    <main class="container wrapper" onpointerover="displayInfoText(), closeCardOnOutsideClick()">
         <h1 id="create_header">Create Authentication Code</h1>
         <!-- UPLOAD FORM -->
         <form action="" class="auth_create_form" id="upload_form" method="">
@@ -118,7 +118,29 @@
 
 
         <!--DETAIL FORM -->
-        <form action="" class="auth_create_form" oninput="enableAndDisableCreateButton()">
+        <form action="" class="auth_create_form">
+            <!-- CATEGORIES -->
+            <div class="category">
+                <div class="create_form_fields">
+                    <label for="categories">Category</label>
+                    <select name="categories" type="file" id="categories">
+                        <option value="none">Select Category</option>
+                        <option value="Javascript">Javascript</option>
+                        <option value="Java">Java</option>
+                        <option value="Python">Python</option>
+                        <option value="PHP">PHP</option>
+                        <option value="Ruby">Ruby</option>
+                        <option value="C++">C++</option>
+                    </select>
+                </div>
+                
+                <button onclick="displayPopup('cat_card')" type="button" id="add_btn">
+                    <p>Add</p>
+                    <?xml version="1.0" ?><svg fill="none" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M12 9V12M12 12V15M12 12H15M12 12H9M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#1f1f1f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+                </button>
+            </div>
+
+            <hr>
             <!-- TITLE -->
             <div class="create_form_fields">
                 <label for="title">Code Title</label>
@@ -135,88 +157,41 @@
             <hr>
             <!-- PACKAGES -->
             <div class="create_form_fields">
-                <label for="requirements">Packages & Dependencies</label>
-                <textarea name="description" placeholder="Fill in the requirements" id="requirements"></textarea>
+                <label for="contents">Content</label>
+                <textarea name="contents" placeholder="Code details" id="contents"></textarea>
             </div>
-
-            <hr>
-            <!-- CODE -->
-            <div class="create_form_fields">
-                <label for="code-snippets">Code Snippets</label>
-                <input type="url" name="code-snippets" placeholder="Enter code snippet's url" id="code-snippets">
-            </div>
-
-            <hr>
-            <!-- EXAMPLES -->
-            <div class="create_form_fields">
-                <label for="examples">Examples</label>
-                <textarea name="examples" placeholder="Examples go here" id="examples"></textarea>
-                <!-- LINKS SECTION -->
-                <div id="links_header">
-                    <h3>Enter any required links here: </h3>
-                    <small>You can fill these with links associated with the examples given above.</small>
-                </div>
-                <div id="links_wrapper">
-                    <div class="links">
-                        <div class="link">
-                            <label for="link_name">Link name (1)</label>
-                            <input type="text" name="link_name" placeholder="Enter url name">
-                        </div>
-                        <div class="link">
-                            <label for="link_name">Link</label>
-                            <input type="url" name="link" placeholder="Enter url" id="link3">
-                        </div>
-                    </div>
-
-                    <div class="links">
-                        <div class="link">
-                            <label for="link_name">Link name (2)</label>
-                            <input type="text" name="link_name" placeholder="Enter url name">
-                        </div>
-                        <div class="link">
-                            <label for="link_name">Link</label>
-                            <input type="url" name="link" placeholder="Enter url" id="link3">
-                        </div>
-                    </div>
-
-                    <div class="links">
-                        <div class="link">
-                            <label for="link_name">Link name (3)</label>
-                            <input type="text" name="link_name" placeholder="Enter url name">
-                        </div>
-                        <div class="link">
-                            <label for="link_name">Link</label>
-                            <input type="url" name="link" placeholder="Enter url" id="link3">
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <hr>
-            <!-- IMAGE -->
-            <div class="create_form_fields">
-                <label for="image">Image</label>
-                <input name="image" type="file" id="image"></input>
-            </div>
-
-            <hr>
-            <!-- CATEGORIES -->
-            <div class="create_form_fields">
-                <label for="categories">Category</label>
-                <select name="categories" type="file" id="categories">
-                    <option value="none">Select Category</option>
-                    <option value="Javascript">Javascript</option>
-                    <option value="Java">Java</option>
-                    <option value="Python">Python</option>
-                    <option value="PHP">PHP</option>
-                    <option value="Ruby">Ruby</option>
-                    <option value="C++">C++</option>
-                </select>
-            </div>
-
-            <button disabled="true" style="pointer-events: none;" type="submit" id="create_btn">Create</button>
+            
+            <button type="submit" id="create_btn">Create</button>
         </form>
     </main>
+
+
+    <!-- CREATE CATEGORY FORM -->
+    <div class="cat_card" id="cat_card">
+        <h1 id="create_header">Add Category</h1>
+        <form action="" class="auth_create_form" id="create_cat_form" method="">
+            <!-- CATEGORY NAME -->
+            <div class="create_form_fields">
+                <label for="cat_name">Name</label>
+                <input type="text" name="cat_name" placeholder="Category name" id="cat_name">
+            </div>
+
+            <hr>
+            <!-- IMAGE-->
+            <div class="create_form_fields">
+                <label for="cat_image">Icon</label>
+                <input type="url" name="cat_image" placeholder="Enter icon's url" id="cat_image">
+            </div>
+
+            <hr>
+            <!-- DESCRIPTION -->
+            <div class="create_form_fields">
+                <label for="cat_description">Description</label>
+                <textarea name="cat_description" placeholder="Category description" id="cat_description"></textarea>
+            </div>
+
+            <button type="submit" id="create_cat_btn" onclick="hidePopup('cat_card')">Add</button>
+        </form> 
+    </div>
 </body>
 </html>
