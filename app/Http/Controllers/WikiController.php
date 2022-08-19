@@ -25,7 +25,7 @@ class WikiController extends Controller
     {
         // $this->middleware(['auth', 'verified'])->only('rating');
         // $this->authorizeResource(Wiki::class, 'wiki');
-        $this->middleware('auth')->except(['index', 'show', 'search', 'downloadZip']);
+        $this->middleware('auth')->except(['index', 'show', 'search']);
         $this->middleware('isAdmin')->only(['create', 'uploadZip', 'store', 'edit', 'update', 'destroy']);
     }
 
