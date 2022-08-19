@@ -32,21 +32,22 @@ Route::controller(LoginController::class)->group(function(){
 });
 Route::controller(WikiController::class)->group(function(){
     Route::prefix('library')->group(function(){
-        Route::get('', 'search')->name('page.library');
-        Route::post('', 'searchAPI')->name('search.library');
+        Route::get('/', 'index')->name('page.library');
+        Route::post('/', 'search')->name('library.search');
         Route::get('publish', 'create')->name('library.create');
         Route::post('publish', 'store')->name('library.publish');
         Route::put('publish', 'uploadZip')->name('library.upload');
-        Route::get('{id}', 'show')->name('library.show');
+        Route::get('{wiki}', 'show')->name('library.show');
         Route::get('{wiki}/delete', 'destroy')->name('library.delete');
-        Route::post('{id}/rating', 'rating')->name('library.rate');
+        Route::post('{wiki}/rating', 'rating')->name('library.rate');
     });
-    Route::get('download/{id}', 'download')->name('page.download');
-    Route::get('download/{id}/file', 'downloadZip')->name('library.download');
+    // Route::get('download/{wiki}', 'download')->name('page.download');
+    Route::get('download/{wiki}/file', 'downloadZip')->name('library.download');
 });
 Route::controller(WikiComment::class)->group(function(){
     Route::post('library/{wiki}/comment', 'store')->name('library.comment');
-    Route::post('comment/{id}/voting', 'vote')->name('comment.vote');
+    Route::get('comment/{comment}/delete', 'destroy')->name('comment.delete');
+    Route::post('comment/{comment}/voting', 'vote')->name('comment.vote');
 });
 Route::controller(UserController::class)->group(function(){
     Route::post('newsletter', 'subscribe')->name('newsletter.subscribe');

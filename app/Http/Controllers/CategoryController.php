@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'isAdmin']);
+        $this->middleware('isAdmin');
     }
     public function create(Request $request) {
         $request->validate([

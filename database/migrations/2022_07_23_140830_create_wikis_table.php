@@ -27,6 +27,7 @@ return new class extends Migration
             $table->timestamp('viewed_at')->nullable();
             $table->integer('downloads')->default(0);
             $table->timestamp('downloaded_at')->nullable();
+            $table->tinyInteger('published')->default(0);
             $table->timestamps();
         });
     }

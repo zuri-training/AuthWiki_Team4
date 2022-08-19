@@ -16,7 +16,7 @@ hr{
     margin-top: 140px;
 }
 
-.wrapper #create_header{
+#create_header{
     font-family: 'DM Sans';
     font-style: normal;
     font-weight: 700;
@@ -82,7 +82,7 @@ input[type="file"]{
 }
 
 textarea:focus-within, input:focus-within:not([type="file"]){
-    border: 2px solid var(--search_box_color);
+    border: 1.5px solid var(--button_color);
 }
 
 button{
@@ -114,6 +114,13 @@ button{
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
+}
+
+.category{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .create_form_fields label:not(#links_wrapper label){
@@ -204,7 +211,7 @@ button{
 
 
 #create_btn {
-    background: rgba(255, 179, 124, 0.39);
+    background: #FFB37C;
     border-radius: 4px;
     display: flex;
     flex-direction: row;
@@ -219,11 +226,11 @@ button{
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
-    color: rgba(31, 31, 31, 0.19);
+    color: #1F1F1F;
     transition: all ease-out 30ms;
 }
 
-#upload_btn{
+#upload_btn, #create_cat_btn{
     background: #FFB37C;
     border-radius: 4px;
     display: flex;
@@ -243,20 +250,69 @@ button{
     transition: all ease-out 30ms;
 }
 
-#create_btn:hover, #upload_btn:hover{
+#add_btn{
+    background: transparent;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 10px;
+    border: #FFB37C 2px solid;
+    outline: none !important;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 20px;
+    color: #1F1F1F;
+    align-self: flex-end;
+}
+
+
+#create_btn:hover, #upload_btn:hover, #create_cat_btn:hover{
     background-color: rgba(255, 215, 145, 0.5) !important;
     box-shadow: 0px 2px 10px 2px rgba(31, 31, 31, 0.1);
+    color: rgba(31, 31, 31, 0.5);
   }
 
-#create_btn:active, #upload_btn:active{
+#create_btn:active, #upload_btn:active, #create_cat_btn:active{
     background-color: #faab73;
     transform: scale(0.97);
 }
 
+#add_btn:hover{
+    background-color: hsl(25, 100%, 95%);
+    box-shadow: 0px 2px 10px 2px rgba(31, 31, 31, 0.1);
+  }
+
+#add_btn:active{
+    transform: scale(0.97);
+}
+
+/* CREATE CATEGORY CARD */
+
+
+.cat_card{
+    position: fixed;
+    z-index: 999999;
+    display: none;
+    background: #F9F9F9;
+    border-radius: 8px;
+    overflow-y: scroll;
+    padding: 3%;
+    box-shadow: rgba(31, 31, 31, 0.7) 0px 0px 0px 100vmax, rgba(31, 31, 31, 0.3) 0px 0px 20px 10px;
+}
+
+
+.cat_card #create_header{
+    text-align: center;
+}
 
 @media screen and (max-width: 900px){
 
-    .wrapper #create_header{
+    #create_header{
         text-align: center;
     }
 
@@ -271,12 +327,14 @@ button{
     }
 }
 
+
 @media screen and (max-width: 600px){
 
     .wrapper{
         margin-top: 30px !important;
     }
-    .wrapper #create_header{
+
+    #create_header{
         font-size: 30px;
         line-height: 36px;
     }
@@ -329,10 +387,19 @@ button{
         line-height: 24px;
         padding: 10px 20px;
     }
+
+    .category #add_btn p{
+        display: none;
+    }
+
+    .category #add_btn{
+        padding: 7px;
+        border-radius: 10px;
+    }
 }
 
 @media screen and (max-width: 400px){
-    .wrapper #create_header{
+    #create_header {
         font-size: 28px;
         font-weight: 600;
     }

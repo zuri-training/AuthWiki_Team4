@@ -72,8 +72,13 @@
         $(document).ready(function(){
             @if($errors->any() || session('success') || session('warning') || session('error') || session('info'))
             $('.be-toast').each(function(index) {
-                $(this).fadeOut(2500 * Math.pow((index + 2), 2), function(){
+                $(this).delay(2500 * index).fadeOut(2500, function(){
                     $(this).remove();
+                    $('.be-toast').each(function(i){
+                        $(this).css({
+                            top: (i * 95)+'px'
+                        });
+                    });
                 });
             });
             @endif

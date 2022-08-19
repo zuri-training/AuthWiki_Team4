@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="row my-3 d-flex flex-row">
-                <button class="w-auto py-2" id="download" data-href="{{ route('library.download', ['id' => $wiki->id]) }}">Download</button>
+                <button class="w-auto py-2" id="download" data-href="{{ route('library.download', ['wiki' => $wiki->id]) }}">Download</button>
                 @can('delete', $wiki)
                     <button id="delete_button" class="w-auto py-2" data-href="{{ route('library.delete', ['wiki' => $wiki->id]) }}">Delete</button>
                 @endcan
@@ -60,11 +60,11 @@
                 </div>
                 <div class="row g-4 py-3 justify-content-center">
                     @foreach($suggests as $sug)
-                    <div style="background: linear-gradient(180deg, #FCFCFC 0%, #FCFCFC 100%); border-bottom: 2px solid #DCDCDC; border-radius: 0px 0px 8px 8px; box-sizing: border-box;" class="col-12 col-md-4" data-href="{{ route('library.show', ['id' => $sug->id]) }}">
+                    <div class="col-12 col-md-4 suggest" data-href="{{ route('library.show', ['wiki' => $sug->id]) }}">
                       <div class="d-flex align-items-center justify-content-center mb-3">
                         <img class="rounded" width="50px" height="50px" src="{{ url($sug->category->icon) }}" alt="card-{{ $loop->index }}"/>
                       </div>
-                      <b style="height: 72px; overflow: hidden;" class="d-block be-break">{{ $sug->title }}</b>
+                      <b class="d-block be-break">{{ $sug->title }}</b>
                       <div class="my-2 d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center">
                           <img class="px-1" src="{{ asset('images/view.svg') }}"/>
@@ -141,6 +141,9 @@
                                     @auth
                                     <div class="d-flex align-items-center">
                                         <a data-target="comment" data-value="{{ $com->user->user_name }}" style="font-weight: bold;">Reply</a>
+                                        @if(Auth::id() === $com->user_id)
+                                        <a href="{{ route('comment.delete', ['comment' => $com->id]) }}" class="mx-2" style="font-weight: bold;">Delete</a>
+                                        @endif
                                         <div class="d-flex align-items-center mx-4" data-comment="{{ $com->id }}">
                                             <img data-vote="up" src="{{ asset('images/like.png') }}" alt="like-button">
                                             <img class="px-2" data-vote="down" src="{{ asset('images/dislike.png') }}" alt="dislike button">
@@ -164,7 +167,6 @@
 @endsection
 @push('js')
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"> </script>    
-    @auth
     <script type="text/javascript">
         let percentRating = {{ $wiki->stars }}, isClickedRating = false;
         $(document).ready(function(){
@@ -198,6 +200,7 @@
             $('code').prepend($('<i class="fa fa-copy" data-clipboard-target="#foo"/>').click(function(){
                 copyToClipboard(this.parentNode);
             }));
+            @auth
             function calcPosition(mouseObj) {
                 var i = $('.star-rating i').index(mouseObj) + 1;
                 return i > 5 ? (i - 5) : i;
@@ -213,7 +216,7 @@
             $('.star-rating i').click(function(){
                 isClickedRating = true;
                 $.ajax({
-                    url: '{{ route('library.rate', ['id' => $wiki->id]) }}',
+                    url: '{{ route('library.rate', ['wiki' => $wiki->id]) }}',
                     method: 'POST',
                     data: {
                         rating: calcPosition(this)
@@ -241,7 +244,7 @@
                     }
                 });
             });
+            @endauth
         });
     </script>
-    @endauth
 @endpush

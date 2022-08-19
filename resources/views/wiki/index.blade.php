@@ -40,8 +40,8 @@
             @endif
             @foreach($wikis as $lib)
             <div class="col-6 col-md-4">
-                <div class="card" data-href="{{ route('library.show', ['id' => $lib->id]) }}">
-                    <img width="48" height="54" src="{{ url($lib->category->icon) }}">
+                <div class="card" data-href="{{ route('library.show', ['wiki' => $lib->id]) }}">
+                    <img width="48px" height="54px" src="{{ url($lib->category->icon) }}">
                     <div class="card-body be-break">
                         <h2 class="card-title be-overflow" id="xx">{{ $lib->title }}</h2>
                         <p class="card-text be-overflow" id="y">
@@ -83,7 +83,7 @@
             $('.input-group [name=keyword]').on('keyup', function(){
                 if($(this).val().length > 0) {
                     $.ajax({
-                        url: '{{ route('search.library') }}',
+                        url: '{{ route('library.search') }}',
                         data: {
                             'keyword': $(this).val()
                         },
