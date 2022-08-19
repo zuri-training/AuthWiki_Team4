@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 class Helper
 {
     public static function filterText($text, $deep = false, $tags = '') {
-        $text = preg_replace("/\n/", "<br>", $text);
         $tags = Str::finish($tags, '|') . 'code|b|i|u|p|ul|ol|li|pre|h1|h2|h3|h4|h5|h6|br|hr';
         if($deep) {
             return strip_tags($text);
@@ -71,6 +70,9 @@ class Helper
     
         // Replace Email Addresses
         $text = preg_replace("#(^|[\n ])([a-z0-9&\-_.]+?)@([\w\-]+\.([\w\-\.]+\.)*[\w]+)#i", "\\1<a href=\"mailto:\\2@\\3\">\\2@\\3</a>", $text);
+
+        $text = preg_replace("/\n{1,}/", "<br>", $text);
+
         return $text;
     }
 }

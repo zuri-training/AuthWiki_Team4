@@ -203,7 +203,7 @@
             @auth
             function calcPosition(mouseObj) {
                 var i = $('.star-rating i').index(mouseObj) + 1;
-                return Math.abs(i - 5);
+                return i > 5 ? (i - 5) : i;
             }
             $('.star-rating i').hover(function(){
                 isClickedRating = false;
