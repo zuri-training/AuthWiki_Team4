@@ -14,6 +14,7 @@ use App\Http\Requests\{
     UpdateWikiRequest
 };
 use Illuminate\{
+    Support\Str,
     Support\Facades\Auth,
     Support\Facades\DB,
     Http\Request
@@ -32,8 +33,8 @@ class WikiController extends Controller
     public function index(Request $request)
     {
         // $this->authorize('viewAny', Wiki::class);
-        $keyword = strtolower($request->input('keyword'));
-        $stack = strtolower($request->input('stack'));
+        $keyword = Str::lower($request->input('keyword'));
+        $stack = Str::lower($request->input('stack'));
         $wikis = Wiki::where(['type' => 'wiki', 'published' => 1])
             ->when($stack, function($query, $stack) {
                 $category = Category::where(DB::raw('lower(name)'), $stack)->first();
@@ -129,14 +130,16 @@ class WikiController extends Controller
     public function search(Request $request)
     {
         // $this->authorize('viewAny', Wiki::class);
-        $keyword = strtolower($request->input('keyword'));
-        $stack = strtolower($request->input('stack'));
+        $keyword = Str::lower($request->input('keyword'));
+        $stack = Str::lower($request->input('stack'));
         $wiki = Wiki::select('title', 'id')
             ->where(['type' => 'wiki', 'published' => 1])
             ->when($stack, function($query, $stack) {
                 $category = Category::where(DB::raw('lower(name)'), $stack)->first();
                 if($category) {
                     $query->where('category_id', $category->id);
+                } else {
+                    $query->where('category_id', null);
                 }
             })
             ->when($keyword, function($query, $keyword){

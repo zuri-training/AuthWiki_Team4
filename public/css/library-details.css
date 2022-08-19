@@ -87,7 +87,7 @@ code > pre, pre > code {
     border-radius: 4px;
     padding: 2.5px;
 }
-code i.fa-copy {
+i.fa-copy {
     color: #FF9243;
     font-size: large;
     position: relative;
@@ -96,7 +96,7 @@ code i.fa-copy {
     align-self: end;
     padding: 5px;
 }
-code i.fa-copy:hover {
+i.fa-copy:hover {
     border: 2px solid rgba(33, 34, 36, 0.2);
     border-radius: 8px;
 }

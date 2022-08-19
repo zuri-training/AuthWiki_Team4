@@ -197,13 +197,13 @@
                     clearSelection();
                 }
             }
-            $('code').prepend($('<i class="fa fa-copy" data-clipboard-target="#foo"/>').click(function(){
+            $('code:not(pre code), pre:not(code pre)').prepend($('<i class="fa fa-copy"/>').click(function(){
                 copyToClipboard(this.parentNode);
             }));
             @auth
             function calcPosition(mouseObj) {
                 var i = $('.star-rating i').index(mouseObj) + 1;
-                return i > 5 ? (i - 5) : i;
+                return Math.abs(i - 5);
             }
             $('.star-rating i').hover(function(){
                 isClickedRating = false;
