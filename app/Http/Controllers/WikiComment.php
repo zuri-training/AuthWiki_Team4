@@ -15,9 +15,7 @@ use App\Http\Requests\{
 };
 use Illuminate\{
     Http\Request,
-    Support\Facades\Validator,
-    Support\Facades\Auth,
-    Support\Facades\DB
+    Support\Facades\Auth
 };
 
 class WikiComment extends Controller
@@ -25,9 +23,9 @@ class WikiComment extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('verified')->only('update');
     }
     public function store(StoreWikiCommentRequest $request, Wiki $wiki) {
+        // $this->authorize('view', $wiki);
         $comment = Comment::create([
             'wiki_id' => $wiki->id,
             'user_id' => Auth::id(),
@@ -39,34 +37,32 @@ class WikiComment extends Controller
         [
             'comment_id' => $comment->id
         ]);
-        return back();
+        return redirect(route('library.show', ['wiki' => $wiki->id]));
     }
     public function update(UpdateWikiCommentRequest $request, Comment $comment) {
-        $comment->update([
-            'comment' => $request->comment
-        ]);
-        return back();
+        if(Auth::id() == $comment->user_id) {
+            $comment->update([
+                'comment' => $request->comment
+            ]);
+            return redirect(route('library.show', ['wiki' => $comment->wiki->id]));
+        }
+        abort(403);
     }
 
     public function destroy(Comment $comment) {
         if(Auth::id() == $comment->user_id) {
             $comment->delete();
-            return back();
+            return redirect(route('library.show', ['wiki' => $comment->wiki->id]));
         }
         abort(403);
     }
 
-    public function vote(Request $request, $id)
+    public function vote(Request $request, Comment $comment)
     {
-        $comment = Comment::find($id);
-        $validator = Validator::make($request->all(), [
+        // $this->authorize('view', $comment->wiki);
+        $request->validate([
             'vote' => 'required|string|in:up,down'
         ]);
-        if($validator->fails() || !$comment) {
-            return response()->json([
-                'status' => false
-            ]);
-        }
         Reaction::updateOrCreate(
             [
                 'user_id' => Auth::id(),

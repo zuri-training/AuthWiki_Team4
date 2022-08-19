@@ -64,7 +64,7 @@
         </div>
                 <div class="daily-selections"> 
                     @foreach($suggests as $sug)
-                    <div id="pick-one" data-href="{{ route('library.show', ['id' => $sug->id]) }}">
+                    <div id="pick-one" data-href="{{ route('library.show', ['wiki' => $sug->id]) }}">
                         <img src="{{ url($sug->category->icon) }}">
                         <div id="options">
                             <p id="title">{{ $sug->title }}</p>        

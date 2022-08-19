@@ -17,9 +17,8 @@ class UpdateWikiCommentRequest extends FormRequest
      */
     public function authorize()
     {
-        $uid = Auth::id();
         $comment = Comment::find($this->route('comment'));
-        return Auth::check() && $comment && $uid == $comment->id;
+        return $comment && Auth::id() == $comment->user_id;
     }
 
     /**

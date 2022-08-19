@@ -32,7 +32,7 @@ class WikiPolicy
      */
     public function view(User $user, Wiki $wiki)
     {
-        return true;
+        return $user->id == $wiki->user_id || $wiki->published;
     }
 
     /**
@@ -43,7 +43,7 @@ class WikiPolicy
      */
     public function create(User $user)
     {
-        return $user->admin || $user->id == 1;
+        return $user->admin;
     }
 
     /**
@@ -79,7 +79,7 @@ class WikiPolicy
      */
     public function restore(User $user, Wiki $wiki)
     {
-        return $user->id == $wiki->user_id;
+        return false;
     }
 
     /**
@@ -91,6 +91,6 @@ class WikiPolicy
      */
     public function forceDelete(User $user, Wiki $wiki)
     {
-        return $user->admin || $user->id == 1;
+        return $user->admin;
     }
 }

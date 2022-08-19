@@ -1,6 +1,16 @@
 body {
     font-family: 'Manrope';
 }
+.suggest {
+    background: linear-gradient(180deg, #FCFCFC 0%, #FCFCFC 100%);
+    border-bottom: 2px solid #DCDCDC;
+    border-radius: 0px 0px 8px 8px;
+    box-sizing: border-box;
+}
+.suggest > b {
+    height: 72px;
+    overflow: hidden;
+}
 .pagination {
     padding-left: 2rem;
 }

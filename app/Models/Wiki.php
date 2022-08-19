@@ -23,7 +23,8 @@ class Wiki extends Model
         'views',
         'viewed_at',
         'downloads',
-        'downloaded_at'
+        'downloaded_at',
+        'published'
     ];
     protected $appends = [
         'comments',
@@ -31,7 +32,8 @@ class Wiki extends Model
     ];
     protected $casts = [
         'viewed_at' => 'datetime',
-        'downloaded_at' => 'datetime'
+        'downloaded_at' => 'datetime',
+        'published' => 'boolean'
     ];
 
     public function setTitleAttribute($value)
