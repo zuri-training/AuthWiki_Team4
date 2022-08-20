@@ -82,6 +82,7 @@ code, pre {
     border-radius: 8px;
     box-sizing: border-box;
     margin: 1.5px 0.5px;
+    white-space: pre;
 }
 code > pre, pre > code {
     border-radius: 4px;
