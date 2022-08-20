@@ -197,7 +197,7 @@
                     clearSelection();
                 }
             }
-            $('code').prepend($('<i class="fa fa-copy" data-clipboard-target="#foo"/>').click(function(){
+            $('code:not(pre code), pre:not(code pre)').prepend($('<i class="fa fa-copy"/>').click(function(){
                 copyToClipboard(this.parentNode);
             }));
             @auth
