@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/font-awesome-4.7.0/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/library-details.css') }}">
     <link rel="stylesheet" href="{{ asset('css/star-rating.css') }}">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
 @endpush
 
 @section('content')
@@ -167,6 +168,7 @@
 @endsection
 @push('js')
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"> </script>    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
     <script type="text/javascript">
         let percentRating = {{ $wiki->stars }}, isClickedRating = false;
         $(document).ready(function(){
@@ -197,9 +199,12 @@
                     clearSelection();
                 }
             }
-            $('code:not(pre code), pre:not(code pre)').prepend($('<i class="fa fa-copy"/>').click(function(){
-                copyToClipboard(this.parentNode);
-            }));
+            $('code:not(pre code), pre:not(code pre)').each(function(){
+                hljs.highlightElement(this);
+                $(this).prepend($('<i class="fa fa-copy"/>').click(function(){
+                    copyToClipboard(this.parentNode);
+                }));
+            });
             @auth
             function calcPosition(mouseObj) {
                 var i = $('.star-rating i').index(mouseObj) + 1;
