@@ -6,7 +6,8 @@ use App\Helper\Helper;
 
 use Illuminate\{
     Database\Eloquent\Factories\HasFactory,
-    Database\Eloquent\Model
+    Database\Eloquent\Model,
+    Database\Eloquent\Casts\Attribute
 };
 
 class Wiki extends Model
@@ -36,17 +37,40 @@ class Wiki extends Model
         'published' => 'boolean'
     ];
 
-    public function setTitleAttribute($value)
+    /**
+     * Interact with the title
+     * 
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function title(): Attribute
     {
-        $this->attributes['title'] = Helper::filterText($value, true);
+        return Attribute::make(
+            set: fn($value) => Helper::filterText($value, true)
+        );
     }
-    public function setOverviewAttribute($value)
+    /**
+     * Interact with the overview
+     * 
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function overview(): Attribute
     {
-        $this->attributes['overview'] = Helper::filterText($value);
+        return Attribute::make(
+            set: fn($value) => Helper::filterText($value),
+            get: fn($value) => Helper::outputText($value)
+        );
     }
-    public function setContentsAttribute($value)
+    /**
+     * Interact with the contents
+     * 
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function contents(): Attribute
     {
-        $this->attributes['contents'] = Helper::filterText($value);
+        return Attribute::make(
+            set: fn($value) => Helper::filterText($value),
+            get: fn($value) => Helper::outputText($value)
+        );
     }
 
     public function file() {

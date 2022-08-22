@@ -8,7 +8,8 @@ use Illuminate\{
     Contracts\Auth\MustVerifyEmail,
     Notifications\Notifiable,
     Support\Facades\Hash,
-    Support\Str
+    Support\Str,
+    Database\Eloquent\Casts\Attribute
 };
 use Laravel\Sanctum\HasApiTokens;
 
@@ -37,6 +38,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
     ];
     protected $appends = [
+        'first_name',
         'libraries',
         // 'blogs',
         // 'forums',
@@ -61,21 +63,61 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Comment::class);
     }
 
-    public function setNameAttribute($value)
+
+    /**
+     * Interact with the first name
+     * 
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function firstName(): Attribute
     {
-        $this->attributes['name'] = Str::title($value);
+        return Attribute::make(
+            get: fn() => Str::of($this->name)->split('/[\s]+/')->first()
+        );
     }
-    public function setUserNameAttribute($value)
+    /**
+     * Interact with the name
+     * 
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function name(): Attribute
     {
-        $this->attributes['user_name'] = Str::lower($value);
+        return Attribute::make(
+            set: fn($value) => Str::title($value)
+        );
     }
-    public function setEmailAttribute($value)
+    /**
+     * Interact with the user name
+     * 
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function userName(): Attribute
     {
-        $this->attributes['email'] = Str::lower($value);
+        return Attribute::make(
+            set: fn($value) => Str::lower($value)
+        );
     }
-    public function setPasswordAttribute($value)
+    /**
+     * Interact with the email
+     * 
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function email(): Attribute
     {
-        $this->attributes['password'] = Hash::make($value);
+        return Attribute::make(
+            set: fn($value) => Str::lower($value)
+        );
+    }
+    /**
+     * Interact with the password
+     * 
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function password(): Attribute
+    {
+        return Attribute::make(
+            set: fn($value) => Hash::make($value)
+        );
     }
 
     public function getLibrariesAttribute()

@@ -70,19 +70,18 @@ h1 {
 hr, br, h1, h2, h3, h4, h5, h6 {
     margin: 1.5px 0;
 }
-p {
+p, pre, code  {
     overflow: auto;
     scrollbar-width: thin;
 }
 code, pre {
-    display: flex;
-    flex-direction: column;
     background-color: rgba(175, 184, 193, 0.2);
     border: 2px solid rgba(33, 34, 36, 0.2);
     border-radius: 8px;
     box-sizing: border-box;
     margin: 1.5px 0.5px;
     white-space: pre;
+    position: relative;
 }
 code > pre, pre > code {
     border-radius: 4px;
@@ -91,13 +90,14 @@ code > pre, pre > code {
 i.fa-copy {
     color: #FF9243;
     font-size: large;
-    position: relative;
-    top: 5px;
-    right: -5px;
-    align-self: end;
     padding: 5px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
 i.fa-copy:hover {
-    border: 2px solid rgba(33, 34, 36, 0.2);
+    border: 2px solid var(--bs-blue);
     border-radius: 8px;
+    top:0;
+    right: 0;
 }

@@ -71,7 +71,7 @@ class Helper
         // Replace Email Addresses
         $text = preg_replace("#(^|[\n ])([a-z0-9&\-_.]+?)@([\w\-]+\.([\w\-\.]+\.)*[\w]+)#i", "\\1<a href=\"mailto:\\2@\\3\">\\2@\\3</a>", $text);
 
-        $text = preg_replace("/\n{1,}/", "<br>", $text);
+        $text = preg_replace("/\n{1,}/", '<br>', $text);
 
         return $text;
     }

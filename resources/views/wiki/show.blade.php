@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/font-awesome-4.7.0/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/library-details.css') }}">
     <link rel="stylesheet" href="{{ asset('css/star-rating.css') }}">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <link rel="stylesheet" href="{{ asset('css/dracula.css') }}">
 @endpush
 
 @section('content')
@@ -24,10 +24,10 @@
                     </h1>
                 </div>
                 <div class="row my-2 d-block">
-                    {!! Helper::outputText($wiki->overview) !!}
+                    {!! $wiki->overview !!}
                 </div>
                 <div class="row d-block">
-                    {!! Helper::outputText($wiki->contents) !!}
+                    {!! $wiki->contents !!}
                 </div>
             </div>
             <div class="row my-3 d-flex flex-row">
@@ -108,13 +108,13 @@
                             @if($com->user_id == null)
                             <div class="d-flex text-muted pt-3">
                                 <img src="{{ asset('images/team/default.png') }}" class="flex-shrink-0 me-2 rounded" width="32px" height="32px" role="img">
-                                <div class="pb-3 mb-0">
+                                <div class="pb-3 mb-0 w-100">
                                     <div class="small">
                                         <a style="color: var(--text_color);"><strong class="text-gray-dark">Deleted user</strong></a>
                                         <span class="px-2">{{ Helper::timeAgo($com->created_at) }}</span>
                                     </div>
                                     <div class="be-break">
-                                        {!! Helper::outputText($com->comment) !!}
+                                        {!! $com->comment !!}
                                     </div>
                                     @auth
                                     <div class="d-flex align-items-center">
@@ -131,13 +131,13 @@
                             @else
                             <div class="d-flex text-muted pt-3">
                                 <img src="{{ url($com->user->photo) }}" class="flex-shrink-0 me-2 rounded" width="32px" height="32px" role="img">
-                                <div class="pb-3 mb-0">
+                                <div class="pb-3 mb-0 w-100">
                                     <div class="small">
                                         <a href="{{ route('index').'/user/'.$com->user->user_name }}" style="color: var(--text_color);"><strong class="text-gray-dark">{{ $com->user->name }}</strong></a>
                                         <span class="px-2">{{ Helper::timeAgo($com->created_at) }}</span>
                                     </div>
                                     <div class="be-break d-block">
-                                        {!! Helper::outputText($com->comment) !!}
+                                        {!! $com->comment !!}
                                     </div>
                                     @auth
                                     <div class="d-flex align-items-center">
