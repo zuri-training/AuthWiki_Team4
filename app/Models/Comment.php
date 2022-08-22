@@ -5,7 +5,8 @@ namespace App\Models;
 use App\Helper\Helper;
 use Illuminate\{
     Database\Eloquent\Factories\HasFactory,
-    Database\Eloquent\Model
+    Database\Eloquent\Model,
+    Database\Eloquent\Casts\Attribute
 };
 
 class Comment extends Model
@@ -18,8 +19,17 @@ class Comment extends Model
         'comment'
     ];
 
-    public function setCommentAttribute($value) {
-        $this->attributes['comment'] = Helper::filterText($value);
+    /**
+     * Interact with the comment
+     * 
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function comment(): Attribute
+    {
+        return Attribute::make(
+            set: fn($value) => Helper::filterText($value),
+            get: fn($value) => Helper::outputText($value)
+        );
     }
 
     public function reaction() {
