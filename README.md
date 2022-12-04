@@ -97,6 +97,7 @@ __All templates for Auth-wiki's pages were written in HTML5 and styled using CSS
 - [Oluwatuyi Segun](https://github.com/soluwatuyi)
 - [Onwughara Prisca](https://github.com/princessvincent)
 - [Chidera Anichebe](https://github.com/starlingvibes)
+- [Andrew Efomah](https://github.com/Efomzy)
 
 ### __*The project is to be deployed [here](https://authwiki.herokuapp.com/)*__
 
